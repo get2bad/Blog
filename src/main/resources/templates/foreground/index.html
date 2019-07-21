@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Will的博客</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/animations.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}" type="text/css"/>
+</head>
+<body>
+<!--header-->
+<header id="header" th:replace="public/public :: #header"></header>
+<!--/header-->
+<!--轮播图-->
+<section id="picScroll" th:replace="public/public :: #picScroll"></section>
+<!--/轮播图-->
+<!--内容页-->
+<section id="content">
+    <div th:class="container">
+        <div class="content-left pull-left">
+            <!--放一个小的导航条，方便用户浏览-->
+            <div class="ul-wapper">
+                <ul class="nav nav-tabs" id="nav-tabs">
+                    <li role="presentation" class="active"><a href="#specialArtical" aria-controls="home" role="tab" data-toggle="tab">特别推荐</a></li>
+                    <li role="presentation"><a href="#hotArtical" aria-controls="profile" role="tab" data-toggle="tab">热门文章</a></li>
+                    <li role="presentation"><a href="#newArtical" aria-controls="messages" role="tab" data-toggle="tab">最新文章</a></li>
+                    <li role="presentation"><a href="#allArtical" aria-controls="settings" role="tab" data-toggle="tab">所有文章</a></li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="specialArtical">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--第1篇文章-->
+                            <div class="artical">
+                                <div class="artical-left pull-left hidden-xs">
+                                    <img src="../../articalPic/little_animal_07.png" />
+                                </div>
+                                <div class="artical-right pull-left">
+                                    <h4 class="pull-left">Java</h4>
+                                    <p class="pull-left">
+                                        Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，
+                                        因此Java语言具有功能强大和简单易用两个特征。
+                                    </p>
+                                    <div class="clearfix"></div>
+                                    <div class="infoTips hidden-xs">
+                                        <i class="iconfont icon-bokeyuan">Java</i>
+                                        <i class="iconfont icon-reloadtime">2019-07-21 12:01:46</i>
+                                        <i class="iconfont icon-yanjing">28</i>
+                                        <i class="iconfont icon-ziyuan">1</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <!--第2篇文章-->
+                            <div class="artical">
+                                <div class="artical-left pull-left hidden-xs">
+                                    <img src="../../articalPic/little_animal_01.png" />
+                                </div>
+                                <div class="artical-right pull-left">
+                                    <h4 class="pull-left">Php</h4>
+                                    <p class="pull-left">
+                                        PHP即“超文本预处理器”，是一种通用开源脚本语言。PHP是在服务器端执行的脚本语言，与C语言类似，
+                                        是常用的网站编程语言。利于学习，使用广泛,主要适用于Web开发领域。
+                                    </p>
+                                    <div class="clearfix"></div>
+                                    <div class="infoTips hidden-xs">
+                                        <i class="iconfont icon-bokeyuan">Php</i>
+                                        <i class="iconfont icon-reloadtime">2019-07-21 12:01:46</i>
+                                        <i class="iconfont icon-yanjing">28</i>
+                                        <i class="iconfont icon-ziyuan">1</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <!--第3篇文章-->
+                            <div class="artical">
+                                <div class="artical-left pull-left hidden-xs">
+                                    <img src="../../articalPic/little_animal_03.png" />
+                                </div>
+                                <div class="artical-right pull-left">
+                                    <h4 class="pull-left">Python</h4>
+                                    <p class="pull-left">
+                                        Python是一种计算机程序设计语言。是一种面向对象的动态类型语言，最初被设计用于编写自动化脚本(shell)，
+                                        随着版本的不断更新和语言新功能的添加，越来越多被用于独立的、大型项目的开发。
+                                    </p>
+                                    <div class="clearfix"></div>
+                                    <div class="infoTips hidden-xs">
+                                        <i class="iconfont icon-bokeyuan">Python</i>
+                                        <i class="iconfont icon-reloadtime">2019-07-21 12:01:46</i>
+                                        <i class="iconfont icon-yanjing">28</i>
+                                        <i class="iconfont icon-ziyuan">1</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <!--第4篇文章-->
+                            <div class="artical">
+                                <div class="artical-left pull-left hidden-xs">
+                                    <img src="../../articalPic/little_animal_09.png" />
+                                </div>
+                                <div class="artical-right pull-left">
+                                    <h4 class="pull-left">C++</h4>
+                                    <p class="pull-left">
+                                        C++是C语言的继承，它既可以进行C语言的过程化程序设计，又可以进行以抽象数据类型为特点的基于对象的程序设计，
+                                        还可以进行以继承和多态为特点的面向对象的程序设计。
+                                    </p>
+                                    <div class="clearfix"></div>
+                                    <div class="infoTips hidden-xs">
+                                        <i class="iconfont icon-bokeyuan">C++</i>
+                                        <i class="iconfont icon-reloadtime">2019-07-21 12:01:46</i>
+                                        <i class="iconfont icon-yanjing">28</i>
+                                        <i class="iconfont icon-ziyuan">1</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <div role="tabpanel" class="tab-pane fade " id="hotArtical">
+
+                </div>
+                <div role="tabpanel" class="tab-pane fade " id="newArtical">
+
+                </div>
+                <div role="tabpanel" class="tab-pane fade " id="allArtical">
+
+                </div>
+            </div>
+        </div>
+        <div class="content-right pull-left">
+            <!--时钟-->
+            <div class="clock_table">
+                <div class="welcome"><em></em>
+                <div><h4 class="text-left">你好，朋友</h4></div></div>
+                <div class="visitTime"><h5>欢迎<spa>山东烟台市</spa>的朋友，您是第<span>1</span>次访问本网站。</h5></div>
+                <main>
+                    <!-- 星期几 -->
+                    <div class="days">
+                        <div class="day">
+                            <p class="sunday">星期日</p>
+                        </div>
+                        <div class="day">
+                            <p class="monday">星期一</p>
+                        </div>
+                        <div class="day">
+                            <p class="tuesday">星期二</p>
+                        </div>
+                        <div class="day">
+                            <p class="wednesday">星期三</p>
+                        </div>
+                        <div class="day">
+                            <p class="thursday">星期四</p>
+                        </div>
+                        <div class="day">
+                            <p class="friday">星期五</p>
+                        </div>
+                        <div class="day">
+                            <p class="saturday">星期六</p>
+                        </div>
+                    </div>
+                    <!-- CLOCK -->
+                    <div class="clock">
+                        <!-- 小时 -->
+                        <div class="numbers">
+                            <p class="hours"></p>
+                            <p class="placeholder"></p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <!-- 分 -->
+                        <div class="numbers">
+                            <p class="minutes"></p>
+                            <p class="placeholder"></p>
+                        </div>
+
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <!-- 秒 -->
+                        <div class="numbers">
+                            <p class="seconds"></p>
+                            <p class="placeholder"></p>
+                        </div>
+                        <!-- 上午 / 下午 -->
+                        <div class="am-pm">
+                            <!-- AM -->
+                            <div>
+                                <p class="am">am</p>
+                            </div>
+                            <!-- PM -->
+                            <div>
+                                <p class="pm">pm</p>
+                            </div>
+                        </div>
+                    </div><!-- END CLOCK -->
+                </main>
+            </div>
+            <div class="catagory_type">
+                <div class="welcome"><em></em>
+                    <div><h4 class="text-left">文章分类</h4></div>
+                </div>
+                <div class="catagorys">
+                    <div class="row">
+                        <div class="col-md-6">Java</div>
+                        <div class="col-md-6">Php</div>
+                        <div class="col-md-6">Python</div>
+                        <div class="col-md-6">C++</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/内容页-->
+<!--友情链接-->
+<section id="link" th:replace="public/public :: #link"></section>
+<!--/友情链接-->
+<!--页脚-->
+<footer id="footer" th:replace="public/public :: #footer"></footer>
+<!--/页脚-->
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="../../js/jquery-2.1.1.js"></script>
+<script src="../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/moment.js"></script>
+<!--引用自己的js文件-->
+<script src="../../js/main.js"></script>
+<script src="../../js/iconfont.js"></script>
+<!--<script src="../../js/batsCursor.js"></script>-->
+</body>
+</html>

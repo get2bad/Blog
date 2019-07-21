@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Will的博客</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/animations.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/main.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/iconfont.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <!--header-->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Wills</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="menu">
+                        <ul class="nav navbar-nav animated category" data-animation="flipInX">
+                            <li class="active"><a href="#">最新文章<span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">热门文章</a></li>
+                            <li class="dropdown ">
+                                <a href="#" data-toggle="dropdown">文章分类<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">JAVA</a></li>
+                                    <li><a href="#">Python</a></li>
+                                    <li><a href="#">PHP</a></li>
+                                    <li><a href="#">C++</a></li>
+                                    <li><a href="#">Golang</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">学习E站</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">资料分享</a></li>
+                                </ul>
+                            </li>
+                            <li class="visible-lg visible-md"><a href="#">留言板</a></li>
+                        </ul>
+                        <form class="navbar-form navbar-left" method="post" action="#">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="在这里输入您想搜索的内容">
+                            </div>
+                            <button type="submit" class="btn btn-default">搜索</button>
+                        </form>
+                        <ul class="nav navbar-nav navbar-right animated category" data-animation="fadeIn">
+                            <li class="hidden-sm user-img"><img src="../../pic/pic5.jpg" alt="用户头像" class="img-circle"></li>
+                            <li class="dropdown hidden-sm">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户昵称<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">用户资料</a></li>
+                                    <li><a href="#">安全设置</a></li>
+                                    <li><a href="#">文章管理</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">安全退出</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--/header-->
+    <!--轮播图-->
+    <section id="picScroll" class="">
+        <div class="container">
+            <div id="ad" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#table_picScroll" data-slide-to="0" class="active"></li>
+                    <li data-target="#table_picScroll" data-slide-to="1"></li>
+                    <li data-target="#table_picScroll" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="../../pic/pic1.jpg" alt="..." style="width: 100%;" />
+                        <div class="carousel-caption">
+                            <div class="jumbotron visible-lg visible-md">
+                                <h1>Java发展态势</h1>
+                                <p>
+                                    近些年的技术圈，单以计算机语言界来说，稳坐第一把太师椅的 Java “或将被取代”、迎接转折点、Java 项目工程师风光不再等言论不绝于耳。在焦虑的大环境下，所有人好像都看起来很焦虑不安。
+                                </p>
+                            </div>
+                            <div class="visible-xs visible-sm"><p>Java发展态势</p></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="../../pic/pic2.jpg" alt="..." style="width: 100%;" />
+                        <div class="carousel-caption">
+                            <div class="jumbotron visible-lg visible-md">
+                                <h1>PHP介绍</h1>
+                                <p>
+                                    PHP（外文名:PHP: Hypertext Preprocessor，中文名：“超文本预处理器”）是一种通用开源脚本语言。语法吸收了C语言、Java和Perl的特点，利于学习，使用广泛，主要适用于Web开发领域。
+                                </p>
+                            </div>
+                            <div class="visible-xs visible-sm"><p>PHP介绍</p></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="../../pic/pic3.jpg" alt="..." style="width: 100%;" />
+                        <div class="carousel-caption">
+                            <div class="jumbotron visible-lg visible-md">
+                                <h1>Python介绍</h1>
+                                <p>
+                                    Python是一种计算机程序设计语言。是一种面向对象的动态类型语言，最初被设计用于编写自动化脚本(shell)，随着版本的不断更新和语言新功能的添加，越来越多被用于独立的、大型项目的开发。
+                                </p>
+                            </div>
+                            <div class="visible-xs visible-sm"><p>Python介绍</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#table_picScroll" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">上一张</span>
+                </a>
+                <a class="right carousel-control" href="#table_picScroll" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">下一张</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!--/轮播图-->
+    <!--友情链接-->
+    <section id="link" class="hidden-sm hidden-xs">
+        <div class="container">
+            <div class="link-tables">
+                <em></em>
+                <div class="link_tip"><h4 class="text-left">友情链接</h4></div>
+                <div class="link_table">
+                    <div class="pull-left"><a href="https://github.com/get2bad" target="_blank">Github</a ></div>
+                    <div class="pull-left"><a href="#">BiliBili</a ></div>
+                    <div class="pull-left"><a href="#">友情链接3</a ></div>
+                    <div class="pull-left"><a href="#">友情链接4</a ></div>
+                    <div class="pull-left"><a href="#">友情链接5</a ></div>
+                    <div class="pull-left"><a href="#">友情链接6</a ></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/友情链接-->
+    <!--footer-->
+    <footer id="footer">
+        <div class="container">
+            <div class="tips text-center"><a href="javascript:about();" target="_blank" style="margin-right: 20px">关于我们</a>
+                <a href="mailto:loveing490@qq.com" target="_blank" style="margin-right: 20px">联系我们</a>
+                <a href="javascript:advertisement();" target="_blank" style="margin-right: 20px">广告合作</a>
+                <a href="javascript:disclaimer();" target="_blank">免责声明</a>
+                <script>
+                    function about(){
+                        alert("本网站所有者Wills,大家有任何需要交流的，请您点击 '联系我们'");
+                    }
+
+                    function advertisement(){
+                        alert("广告合作，请您联系邮箱loveing490@qq.com 或者请您点击 '联系我们'");
+                    }
+
+                    function disclaimer(){
+                        alert("本前端页面归属权归Wills所有，如若您需要前端页面的源码，请您移步至github去clone我的仓库，感谢!");
+                    }
+                </script></div>
+            <div><p class="text-center">Wills   鲁ICP备17045047号</p></div>
+        </div>
+    </footer>
+    <!--/footer-->
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="../../js/jquery-2.1.1.js"></script>
+    <script src="../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../../js/bootstrap.min.js"></script>
+<!--引用自己的js文件-->
+<script src="../../js/main.js"></script>
+<script src="../../js/iconfont.js"></script>
+    <!--<script src="../../js/batsCursor.js"></script>-->
+    </body>
+    </html>

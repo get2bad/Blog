@@ -1,0 +1,272 @@
+/**
+公共属性
+ */
+img{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+/*当屏幕的宽度大于768的时候会自动应用大括号内部的样式*/
+@media (min-width: 768px) {
+    #ad > .carousel-inner > .item{
+        height: 410px;
+    }
+}
+a{
+    text-decoration: none;
+    color: #555555;
+}
+/*字体图标文件引入*/
+@font-face {
+    font-family: 'iconfont';
+    src: url('../fonts/iconfont.eot');
+    src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/iconfont.woff2') format('woff2'),
+    url('../fonts/iconfont.woff') format('woff'),
+    url('../fonts/iconfont.ttf') format('truetype'),
+    url('../fonts/iconfont.svg#iconfont') format('svg');
+}
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/*css3 选择类中带icon-自动套用样式
+[class^="icon-"],
+[class*=" icon-"] {
+    font-family: 'wills' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+*/
+/**
+网页属性
+ */
+body{
+    margin:0;
+    padding: 0;
+    background-color: #EEEEEE;
+    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+}
+#header{
+    position: relative;
+    z-index: 9999;
+    margin-bottom: 50px;
+}
+#header > .container{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.user-img > img{
+    width: 45px;
+    height: 45px;
+}
+/*搜索按钮的样式*/
+#search{
+
+}
+/*轮播图*/
+#picScroll{
+
+}
+#picScroll .jumbotron{
+    background-color: #0f0f0f !important;
+    opacity: 0.5 !important;
+}
+/*内容页的样式*/
+#content{
+    margin-top: 20px;
+}
+#content h4{
+    margin-bottom: 0 !important;
+}
+#content > .container > .content-left{
+    /*margin-left: 15px;*/
+    padding: 5px 10px 5px 10px;
+    width: 70%;
+    background-color: #ffffff;
+}
+#content > .container > .content-right{
+    width: 28%;
+    margin-left: 20px;
+    background-color: #ffffff;
+    padding: 5px 10px 5px 10px;
+}
+#content em{
+    background: #444444;
+    float: left;
+    width: 6px;
+    height: 19px;
+    /*margin-top: 4px;*/
+    overflow: hidden;
+    border-radius: 1px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+#content .visitTime{
+    /*欢迎访问次数的css样式设置*/
+
+}
+#content .welcome{
+    border-bottom: 1px solid #eeeeee;
+}
+#content .catagory_type .welcome{
+    margin-bottom: 10px;
+}
+#content .catagory_type .catagorys .row div{
+    margin-bottom: 10px;
+}
+#content .artical{
+    margin-top: 20px;
+}
+#content .artical .artical-right{
+    border-bottom:1px solid #c0c0c0;
+}
+#content .artical-left{
+    border: 1px solid #c0c0c0;
+    margin-top: 15px;
+    padding-top:11px;
+}
+#content .artical-right{
+    padding-left: 10px;
+    width:88%;
+}
+#content .artical-right p{
+    margin:0;
+}
+#content .infoTips i{
+    margin-right: 10px;
+}
+/*友情链接*/
+#link{
+    margin-top: 30px;
+}
+#link > .container{
+    background-color: #ffffff;
+}
+#link > .container > .link-table{
+
+}
+#link > .container > .link_tip{
+    border-bottom: 1px solid #e3e3e3;
+}
+#link > .container > .link-tables > .link_table > div{
+    margin-right: 30px;
+}
+#link em{
+    background: #444444;
+    float: left;
+    width: 6px;
+    height: 19px;
+    margin-top: 8px;
+    overflow: hidden;
+    border-radius: 1px;
+    margin-right: 10px;
+}
+/*页脚*/
+#footer{
+    margin-top: 30px;
+}
+#footer .container{
+    background-color: #0f0f0f;
+}
+#footer .tips{
+    margin:10px 0 10px 0;
+}
+#footer p{
+    margin: 0;
+    color: #c0c0c0;
+}
+#footer a{
+    color: #b8bbc0;
+}
+
+/*时钟css样式*/
+main {
+    text-align: center;
+    padding: 7px;
+    width: 100%;
+    /*border: solid 5px #ffffff;*/
+    background-color: #c0c0c0;
+    font-family: 'digital-7', sans-serif;
+}
+
+
+/* DAYS OF THE WEEK */
+div.days {
+    margin: 0 auto;
+    color: #131212;
+}
+
+div.days .day {
+    display: inline-block;
+}
+
+div.days .day p {
+    font-size: 12px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+
+/* CLOCK */
+div.clock {
+    margin: 5px 0;
+}
+
+div.clock div{
+    display: inline-block;
+    position: relative;
+}
+
+div.clock div p{
+    font-size: 20px;
+    position: relative;
+    z-index: 100;
+}
+
+div.clock .placeholder {
+    color: #131212;
+    position: absolute;
+    top: 0;
+    z-index: 50;
+}/*END CLOCK*/
+
+
+/* AM OR PM*/
+.am-pm {
+    font-family: sans-serif;
+    text-transform: uppercase;
+    width: 20px;
+}
+
+div.am-pm div p {
+    font-size: 12px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.am, .pm {
+    color: #131212;
+}
+
+/*CLASS THAT CHANGES COLOR OF TEXT TO APPEAR LIKE ITS "ON"*/
+.light-on {
+    color: #ffffff;
+}
