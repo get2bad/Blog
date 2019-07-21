@@ -16,8 +16,8 @@ public class SpringmvcConfig implements WebMvcConfigurer {
     private LoginInterceptor loginInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/login","/main/login")
-                .excludePathPatterns("/js/**","/css/**","/js/**","/pic/**","/fonts/**", "/articalPic/**");
+        /*registry.addInterceptor(loginInterceptor).addPathPatterns("/login","/main/login")
+                .excludePathPatterns("/js/**","/css/**","/js/**","/pic/**","/fonts/**", "/articalPic/**");*/
     }
 
     @Override

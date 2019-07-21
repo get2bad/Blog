@@ -10,4 +10,9 @@ public class BaseController {
     public String getIndex(){
         return "foreground/index";
     }
+
+    @GetMapping("/login")
+    public String login(){
+        return "user/login";
+    }
 }
