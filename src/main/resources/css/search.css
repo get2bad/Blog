@@ -1,0 +1,14 @@
+#searchPage .container .searchContent{
+    background-color: #ffffff;
+    padding: 20px 20px 20px 20px;
+}
+#searchPage .container .searchContent .searchTitle{
+    border-bottom: 2px solid #c0c0c0;
+}
+p{
+    margin: 0;
+}
+.searchContent{
+    padding-bottom: 15px;
+    border-bottom: 1px solid #cccccc;
+}

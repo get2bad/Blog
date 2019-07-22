@@ -15,4 +15,19 @@ public class BaseController {
     public String login(){
         return "user/login";
     }
+
+    @GetMapping("/content")
+    public String getContent(){
+        return "foreground/content/content";
+    }
+
+    @GetMapping("/search")
+    public String search(){
+        return "foreground/search/search";
+    }
+
+    @GetMapping("/comment")
+    public String common(){
+        return "foreground/common/comment";
+    }
 }

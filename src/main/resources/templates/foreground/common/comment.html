@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Will的博客</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/animations.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/comment.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/content.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}" type="text/css"/>
+</head>
+<body>
+<!--header-->
+<header id="header" th:replace="public/public :: #header"></header>
+<!--/header-->
+<!--评论页内容-->
+<section id="comment">
+    <div class="container">
+        <ol class="breadcrumb">
+            <span class="sourceTips hidden-xs">您当前位置</span>
+            <li><a href="#">主页</a></li>
+            <li class="active"><a href="#">留言页</a></li>
+        </ol>
+        <div class="commentDiv">
+            <div class="commentTitle"><h4>留言本</h4></div>
+            <div class="commentContent"><p>这里是留言本，您可以在这里畅所欲言~!把您想说的告诉我</p></div>
+        </div>
+        <div class="commentContentDiv">
+            <div class="commentTitle"><h5>评论</h5></div>
+            <div class="commentCommit">
+                <form role="form" action="#" method="post">
+                    <div class="input-group">
+                        <textarea class="form-control" cols="100%" rows="3" placeholder="在这里您可以畅所欲言，说出您想说的话"></textarea>
+                        <button type="submit" class="btn btn-default subComment">提交</button>
+                    </div><!-- /input-group -->
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/评论页内容-->
+<!--友情链接-->
+<section id="link" th:replace="public/public :: #link"></section>
+<!--/友情链接-->
+<!--页脚-->
+<footer id="footer" th:replace="public/public :: #footer"></footer>
+<!--/页脚-->
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="../../js/jquery-2.1.1.js"></script>
+<script src="../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/moment.js"></script>
+<!--引用自己的js文件-->
+<!--<script src="../../js/main.js"></script>-->
+<script src="../../js/iconfont.js"></script>
+<!--<script src="../../js/batsCursor.js"></script>-->
+</body>
+</html>

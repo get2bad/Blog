@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Will的博客</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/animations.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/search.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}" type="text/css"/>
+</head>
+<body>
+<!--header-->
+<header id="header" th:replace="public/public :: #header"></header>
+<!--/header-->
+<!--搜索界面-->
+<section id="searchPage">
+    <div class="container">
+        <div class="searchContent">
+            <div class="searchTitle">
+                <h4>搜索“<span>Java</span>”,结果为:</h4>
+            </div>
+            <div class="searchResult">
+                <!--第一条搜索内容-->
+               <div class="media searchContent">
+                   <div class="media-left pull-left">
+                       <img src="https://static.runoob.com/images/mix/img_avatar.png" class="media-object" style="width:90px;height: 90px">
+                   </div>
+                   <div class="media-body">
+                       <h5 class="media-heading">文章题目</h5>
+                       <p>文章内容</p>
+                       <div class="infoTips hidden-xs">
+                           <i class="iconfont icon-bokeyuan">Java</i>
+                           <i class="iconfont icon-reloadtime">2019-07-21 12:01:46</i>
+                           <i class="iconfont icon-yanjing">28</i>
+                           <i class="iconfont icon-ziyuan">1</i>
+                       </div>
+                   </div>
+                    </div>
+                <!--第二条搜索内容-->
+                <div class="media searchContent">
+                    <div class="media-left pull-left">
+                        <img src="https://static.runoob.com/images/mix/img_avatar.png" class="media-object" style="width:90px;height: 90px">
+                    </div>
+                    <div class="media-body">
+                        <h5 class="media-heading">文章题目</h5>
+                        <p>文章内容</p>
+                        <div class="infoTips hidden-xs">
+                            <i class="iconfont icon-bokeyuan">Java</i>
+                            <i class="iconfont icon-reloadtime">2019-07-21 12:01:46</i>
+                            <i class="iconfont icon-yanjing">28</i>
+                            <i class="iconfont icon-ziyuan">1</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/搜索界面-->
+<!--友情链接-->
+<section id="link" th:replace="public/public :: #link"></section>
+<!--/友情链接-->
+<!--页脚-->
+<footer id="footer" th:replace="public/public :: #footer"></footer>
+<!--/页脚-->
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="../..
+
+/js/jquery-2.1.1.js"></script>
+<script src="../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/moment.js"></script>
+<!--引用自己的js文件-->
+<!--<script src="../../js/main.js"></script>-->
+<script src="../../js/iconfont.js"></script>
+<!--<script src="../../js/batsCursor.js"></script>-->
+</body>
+</html>

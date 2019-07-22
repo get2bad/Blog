@@ -95,13 +95,13 @@ body{
 #content h4{
     margin-bottom: 0 !important;
 }
-#content > .container > .content-left{
+#content .content-left{
     /*margin-left: 15px;*/
     padding: 5px 10px 5px 10px;
-    width: 70%;
+    width: 70% !important;
     background-color: #ffffff;
 }
-#content > .container > .content-right{
+#content .content-right{
     width: 28%;
     margin-left: 20px;
     background-color: #ffffff;

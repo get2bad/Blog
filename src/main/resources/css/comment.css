@@ -1,0 +1,21 @@
+#comment .container .commentDiv{
+    background-color: #ffffff;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 30px;
+}
+.breadcrumb{
+    margin: 0;
+}
+.commentTitle{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 20px;
+}
+#comment .container .commentContentDiv{
+    background-color: #ffffff;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 30px;
+}
+.subComment{
+    margin-top: 10px;
+}
