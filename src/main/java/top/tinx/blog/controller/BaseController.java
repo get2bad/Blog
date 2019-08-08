@@ -30,4 +30,14 @@ public class BaseController {
     public String common(){
         return "foreground/common/comment";
     }
+
+    @GetMapping("/background")
+    public String background(){
+        return "background/index";
+    }
+
+    @GetMapping("/writeArtical")
+    public String writeArtical(){
+        return "background/artical/writeArtical";
+    }
 }

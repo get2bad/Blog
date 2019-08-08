@@ -24,7 +24,12 @@ public class SpringmvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //需要配置1：----------- 需要告知系统，这是要被当成静态文件的！
         //第一个方法设置访问路径前缀，第二个方法设置资源路径
-        registry.addResourceHandler("/**","/**/**").addResourceLocations("classpath:/");
+        //registry.addResourceHandler("/**","/**/**").addResourceLocations("classpath:/");
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/js/");
+        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/css/");
+        registry.addResourceHandler("/articalPic/**").addResourceLocations("classpath:/articalPic/");
+        registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/fonts/");
+        registry.addResourceHandler("/pic/**").addResourceLocations("classpath:/pic/");
     }
 
     @Override

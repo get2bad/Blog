@@ -13,13 +13,13 @@ import javax.servlet.http.HttpSession;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session = request.getSession();
+        /*HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if(user != null){return true;}
         //没有登录就返回登录界面
         request.setAttribute("msg","您的登录信息已过期！请重新登陆");
-        request.getRequestDispatcher("/").forward(request,response);
-        return false;
+        request.getRequestDispatcher("/").forward(request,response);*/
+        return true;
     }
 
     @Override

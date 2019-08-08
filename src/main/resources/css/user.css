@@ -19,6 +19,7 @@ body{
 #loginForm{
     width:33%;
     background-color: #c0c0c0;
+    border-top: 10px solid #932322;
     opacity: 0.7 !important;
     color: #0f0f0f;
     position: absolute;
