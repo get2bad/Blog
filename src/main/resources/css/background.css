@@ -1,7 +1,3 @@
-body{
-    margin: 0;
-    padding: 0;
-}
 .container-fluid{
     margin: 0 !important;
     padding: 0 !important;
@@ -41,7 +37,6 @@ body {
     width: 100%;
     height: 100%;
     margin: 0;
-    overflow: hidden;
     background-color: #FFFFFF;
     font-family: "Microsoft YaHei", sans-serif;
 }
@@ -91,22 +86,4 @@ body {
     position: absolute;
     z-index: 10;
     background-color:#DFDFDF;
-}
-
-/*写文章的样式*/
-.writeIcon{
-    font-size: 20px;
-}
-.writeContent{
-    padding-top: 10px;
-    padding-left: 10px;
-}
-.writeHeader{
-    border-bottom: 2px solid #e0e0e0;
-}
-#articalTitle,#articalAuth,#articalType{
-    width:50%;
-}
-.formElement{
-    margin-bottom: 15px;
 }

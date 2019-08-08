@@ -5,11 +5,13 @@
     <title>Will的博客</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="../../../css/bootstrap.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/iconfont.css" rel="stylesheet" type="text/css"/>
-    <link href="../../../css/background.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/dropify.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/writeArtical.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<div id="artical">
     <div class="container-fluid">
         <div class="writeContent">
             <div class="writeHeader">
@@ -23,10 +25,8 @@
                      </div>
                     <div class="formElement">
                         <div class="input-group" style="width: 50%">
-                             <input type="text" class="form-control" placeholder="请点击右侧上传按钮，选择您需要的图片或图片地址">
-                             <span class="input-group-btn">
-                                 <button class="btn btn-default" type="button">上传</button>
-                              </span>
+                            <input type="file" id="input-file-now" class="dropify"data-height="200"
+                                   data-max-file-size="3M" placeholder="请点击右侧上传按钮，选择您需要的图片或图片地址" />
                         </div>
                     </div>
                     <div class="formElement">
@@ -63,8 +63,10 @@
             </div>
         </div>
     </div>
+</div>
     <script src="../../../js/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="../../../js/wangEditor.min.js"></script>
+    <script type="text/javascript" src="../../../js/dropify.min.js"></script>
     <script src="https://raw.github.com/leizongmin/js-xss/master/dist/xss.js"></script>
 <script type="text/javascript">
     //富文本编辑器
@@ -108,6 +110,15 @@
     myxss = new s.FilterXSS(options);
     // 以后直接调用 myxss.process() 来处理即可
     html = myxss.process("alert('111');");*/
+    $('.dropify').dropify({
+        messages: {
+            'default': '点击这里上传文章封面',
+            'replace': '点击或拖拽文件到这里来替换文件',
+            'remove':  '移除文件',
+            'error':   '对不起，你上传的文件大于3M'
+        }
+    });
+
 </script>
 </body>
 </html>

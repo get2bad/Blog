@@ -40,4 +40,7 @@ public class BaseController {
     public String writeArtical(){
         return "background/artical/writeArtical";
     }
+
+    @GetMapping("manageArtical")
+    public String manageArtical(){ return "background/artical/manageArtical";}
 }

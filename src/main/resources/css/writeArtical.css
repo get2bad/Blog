@@ -1,0 +1,20 @@
+/*写文章的样式*/
+#artical{
+
+}
+.writeIcon{
+    font-size: 20px;
+}
+.writeContent{
+    /*padding-top: 10px;*/
+    padding-left: 10px;
+}
+.writeHeader{
+    border-bottom: 2px solid #e0e0e0;
+}
+#articalTitle,#articalAuth,#articalType{
+    width:50%;
+}
+.formElement{
+    margin-bottom: 15px;
+}
