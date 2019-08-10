@@ -73,4 +73,10 @@ public class BaseController {
 
     @GetMapping("/fileManage")
     public String fileManage(){ return "background/file/fileManage";}
+
+    @GetMapping("/logout")
+    public String logout(){ return "redirect:/login";}
+
+    @GetMapping("/userManage")
+    public String userManage(){ return "background/user/userManage";}
 }

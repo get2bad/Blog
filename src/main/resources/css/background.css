@@ -3,8 +3,19 @@
     padding: 0 !important;
 }
 /* 后台管理框架的样式 */
+a:active,a:hover,a:before,a:after{
 
-/* 下拉菜单和导航 */
+}
+.clearDefaultStyle{
+    margin-left: 20px;
+    font-family: '幼圆';
+    text-decoration: none !important;
+    color: #f8f8f8 !important;
+}
+.bottom8Px{
+    margin-bottom: 8px;
+}
+    /* 下拉菜单和导航 */
 .navbar-collapse{
     padding-left: 5px;
     padding-right: 5px;
@@ -17,7 +28,10 @@
     margin: 0 5px;
 }
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
-    background-color: #222222;
+    background-color: #3399cc; /*#222*/
+}
+.navbar-blue{
+    background-color: #339acc;
 }
 .dropdown-menu{
     float: none;

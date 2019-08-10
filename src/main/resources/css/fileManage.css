@@ -1,0 +1,17 @@
+.fileDiv{
+    background-color: #0f0f0f;
+    height:200px;
+    margin: 0 0 10px 15px;
+}
+
+.fileDiv:nth-child(2n+1){
+    background-color: #8a6d3b;
+    height:200px;
+    margin: 0 0 10px 15px;
+}
+
+@media screen and (max-width: 1000px) {
+    .row .btn-primary{
+        margin-top: 8px;
+    }
+}

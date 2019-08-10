@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Will的博客</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../../css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/dropify.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/fileManage.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<div id="fileManage" class="container-fluid">
+    <div class="fileHeader" style=" border-bottom: 2px solid #e0e0e0;margin-bottom: 10px">
+        <h3><span class="iconfont icon-bangzhuzhichi_CDN" style="font-size: 24px;margin-right: 4px"></span>附件管理</h3>
+    </div>
+    <div class="fileSearch" style="margin-bottom: 20px;background-color: #f0f0f0;padding: 5px 5px 5px 15px;">
+        <div>
+            <form class="form-inline" action="#" method="post" enctype="multipart/form-data">
+                <h5>选择需要上传的文件:</h5>
+                <div class="row">
+                    <div class="col-md-3"><span><input type="file" class="form-control" /></span></div>
+                    <!--<div class="col-md-2">
+                        <input type="checkbox" name="autoNamedFile" id="autoNamedFile" class="form-control" />
+                        <label for="autoNamedFile">自动重命名文件名</label>
+                    </div>-->
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary form-control">提交文件</button>
+                        <button type="reset" class="btn btn-primary form-control">重置文件</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-primary form-control">全选取消</button>
+                        <button type="button" class="btn btn-primary form-control hidden-sm hidden-xs">反选</button>
+                        <button type="button" class="btn btn-primary form-control">批量删除</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="fileManage">
+        <div class="row">
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv"></div>
+            <div class="col-lg-2 col-xs-12 col-sm-6 col-md-3 fileDiv">
 
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../../js/jquery-2.1.1.js"></script>
 </body>
 </html>

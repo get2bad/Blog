@@ -30,6 +30,7 @@ public class SpringmvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/articalPic/**").addResourceLocations("classpath:/articalPic/");
         registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/fonts/");
         registry.addResourceHandler("/pic/**").addResourceLocations("classpath:/pic/");
+        registry.addResourceHandler("/upload/**").addResourceLocations("classpath:/upload/");
     }
 
     @Override

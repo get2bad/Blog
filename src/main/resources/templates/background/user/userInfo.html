@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Will的博客</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/dropify.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/userInfo.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<div class="container-fluid">
+    <div class="pwdHeader" style=" border-bottom: 2px solid #e0e0e0;margin-bottom: 20px">
+        <h3><span class="iconfont icon-user" style="font-size: 24px;margin-right: 4px"></span>密码修改</h3>
+    </div>
+    <div id="changePwd">
+        <form action="#" method="post" class="form-group">
+            <div class="row">
+                <div class="col-md-4">
+                    <div><span>用户名:</span><span>
+                        <input type="text" name="userName" disabled="disabled" class="form-control" value="978090490"/></span>
+                    </div>
+                    <div><span>用户级别:</span>
+                        <span>
+                            <select name="userLevel" class="form-control">
+                                <option selected="selected">管理员</option>
+                                <option>网站编辑</option>
+                                <option>作者</option>
+                                <option>评论者</option>
+                                <option>游客</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div><span>别名:</span><span><input type="text" name="otherName" class="form-control"/></span></div>
+                    <div><span>邮箱:</span><span><input type="text" name="userEmail" class="form-control"/></span></div>
+                    <div><span>主页:</span><span><input type="text" name="userWebsite" class="form-control"/></span></div>
+                    <div><span>个人签名:</span><span>
+                <textarea class="form-control" rows="5"></textarea>
+            </span></div>
 
+                </div>
+                <div class="userPic col-md-3" >
+                    <span>头像:</span>
+                    <input type="file" data-default-file="../../articalPic/little_animal_18.png" id="input-file-now" class="dropify"/>
+                </div>
+            </div>
+            <div style="margin-top: 8px">
+                <span><button type="submit" class="btn btn-primary">提交</button></span>
+                <span><button type="reset" class="btn btn-primary">重置</button></span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="../../js/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="../../../js/dropify.min.js"></script>
+<script type="text/javascript">
+    $('.dropify').dropify({
+        messages: {
+            'default': '点击这里上传您的头像',
+            'replace': '点击或拖拽文件到这里来替换文件',
+            'remove':  '移除文件',
+            'error':   '对不起，你上传的文件大于3M'
+        }
+    });
+</script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/iconfont.js"></script>
 </body>
 </html>

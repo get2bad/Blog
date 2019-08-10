@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Will的博客</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../../css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/manageArtical.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="userManage" class="container-fluid">
+    <div class="userHeader" style="border-bottom: 2px solid #e0e0e0;">
+        <h3><span class="iconfont icon-team" style="font-size: 25px;margin-right: 4px"></span>用户管理</h3>
+    </div>
+    <div id="user" style="margin-top: 10px">
+        <form action="#" method="post">
+            <span>搜索：权限</span>
+            <span>
+                <select>
+                    <option selected="selected">管理员</option>
+                    <option>网站编辑</option>
+                    <option>作者</option>
+                    <option>评论者</option>
+                    <option>游客</option>
+                </select>
+            </span>
+            <span>性别:
+                <select>
+                    <option>男</option>
+                    <option>女</option>
+                    <option>保密</option>
+                </select>
+            </span>
+            <span>
+                <input type="checkbox" id="isBanned" name="isBanned">
+                <label for="isBanned">是否被封号</label>
+            </span>
+            <span>
+                <input type="text" placeholder="在此输入要搜索的用户名"/>
+            </span>
+            <span>
+                <span>发表文章篇数:</span>
+                <input type="text" style="width: 4%" maxlength="3"/>~
+                <input type="text" style="width: 4%" max="3"/>
+                <input type="submit" value="搜索" />
+            </span>
+        </form>
+    </div>
+    <div id="userResult" style="margin-top: 15px">
+        <table class="table table-striped table-hover">
+            <tr>
+                <td>用户ID</td>
+                <td>用户名</td>
+                <td>密码</td>
+                <td class="visible-md visible-lg">生日</td>
+                <td>性别</td>
+                <td>Email</td>
+                <td>联系方式</td>
+                <td class="visible-md visible-lg">个人签名</td>
+                <td>注册日期</td>
+                <td>权限</td>
+                <td class="visible-md visible-lg">发表文章篇数</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Wills</td>
+                <td>whwh2008</td>
+                <td class="visible-md visible-lg">1997-02-08 12:00</td>
+                <td>男</td>
+                <td>loveing490@qq.com</td>
+                <td>17607113011</td>
+                <td class="visible-md visible-lg">珍稀的东西永远抓不住，封闭自己疯狂努力吧。</td>
+                <td>2019-8-6 18:00</td>
+                <td>管理员</td>
+                <td class="visible-md visible-lg">3</td>
+                <td>
+                    <a href="#" class="iconfont icon-xiangqing" style="margin-right: 8px" title="编辑"></a>
+                    <a href="#" class="iconfont icon-close-circle" style="margin-right: 8px" title="删除"></a>
+                    <a href="#" class="iconfont icon-shandian" title="封号"></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script src="../../../js/jquery-2.1.1.js"></script>
+</body>
+</html>
