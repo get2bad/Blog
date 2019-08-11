@@ -1,0 +1,40 @@
+body{
+    margin:0;
+    padding:0;
+    background-color: #ebf0f2;
+}
+#networkStatus{
+    background-color: #f8f8f8;
+}
+#networkInfo{
+    margin-top: 8px;
+}
+.padding8PxBorderBottom{
+    padding: 8px;
+    border-bottom: 1px solid #ebf0f2;
+}
+.top20Px{
+    margin-top: 20px;
+}
+.top40Px{
+    margin-top: 40px;
+}
+#infoResult{
+    padding: 0px 20px 20px 20px;
+}
+.padding20PX{
+    padding: 20px;
+}
+.infoBlock{
+    padding: 40px 20px 40px 20px;
+    background-color: #f8f8f8;
+}
+.backColorBlue{
+    background-color: #23b7e5;
+}
+.backColorPurple{
+    background-color: #7266ba;
+}
+.left8px{
+    margin-left: 8px !important;
+}

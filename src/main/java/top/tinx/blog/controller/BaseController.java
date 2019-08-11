@@ -79,4 +79,7 @@ public class BaseController {
 
     @GetMapping("/userManage")
     public String userManage(){ return "background/user/userManage";}
+
+    @GetMapping("/operationLog")
+    public String operationLog(){ return "background/operation/operationLog";}
 }
