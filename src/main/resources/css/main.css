@@ -98,12 +98,11 @@ body{
 #content .content-left{
     /*margin-left: 15px;*/
     padding: 5px 10px 5px 10px;
-    width: 70% !important;
+    width: 100% !important;
     background-color: #ffffff;
 }
 #content .content-right{
-    width: 28%;
-    margin-left: 20px;
+    width: 100%;
     background-color: #ffffff;
     padding: 5px 10px 5px 10px;
 }

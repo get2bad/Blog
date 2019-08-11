@@ -34,7 +34,7 @@ a:active,a:hover,a:before,a:after{
     margin: 0 5px;
 }
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
-    background-color: #3399cc; /*#222*/
+    background-color: #3399cc;
 }
 .navbar-blue{
     background-color: #339acc;
@@ -68,26 +68,17 @@ body {
     overflow: auto;
     background-color: #0f0f0f;
 }
-.splitter {
-    width: 3px;
-    position: absolute;
-    height: 100%;
-    bottom: 0;
-    left: 240px;
-    overflow: hidden;
-    background-color: #c0c0c0;
-}
 .pageContent{
     height: 100%;
-    min-width: 768px;
-    left: 246px;
+    /*min-width: 768px;*/
+    position: absolute;
+    left: 300px;
     top: 0;
     right: 0;
-    z-index: 3;
     /*padding-bottom: 30px;*/
-    position: absolute;
 }
 .pageContainer{
+    /*
     bottom: 0;
     left:0;
     right: 0;
@@ -95,19 +86,5 @@ body {
     overflow: hidden;
     position: absolute;
     width: 100%;
+    */
 }
-/*
-.footer {
-    width: 100%;
-    color: #f8f8f8;
-    height: 30px;
-    line-height: 30px;
-    margin-top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    z-index: 10;
-    background-color:#0f0f0f;
-}
- */

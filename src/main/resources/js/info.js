@@ -1,22 +1,29 @@
 'use strict';
+var base = +new Date(2019, 8, 6);
+var oneDay = 24 * 3600 * 1000;
+var date = [];
+
+var data = [Math.random() * 150];
+var now = new Date(base);
+
 $(function(){
     initGaugeCharts('cpuInfo','Cpu','gauge','cpu占用','');
     initGaugeCharts('memoryInfo','内存','gauge','内存占用','');
     initGaugeCharts('diskInfo','硬盘','gauge','硬盘占用','');
     initGaugeCharts('picInfo','上传','gauge','文件占用','');
-    initCategoryCharts('networkInfo','');
+    initCategoryCharts('networkInfo','category','网络吞吐量');
 });
-function initCategoryCharts(elementId,charTitle) {
+function initCategoryCharts(elementId,chartType,chartName) {
         var Chart=echarts.init(document.getElementById(elementId));//初始化
         //用户等待
         Chart.showLoading(
             {text: '获取数据中...'  }
         );
-        /*//自定义变量
+        //自定义变量
         var times=[];
         var legend=[];
         var chartDatas = [];
-        var nodeid = ${nodeid};*/
+        //var nodeid = ${nodeid};
         //getData(Chart,elementId); //先执行一次，以防等十秒后才出现图表
         setInterval(function(){//定时器
             getData(Chart, elementId);
