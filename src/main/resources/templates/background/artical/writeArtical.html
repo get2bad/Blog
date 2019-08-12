@@ -18,7 +18,7 @@
                 <h3><span class="iconfont icon-bokeyuan writeIcon" style="margin-right: 4px"></span>文章编辑</h3>
             </div>
             <div class="writeCategory">
-                <form id="" action="" method="post">
+                <form id="articalContent" action="/" method="post">
                     <div class="formElement">
                         <label for="articalTitle"><h4><strong>标题</strong></h4></label>
                          <input type="text" id="articalTitle" class="form-control" placeholder="在这里输入文章的标题" name="articalTitle" />
@@ -29,15 +29,16 @@
                     </div>
                     <div class="formElement">
                         <div class="input-group" style="width: 50%">
-                            <input type="file" id="input-file-now" class="dropify"data-height="200"
+                            <input type="file" name="picIntroduceUpload" id="input-file-now" class="dropify"data-height="200"
                                    data-max-file-size="3M" placeholder="请点击右侧上传按钮，选择您需要的图片或图片地址" />
                         </div>
                     </div>
                     <div class="formElement">
                         <label for="editor"><h4><strong>正文</strong></h4></label>
                         <div id="editor">
-                            <p>输入内容...</p>
+                            <p>输入文章内容...</p>
                         </div>
+                        <input type="hidden" readonly="readonly" id="content_text">
                     </div>
                     <div class="formElement">
                         <label for="articalType"><h4><strong>分类</strong></h4></label>
@@ -61,7 +62,7 @@
                         <div><input type="checkbox" id="isSubmitTop" name="isSubmitTop" /><label for="isSubmitTop">置顶申请</label></div>
                     </div>
                     <div class="formElement">
-                        <button type="button" class="btn btn-primary">提交审核</button>
+                        <button type="button" class="btn btn-primary" onclick="getValuee();">提交审核</button>
                     </div>
                 </form>
             </div>
@@ -72,57 +73,6 @@
     <script type="text/javascript" src="../../../js/wangEditor.min.js"></script>
     <script type="text/javascript" src="../../../js/dropify.min.js"></script>
     <script src="https://raw.github.com/leizongmin/js-xss/master/dist/xss.js"></script>
-<script type="text/javascript">
-    //富文本编辑器
-    var E = window.wangEditor;
-    var editor = new E('#editor');
-    // 或者 var editor = new E( document.getElementById('editor') )
-    // 自定义菜单配置
-    editor.customConfig.menus = [
-        'head',  // 标题
-        'bold',  // 粗体
-        'fontSize',  // 字号
-        'fontName',  // 字体
-        'italic',  // 斜体
-        'underline',  // 下划线
-        'strikeThrough',  // 删除线
-        'foreColor',  // 文字颜色
-        'backColor',  // 背景颜色
-        'link',  // 插入链接
-        'list',  // 列表
-        'justify',  // 对齐方式
-        'quote',  // 引用
-        'emoticon',  // 表情
-        'image',  // 插入图片
-        'table',  // 表格
-        'video',  // 插入视频
-        'code',  // 插入代码
-        'undo',  // 撤销
-        'redo'  // 重复
-    ];
-    // 下面两个配置，使用其中一个即可显示“上传图片”的tab。但是两者不要同时使用！！！
-    // editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
-    editor.customConfig.uploadImgServer = '/upload';  // 上传图片到服务器
-    editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;  //限制上传图片的大小 限制3mb
-    // 限制一次最多上传 10张图片
-    editor.customConfig.uploadImgMaxLength = 10;
-    editor.create();
-
-    /*防止xxs攻击配置
-    // 使用函数名 filterXSS，用法一样
-    var options = {};  // 自定义规则
-    myxss = new s.FilterXSS(options);
-    // 以后直接调用 myxss.process() 来处理即可
-    html = myxss.process("alert('111');");*/
-    $('.dropify').dropify({
-        messages: {
-            'default': '点击这里上传文章封面',
-            'replace': '点击或拖拽文件到这里来替换文件',
-            'remove':  '移除文件',
-            'error':   '对不起，你上传的文件大于3M'
-        }
-    });
-
-</script>
+<script type="text/javascript" src="../../../js/writeArtical.js" ></script>
 </body>
 </html>
