@@ -43,6 +43,7 @@ $(function(){
     myxss = new s.FilterXSS(options);
     // 以后直接调用 myxss.process() 来处理即可
     html = myxss.process("alert('111');");*/
+
     $('.dropify').dropify({
         messages: {
             'default': '点击这里上传文章封面',
@@ -58,11 +59,12 @@ function getValuee() {
     //获取富文本编辑器中的内容（包含html代码）
     var content = editor.txt.html();
     var inputValue = $('#content_text');
-    inputValue.value = content;
+    inputValue.val(content);
     var formValue = $('#articalContent').serializeArray();
     formValue.push({name:'content',value:content});
     var uploadFile = $('#input-file-now').val();
     formValue.push({name:'picIntroduceUpload',value:uploadFile});
     var jsonContent = JSON.stringify(formValue);
     console.log(jsonContent);
+    document.getElementById('articalContent').submit();
 }

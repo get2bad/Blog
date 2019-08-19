@@ -18,7 +18,7 @@
                 <h3><span class="iconfont icon-bokeyuan writeIcon" style="margin-right: 4px"></span>文章编辑</h3>
             </div>
             <div class="writeCategory">
-                <form id="articalContent" action="/" method="post">
+                <form id="articalContent" action="/newArtical" enctype="multipart/form-data" method="post">
                     <div class="formElement">
                         <label for="articalTitle"><h4><strong>标题</strong></h4></label>
                          <input type="text" id="articalTitle" class="form-control" placeholder="在这里输入文章的标题" name="articalTitle" />
@@ -29,7 +29,7 @@
                     </div>
                     <div class="formElement">
                         <div class="input-group" style="width: 50%">
-                            <input type="file" name="picIntroduceUpload" id="input-file-now" class="dropify"data-height="200"
+                            <input type="file" name="picIntroduceUploads" id="input-file-now" class="dropify"data-height="200"
                                    data-max-file-size="3M" placeholder="请点击右侧上传按钮，选择您需要的图片或图片地址" />
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div id="editor">
                             <p>输入文章内容...</p>
                         </div>
-                        <input type="hidden" readonly="readonly" id="content_text">
+                        <input type="hidden" name="articalContent" id="content_text">
                     </div>
                     <div class="formElement">
                         <label for="articalType"><h4><strong>分类</strong></h4></label>
@@ -58,8 +58,8 @@
                         </select>
                     </div>
                     <div class="formElement">
-                        <div><input type="checkbox" id="isDenyComment" name="isDenyComment" /><label for="isDenyComment">禁止评论</label></div>
-                        <div><input type="checkbox" id="isSubmitTop" name="isSubmitTop" /><label for="isSubmitTop">置顶申请</label></div>
+                        <div><input type="checkbox" id="isDenyComment" name="isDenyComment" value="1" /><label for="isDenyComment">禁止评论</label></div>
+                        <div><input type="checkbox" id="isSubmitTop" name="isSubmitTop" value="1" /><label for="isSubmitTop">置顶申请</label></div>
                     </div>
                     <div class="formElement">
                         <button type="button" class="btn btn-primary" onclick="getValuee();">提交审核</button>

@@ -101,3 +101,15 @@ function whatDay(){
         (classArr !== undefined) && ((x == currentDay) ? classArr.add("light-on") : classArr.remove("light-on"));
     }
 }
+
+function about(){
+    alert("本网站所有者Wills,大家有任何需要交流的，请您点击 '联系我们'");
+}
+
+function advertisement(){
+    alert("广告合作，请您联系邮箱loveing490@qq.com 或者请您点击 '联系我们'");
+}
+
+function disclaimer(){
+    alert("本前端页面归属权归Wills所有，如若您需要前端页面的源码，请您移步至github去clone我的仓库，感谢!");
+}

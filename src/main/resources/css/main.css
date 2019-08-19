@@ -7,6 +7,13 @@ img{
     max-width: 100%;
     max-height: 100%;
 }
+a{
+    text-decoration: none;
+    color:#777777;
+}
+ul{
+    list-style: none;
+}
 /*当屏幕的宽度大于768的时候会自动应用大括号内部的样式*/
 @media (min-width: 768px) {
     #ad > .carousel-inner > .item{
@@ -59,7 +66,7 @@ body{
 }
 #header{
     position: relative;
-    z-index: 9999;
+    z-index: 999;
     margin-bottom: 50px;
 }
 #header > .container{
