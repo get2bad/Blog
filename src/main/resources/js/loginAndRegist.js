@@ -52,9 +52,19 @@ jQuery(document).ready(function($){
 			$password_field = $this.prev('input');
 		
 		( 'password' == $password_field.attr('type') ) ? $password_field.attr('type', 'text') : $password_field.attr('type', 'password');
-		( 'Hide' == $this.text() ) ? $this.text('Show') : $this.text('Hide');
-		//focus and move cursor to the end of input field
+		( '隐藏' == $this.text() ) ? $this.text('显示') : $this.text('隐藏');
+		//使输入框成为焦点
 		$password_field.putCursorAtEnd();
+	});
+
+	//send email
+	$('.send-email').on('click', function(){
+		var $this= $(this),
+			$email_field = $this.prev('input');
+
+		( '发送验证码' == $this.text() ) ? $this.text('已发送，请您接收~') : $this.text('发送验证码');
+		//focus and move cursor to the end of input field
+		$email_field.putCursorAtEnd();
 	});
 
 	//show forgot-password form 
@@ -91,19 +101,20 @@ jQuery(document).ready(function($){
 		$form_forgot_password.addClass('is-selected');
 	}
 
-	//REMOVE THIS - it's just to show error messages 
+	//错误信息的显示
 	$form_login.find('input[type="submit"]').on('click', function(event){
 		event.preventDefault();
+		//显示错误信息
 		$form_login.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
 	});
 	$form_signup.find('input[type="submit"]').on('click', function(event){
 		event.preventDefault();
+		//显示错误信息
 		$form_signup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
 	});
 
 
 	//IE9 placeholder fallback
-	//credits http://www.hagenburger.net/BLOG/HTML5-Input-Placeholder-Fix-With-jQuery.html
 	if(!Modernizr.input.placeholder){
 		$('[placeholder]').focus(function() {
 			var input = $(this);

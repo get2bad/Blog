@@ -1,5 +1,6 @@
 package top.tinx.blog.service;
 
+import top.tinx.blog.bean.Login;
 import top.tinx.blog.bean.User;
 
 /**
@@ -29,4 +30,17 @@ public interface UserService {
      * @return
      */
     public User findSimpleUserByUserName(String username);
+
+    /**
+     * 登陆
+     * @return
+     */
+    public User findUserByUserNameAndPassword(String userName,String password);
+
+    /**
+     * 修改登陆的IP地址
+     * @param ip
+     * @param user_id
+     */
+    public void updateSignInIP(String ip,String user_id);
 }

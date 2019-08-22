@@ -1,6 +1,10 @@
 'use strict';
-
+//创建配置类对象
+var vaptchaCode;
+var ajaxInfo;
 $(function(){
+    vaptchaCode = Object.create(vaptchaBaseInfo);
+    ajaxInfo = Object.create(ajaxInfos);
     /*时钟效果*/
     window.setInterval(function () {
         time();
@@ -24,11 +28,17 @@ $(function(){
             $('.content-left').css('width','100%');
             //将右边div的display设置为none
             $('.content-right').css('display','none');
+            //去除点击事件→直接点击，然后连接到login界面
+            $('.main-nav').unbind('click');
+            //修改登陆地址
+            $('#loginAddr').attr('href','/login');
         }else{
             //大于1200px将左边div缩小到70%
             $('.content-left').css('width','70%');
             //将右边div的display设置为block
             $('.content-right').css('display','block');
+            //修改登陆地址
+            $('#loginAddr').attr('href','#0');
         }
         scrollNavTabs();
     }
@@ -112,4 +122,137 @@ function advertisement(){
 
 function disclaimer(){
     alert("本前端页面归属权归Wills所有，如若您需要前端页面的源码，请您移步至github去clone我的仓库，感谢!");
+}
+//提示框
+function tips(alertText,position){
+    new NoticeJs({
+        text: alertText,
+        //topLeft topCenter topRight middleLeft middleCenter middleRight bottomLeft bottomCenter bottomRight
+        position: position,
+        animation: {
+            open: 'animated bounceIn',
+            close: 'animated bounceOut'
+        }
+    }).show();
+}
+var token = "";
+function setVaptchaContainer(vaptchaContainerId,sceneText){
+    //vaptcha验证码加载
+    vaptcha({
+        //配置参数
+        // 验证单元id
+        vid: vaptchaCode.vid,
+        lang:vaptchaCode.lang,
+        // 展现类型 点击式
+        type: vaptchaCode.type,
+        scene:sceneText,
+        // 按钮容器，可为Element 或者 selector
+        container: '#'+vaptchaContainerId
+    }).then(function (vaptchaObj) {
+        // 调用验证实例 vaptchaObj 的 render 方法加载验证按钮
+        vaptchaObj.render()
+        vaptchaObj.listen('pass', function() {
+            // 验证成功， 进行登录操作
+            //如果token为空说明没有通过验证，如果token不为空说明通过了验证
+            token = vaptchaObj.getToken();
+            console.log(token);
+            judgeTokenIsEmpty();
+        })
+        vaptchaObj.listen('close', function() {
+            //验证弹窗关闭触发
+        })
+        $('input[type="reset"]').on('click',function(){
+            vaptchaObj.reset();
+        })
+    })
+}
+(function($){
+    $.fn.serializeJson=function(){
+        var serializeObj={};
+        var array=this.serializeArray();
+        var str=this.serialize();
+        $(array).each(function(){
+            if(serializeObj[this.name]){
+                if($.isArray(serializeObj[this.name])){
+                    serializeObj[this.name].push(this.value);
+                }else{
+                    serializeObj[this.name]=[serializeObj[this.name],this.value];
+                }
+            }else{
+                serializeObj[this.name]=this.value;
+            }
+        });
+        return serializeObj;
+    };
+})(jQuery);
+//登陆按钮单击事件
+function loginAccount(){
+    if (token.length ==0) {
+        //如果为空说明没有进行人机验证操作
+        tips("请您进行人机验证,验证通过后方可进行后续操作！","topCenter");
+    }else{
+        //不为空说明进行了人机操作，进行表单提交
+        $("#vaptchaCode1").attr('value',token);
+        var params = $("#login-form").serializeJson();
+        console.log(JSON.stringify(params));
+        $.ajax({
+            //请求方式
+            type : ajaxInfo.postType,
+            //请求的媒体类型
+            contentType: ajaxInfo.jsonRequestContentType,
+            //请求地址
+            url : ajaxInfo.loginUrl,
+            //是否异步执行命令
+            async: ajaxInfo.limitAsyc,
+            //不进行缓存
+            cache: ajaxInfo.limitCache,
+            //数据，json字符串
+            data : JSON.stringify(params),
+            dataType: ajaxInfo.jsonDataType,
+            //请求成功
+            success : function(result) {
+                console.log(result);
+                if(result.code ==1){
+                    tips(result.data,'topCenter');
+                    location.href="/";
+                }else{
+                    tips(result.data,'topCenter');
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                //_obj.reset(); //重置验证码
+                tips('请求失败，请您检查！','topCenter');
+                location.href="/login";
+            }
+        });
+    }
+}
+function regist(){
+    if((token ==null)||(token =='')){
+        //如果为空说明没有进行人机验证操作
+        tips("请您进行人机验证,验证通过后方可进行后续操作！","topCenter");
+    }else{
+        //不为空说明进行了人机操作，进行表单提交
+        $("#vaptchaCode2").val(token);
+
+    }
+}
+function resetPwd() {
+    if((token ==null)||(token =='')){
+        //如果为空说明没有进行人机验证操作
+        tips("请您进行人机验证,验证通过后方可进行后续操作！","topCenter");
+    }else{
+        //不为空说明进行了人机操作，进行表单提交
+        $("#vaptchaCode3").attr('value',token);
+
+    }
+}
+function judgeTokenIsEmpty(){
+    if((token ==null)||(token =='')){
+        tips("请您进行人机验证,验证通过后方可进行后续操作！","topCenter");
+    }else{
+        $("#vaptchaCode3").val(token);
+
+    }
 }

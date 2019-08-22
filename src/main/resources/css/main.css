@@ -277,3 +277,7 @@ div.am-pm div p {
     color: #ffffff;
 }
 
+#vaptchaCode1,#vaptchaCode2,#vaptchaCode3{
+    display: none;
+}
+

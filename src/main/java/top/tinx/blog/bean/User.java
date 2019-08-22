@@ -8,6 +8,8 @@ public class User {
     private int userId;
     private String userName;
     private String password;
+    private String vaptchaCode;
+    private String remember;
     private Role role;
     private int sex;
     private String phone;
@@ -35,10 +37,15 @@ public class User {
     public User() {
     }
 
-    public User(int userId, String userName, String password, Role role, int sex, String phone, String QQ, String email, String address, int score, String lastSignIP, Date birthday, String description, String userIconLocation, int isDenySignIn, String activationCode, int isActived, List<Role> roleList) {
+    public User(int userId, String userName, String password, String vaptchaCode, String remember, Role role,
+                int sex, String phone, String QQ, String email, String address, int score, String lastSignIP,
+                Date birthday, String description, String userIconLocation, int isDenySignIn, String activationCode,
+                int isActived, List<Role> roleList) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
+        this.vaptchaCode = vaptchaCode;
+        this.remember = remember;
         this.role = role;
         this.sex = sex;
         this.phone = phone;
@@ -192,12 +199,30 @@ public class User {
         this.isActived = isActived;
     }
 
+    public String getVaptchaCode() {
+        return vaptchaCode;
+    }
+
+    public void setVaptchaCode(String vaptchaCode) {
+        this.vaptchaCode = vaptchaCode;
+    }
+
+    public String getRememberMe() {
+        return remember;
+    }
+
+    public void setRememberMe(String rememberMe) {
+        this.remember = rememberMe;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", vaptchaCode='" + vaptchaCode + '\'' +
+                ", remember='" + remember + '\'' +
                 ", role=" + role +
                 ", sex=" + sex +
                 ", phone='" + phone + '\'' +

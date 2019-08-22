@@ -266,6 +266,9 @@ xsigin/signup popup
 .cd-form input.full-width {
   width: 100%;
 }
+.cd-form input.half-width {
+  width: 45%;
+}
 .cd-form input.has-padding {
   padding: 12px 20px 12px 50px;
 }
@@ -285,7 +288,7 @@ xsigin/signup popup
   /* space left for the HIDE button */
   padding-right: 65px;
 }
-.cd-form input[type=submit] {
+.cd-form input[class~=submit] {
   padding: 16px 0;
   cursor: pointer;
   background: #2f889a;
@@ -294,8 +297,12 @@ xsigin/signup popup
   border: none;
   appearance: none;
 }
-.no-touch .cd-form input[type=submit]:hover, .no-touch .cd-form input[type=submit]:focus {
+.no-touch .cd-form input[class~=submit]:hover, .no-touch .cd-form input[class~=submit]:focus {
   background: #3599ae;
+  outline: none;
+}
+.no-touch .cd-form input[type=reset]:hover, .no-touch .cd-form input[type=reset]:focus {
+  background: #985f0d;
   outline: none;
 }
 .cd-form .hide-password {
@@ -352,7 +359,7 @@ xsigin/signup popup
     padding: 2em;
   }
   .cd-form .fieldset {
-    margin: 2em 0;
+    margin: 1em 0;
   }
   .cd-form .fieldset:first-child {
     margin-top: 0;
@@ -363,7 +370,7 @@ xsigin/signup popup
   .cd-form input.has-padding {
     padding: 16px 20px 16px 50px;
   }
-  .cd-form input[type=submit] {
+  .cd-form input[class~=submit] {
     padding: 16px 0;
   }
 }
@@ -385,9 +392,9 @@ xsigin/signup popup
   position: absolute;
   width: 100%;
   left: 0;
-  bottom: -30px;
+  bottom: -35px;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px !important;
   font-size: 0.875rem;
 }
 .cd-form-bottom-message a {
@@ -419,4 +426,16 @@ xsigin/signup popup
 
 #cd-login.is-selected, #cd-signup.is-selected, #cd-reset-password.is-selected {
   display: block;
+}
+
+/*重置按钮的样式*/
+.cd-form input[type=reset] {
+  padding: 16px 0;
+  cursor: pointer;
+  background: rgba(215, 102, 102, 0.9);
+  color: #FFF;
+  font-weight: bold;
+  border: none;
+  appearance: none;
+  margin: 0 !important;
 }

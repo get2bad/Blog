@@ -35,11 +35,11 @@ public class ShiroConfig {
 
 
         //需要登陆的接口，如果没有登陆，则会跳转到这个URL（如果不是前后端分离，则会用这个URL进行跳转）
-        shiroFilter.setLoginUrl("/pub/need_login");
+        shiroFilter.setLoginUrl("/login");
         //如果登陆成功，则会跳转到这个页面(仅限非前后端分离)
         shiroFilter.setSuccessUrl("/");
         //如果没有权限，则会跳转到这个URL（仅限非前后端分离）
-        shiroFilter.setUnauthorizedUrl("/pub/not_permit");
+        shiroFilter.setUnauthorizedUrl("/not_permit");
 
         //拦截器拦截路径
         //坑1!如果使用HashMap的话，会拦截时有时无。因为HashMap是无序的,使用LinkedHashMap有序的可以拦截
@@ -50,21 +50,30 @@ public class ShiroConfig {
         //设置Filter
         shiroFilter.setFilters(roleMap);
         Map<String,String> map = new LinkedHashMap<String,String>();
+
+        //静态资源防止拦截
+        map.put("/articalPic/**","anon");
+        map.put("/css/**","anon");
+        map.put("/js/**","anon");
+        map.put("/fonts/**","anon");
+        map.put("/pic/**","anon");
+        map.put("/templates/**","anon");
+
         //退出过滤器
         map.put("/logout","logout");
         //匿名可以访问
-        map.put("/pub/**","anon");
+        //map.put("/*","anon");
         //需要有video_play权限才能访问本URL
-        map.put("/authc/video/play_record","perms[video_play]");
+        //map.put("/authc/video/play_record","perms[video_play]");
         //登录用户可以访问的
-        map.put("/authc/*","authc");
+        //map.put("/user/**","authc");
         //管理员角色才可以访问
-        map.put("/admin/**","roles[admin,root]");
+        map.put("/background/**","roles[admin,root]");
         //有编辑权限才可以访问的
-        map.put("/video/update","perms[video_update]");
+        //map.put("/video/update","perms[video_update]");
 
         //坑2 因为拦截是顺序执行，所以要将/**拦截放到最下面
-        map.put("/**","authc");
+        map.put("/**","anon");
         shiroFilter.setFilterChainDefinitionMap(map);
 
         return shiroFilter;

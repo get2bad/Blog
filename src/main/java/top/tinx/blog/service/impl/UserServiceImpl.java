@@ -2,6 +2,7 @@ package top.tinx.blog.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.tinx.blog.bean.Login;
 import top.tinx.blog.bean.Role;
 import top.tinx.blog.bean.User;
 import top.tinx.blog.maaper.RoleMapper;
@@ -39,5 +40,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findSimpleUserByUserName(String username) {
         return userMapper.findUserByUserName(username);
+    }
+
+    @Override
+    public User findUserByUserNameAndPassword(String userName,String password) {
+        return userMapper.findUserByUsernameAndPassword(userName,password);
+    }
+
+    @Override
+    public void updateSignInIP(String ip, String user_id) {
+        userMapper.updateLoginIP(ip,user_id);
     }
 }

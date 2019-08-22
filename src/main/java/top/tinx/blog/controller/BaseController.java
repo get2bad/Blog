@@ -3,6 +3,8 @@ package top.tinx.blog.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class BaseController {
 
@@ -13,7 +15,7 @@ public class BaseController {
 
     @GetMapping("/login")
     public String login(){
-        return "user/login";
+        return "foreground/user/login";
     }
 
     @GetMapping("/content")
@@ -82,4 +84,11 @@ public class BaseController {
 
     @GetMapping("/operationLog")
     public String operationLog(){ return "background/operation/operationLog";}
+
+    @GetMapping("/not_permit")
+    public String notPermission(HttpServletRequest request){
+        request.setAttribute("errorTitle","出错了....");
+        request.setAttribute("errorMsg","对不起，您的权限不够哦，请您重新尝试一下，或者登陆拥有该权限的账号再试!");
+        return "/error/4xx";
+    }
 }
