@@ -43,4 +43,31 @@ public interface UserService {
      * @param user_id
      */
     public void updateSignInIP(String ip,String user_id);
+
+    /**
+     * 获取重复的email
+     * @param email
+     * @return
+     */
+    public int getRepeatEmial(String email);
+
+    /**
+     * 注册功能实现---向数据库添加用户
+     * @param user
+     */
+    public void insertUser(User user);
+
+    /**
+     * 查询数据库中是否存在这个用户名
+     * @param userName
+     * @return
+     */
+    public int getUserNameCount(String userName);
+
+    /**
+     * 查询数据库是否存在相同的email
+     * @param email
+     * @return
+     */
+    public int getEmailCount(String email);
 }

@@ -78,22 +78,24 @@
                             <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
                                 <ul class="cd-switcher">
                                     <li><a href="#0">登陆</a></li>
-                                    <li><a href="#0"  onclick="setVaptchaContainer('vaptchaContainer2','01')">注册</a></li>
+                                    <li><a href="#0" onclick="setVaptchaContainer('vaptchaContainer2','01')">注册</a></li>
                                 </ul>
 
                                 <div id="cd-login"> <!-- log in form -->
-                                    <form id="login-form" class="cd-form" action="/login">
+                                    <form id="login-form" class="cd-form form-inline" action="/user/login">
                                         <p class="fieldset">
-                                            <label class="image-replace cd-username" for="signin-email">账号</label>
-                                            <input name="userName" class="full-width has-padding has-border" id="signin-email" type="email" placeholder="账号">
-                                            <span class="cd-error-message">错误提示信息!</span>
+                                            <label class="image-replace cd-username" for="signin-userName">账号</label>
+                                            <input name="userName" class="full-width has-padding has-border" id="signin-userName"
+                                                   type="email" placeholder="账号" onkeyup="checkInputValueLength(this.value,'loginUserNameWarning')">
+                                            <span class="cd-error-message loginUserNameWarning">请输入账号!</span>
                                         </p>
 
                                         <p class="fieldset">
                                             <label class="image-replace cd-password" for="signin-password">密码</label>
-                                            <input name="password" class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="密码">
+                                            <input name="password" class="full-width has-padding has-border" id="signin-password"
+                                                   type="password" placeholder="密码" onkeyup="checkInputValueLength(this.value,'loginPwdWarning')">
                                             <a href="#0" class="hide-password">显示</a>
-                                            <span class="cd-error-message">错误提示信息!</span>
+                                            <span class="cd-error-message loginPwdWarning">请输入密码!</span>
                                         </p>
 
                                         <!--验证码模块嵌入-->
@@ -103,7 +105,7 @@
                                                 <!--验证码加载-->
                                                 <div class="vaptcha-init-loading">
                                                     <a href="https://www.vaptcha.com" target="_blank">
-                                                        <img src="https://cdn.vaptcha.com/vaptcha-loading.gif" />
+                                                        <img src="https://cdn.vaptcha.com/vaptcha-loading.gif"/>
                                                     </a>
                                                     <span class="vaptcha-text">人机验证启动中...</span>
                                                 </div>
@@ -111,46 +113,94 @@
                                         </div>
                                         </p>
                                         <p class="fieldset">
-                                            <input name="vaptchaCode" type="text" id="vaptchaCode1" value="">
+                                            <input name="vaptchaCode" type="text" id="vaptchaCode1" value="" hidden>
                                         </p>
                                         <!--/验证码模块嵌入-->
 
                                         <p class="fieldset">
-                                           <input name="remember" type="checkbox" id="remember-me" checked value="1">
-                                           <label for="remember-me">记住我</label>
+                                            <input name="remember" type="checkbox" id="remember-me" checked value="1">
+                                            <label for="remember-me">记住我</label>
                                         </p>
 
                                         <p class="fieldset">
-                                            <input class="full-width submit" type="button" value="登陆" id="login" onclick="loginAccount()">
+                                            <input class="full-width submit" type="button" value="登陆" id="login"
+                                                   onclick="loginAccount()">
                                         </p>
                                         <p class="fieldset">
                                             <input class="full-width reset" type="reset" value="重置">
                                         </p>
                                     </form>
 
-                                    <p class="cd-form-bottom-message"><a href="#0" onclick="setVaptchaContainer('vaptchaContainer3','04')">忘记密码？</a></p>
+                                    <p class="cd-form-bottom-message"><a href="#0"
+                                                                         onclick="setVaptchaContainer('vaptchaContainer3','04')">忘记密码？</a>
+                                    </p>
                                     <!-- <a href="#0" class="cd-close-form">Close</a> -->
                                 </div> <!-- cd-login -->
 
                                 <div id="cd-signup"> <!-- sign up form -->
-                                    <form class="cd-form" id="regist-form">
+                                    <form class="cd-form" id="regist">
                                         <p class="fieldset">
                                             <label class="image-replace cd-username" for="signup-username">用户名</label>
-                                            <input name="userName" class="full-width has-padding has-border" id="signup-username" type="text" placeholder="用户名">
-                                            <span class="cd-error-message">错误提示信息!</span>
+                                            <input name="userName" class="full-width has-padding has-border" id="signup-username"
+                                                   type="text" placeholder="用户名" onkeyup="checkInputValueLength(this.value,'regUserName')">
+                                            <span class="cd-error-message regUserName">请输入要注册的用户名!</span>
                                         </p>
 
                                         <p class="fieldset">
-                                            <label class="image-replace cd-email" for="signup-email">E-mail</label>
-                                            <input name="email" class="full-width has-padding has-border" id="signup-email" type="email" placeholder="邮箱">
-                                            <span class="cd-error-message">错误提示信息!</span>
-                                        </p>
-
-                                        <p class="fieldset">
-                                            <label class="image-replace cd-password" for="signup-password">Password</label>
-                                            <input name="conform_pwd" class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="密码">
+                                            <label class="image-replace cd-password" for="password">密码</label>
+                                            <input name="password" class="full-width has-padding has-border" id="password"
+                                                   type="password" placeholder="密码" onkeyup="checkInputValueLength(this.value,'regPwd')">
                                             <a href="#0" class="hide-password">显示</a>
-                                            <span class="cd-error-message">错误提示信息!</span>
+                                            <span class="cd-error-message regPwd">请输入注册用户的密码!</span>
+                                        </p>
+
+                                        <p class="fieldset">
+                                            <label class="image-replace cd-password" for="confirmPassword">确认密码</label>
+                                            <input name="confirmPwd" class="full-width has-padding has-border"
+                                                   id="confirmPassword" type="password" placeholder="确认密码" onkeyup="checkInputValueLength(this.value,'regConfirmPwd')">
+                                            <a href="#0" class="hide-password">显示</a>
+                                            <span class="cd-error-message regConfirmPwd">请输入确认密码!</span>
+                                        </p>
+
+                                        <p class="fieldset">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <select class="form-control" name="sex">
+                                                    <option value="1">男</option>
+                                                    <option value="0">女</option>
+                                                    <option value="2">保密</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        </p>
+
+                                        <p class="fieldset">
+                                            <input name="phone" class="form-control full-width has-padding has-border"
+                                                   id="signup-phone" type="text" placeholder="请输入您的手机号" oninput="this.value=value.replace(/[^\d]/g,'')" onkeyup="checkInputValueLength(this.value,'regPhone')">
+                                            <span class="cd-error-message regPhone">请您输入注册的手机号!</span>
+                                        </p>
+
+                                        <p class="fieldset">
+                                            <input readonly name="birthday" class="form-control full-width has-padding has-border"
+                                                   id="birthday" type="date" placeholder="点击这里开始填写生日" onclick="chooseBirthday()" onkeyup="checkInputValueLength(this.value,'regBirthday')">
+                                            <span class="cd-error-message regBirthday">请您填写生日日期!</span>
+                                        </p>
+
+                                        <p class="fieldset">
+                                        <div class="input-group">
+                                            <input name="email" class="form-control full-width has-padding has-border"
+                                                   id="email" type="email" placeholder="邮箱" onkeyup="checkInputValueLength(this.value,'regEmail')">
+                                            <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" onclick="sendAuthCode(this,30000)">发送验证码</button>
+                                    </span>
+                                            <span class="cd-error-message regEmail">请输入您的邮箱以便接收验证码!</span>
+                                        </div>
+                                        </p>
+
+                                        <p class="fieldset">
+                                            <input name="activationCode" class="form-control full-width has-padding has-border"
+                                                   id="activeCode" type="text" placeholder="验证码" oninput="this.value=value.replace(/[^\d]/g,'')" onkeyup="checkInputValueLength(this.value,'regAuthCode')">
+                                            <span class="cd-error-message regAuthCode">请您输入验证码!</span>
                                         </p>
 
                                         <!--验证码模块嵌入-->
@@ -159,7 +209,7 @@
                                             <div class="vaptcha-init-main">
                                                 <div class="vaptcha-init-loading">
                                                     <a href="https://www.vaptcha.com" target="_blank">
-                                                        <img src="https://cdn.vaptcha.com/vaptcha-loading.gif" />
+                                                        <img src="https://cdn.vaptcha.com/vaptcha-loading.gif"/>
                                                     </a>
                                                     <span class="vaptcha-text">人机验证启动中...</span>
                                                 </div>
@@ -167,17 +217,18 @@
                                         </div>
                                         </p>
                                         <p class="fieldset">
-                                            <input name="vaptchaCode" type="text" id="vaptchaCode2">
+                                            <input name="vaptchaCode" type="text" id="vaptchaCode2" value="" hidden>
                                         </p>
                                         <!--//验证码-->
 
                                         <p class="fieldset">
-                                            <input name="agreement" type="checkbox" id="accept-terms">
-                                            <label for="accept-terms">我同意<a href="#0">条款</a></label>
+                                            <input name="agreement" type="checkbox" id="accept-terms" checked>
+                                            <label for="accept-terms">我同意<a href="#0" onclick="tips('此条款拟定中，暂时默认选择，上线后会以邮件的形式发送给您，抱歉！','middleCenter')">条款</a></label>
                                         </p>
 
                                         <p class="fieldset">
-                                            <input class="full-width has-padding submit" type="submit" value="注册" onclick="regist()">
+                                            <input id="subReg" class="full-width has-padding submit" type="button" value="注册"
+                                                   onclick="regist()">
                                         </p>
                                         <p class="fieldset">
                                             <input class="full-width reset" type="reset" value="重置">
@@ -191,12 +242,14 @@
                                     <form id="forget-form" class="cd-form">
                                         <p class="fieldset">
                                             <label class="image-replace cd-username" for="reset-email">账号</label>
-                                            <input name="userName" class="full-width has-padding has-border" type="text" placeholder="要找回的账号">
+                                            <input name="userName" class="full-width has-padding has-border" type="text"
+                                                   placeholder="要找回的账号">
                                             <span class="cd-error-message">错误提示信息!</span>
                                         </p>
                                         <p class="fieldset">
                                             <label class="image-replace cd-email" for="reset-email">邮箱</label>
-                                            <input name="email" class="full-width has-padding has-border" id="reset-email" type="email" placeholder="邮箱">
+                                            <input name="email" class="full-width has-padding has-border" id="reset-email"
+                                                   type="email" placeholder="邮箱">
                                             <span class="cd-error-message">错误提示信息!</span>
                                         </p>
 
@@ -206,7 +259,7 @@
                                             <div class="vaptcha-init-main">
                                                 <div class="vaptcha-init-loading">
                                                     <a href="https://www.vaptcha.com" target="_blank">
-                                                        <img src="https://cdn.vaptcha.com/vaptcha-loading.gif" />
+                                                        <img src="https://cdn.vaptcha.com/vaptcha-loading.gif"/>
                                                     </a>
                                                     <span class="vaptcha-text">人机验证启动中...</span>
                                                 </div>
@@ -214,12 +267,13 @@
                                         </div>
                                         </p>
                                         <p class="fieldset">
-                                            <input name="vaptchaCode" type="text" id="vaptchaCode3">
+                                            <input name="vaptchaCode" type="text" id="vaptchaCode3" hidden>
                                         </p>
                                         <!--//验证码-->
 
                                         <p class="fieldset">
-                                            <input class="full-width has-padding submit" type="submit" value="重置密码" onclick="resetPwd()">
+                                            <input class="full-width has-padding submit" type="submit" value="重置密码"
+                                                   onclick="resetPwd()">
                                         </p>
                                         <p class="fieldset">
                                             <input class="full-width reset" type="reset" value="重置">
@@ -328,6 +382,7 @@
                 <a href="javascript:advertisement();" target="_blank" style="margin-right: 20px">广告合作</a>
                 <a href="javascript:disclaimer();" target="_blank">免责声明</a>
             </div>
+            <!--备案号声明-->
             <div><p class="text-center">Wills   鲁ICP备17045047号</p></div>
         </div>
     </footer>
@@ -338,10 +393,13 @@
     <script src="../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="../../js/bootstrap.min.js"></script>
-    <script src="../../js/baseInfo.js"></script>
     <!--引用自己的js文件-->
     <script src="../../js/moment.js"></script>
     <script src="../../js/notice.js"></script>
+    <!--日期选择插件引用-->
+    <script src="../../js/rolldate.js"></script>
+    <!--基本配置信息设置-->
+    <script src="../../js/baseInfo.js"></script>
     <script src="https://cdn.vaptcha.com/v2.js"></script>
     <script src="../../js/main.js"></script>
     <script src="../../js/loginAndRegist.js"></script>

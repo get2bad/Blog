@@ -228,16 +228,61 @@ function loginAccount(){
         });
     }
 }
-function regist(){
-    if((token ==null)||(token =='')){
-        //如果为空说明没有进行人机验证操作
-        tips("请您进行人机验证,验证通过后方可进行后续操作！","topCenter");
+function regist() {
+    var pwd = $("#password").val();
+    var confirmPwd = $("#confirmPassword").val();
+    if(pwd != confirmPwd){
+        tips("对不起，您输入的密码/确认密码不一致，请您重新填写",'middleCenter');
+        return;
+    }
+    if(($("#accept-terms").prop("checked"))==false){
+        tips("请您点击我同意条款","middleCenter");
     }else{
-        //不为空说明进行了人机操作，进行表单提交
-        $("#vaptchaCode2").val(token);
+        if (token.length ==0) {
+            //如果为空说明没有进行人机验证操作
+            tips("请您进行人机验证,验证通过后方可进行后续操作！", "topCenter");
+        } else {
+            $("#vaptchaCode2").attr('value', token);
+            //序列化表单成JSON格式
+            var data = $("#regist").serializeJson();
+            console.log(JSON.stringify(data));
+            //不为空说明进行了人机操作，进行表单AJAX提交
+            $.ajax({
+                //请求方式
+                type: ajaxInfo.postType,
+                //请求的媒体类型
+                contentType: ajaxInfo.jsonRequestContentType,
+                //请求地址
+                url: ajaxInfo.regUrl,
+                //是否异步执行命令
+                async: ajaxInfo.limitAsyc,
+                //不进行缓存
+                cache: ajaxInfo.allowCache,
+                //数据，json字符串
+                data: JSON.stringify(data),
+                dataType: ajaxInfo.jsonDataType,
+                //请求成功
+                success: function (result) {
+                    console.log(result);
+                    if (result.code == 1) {
+                        tips(result.data, 'topCenter');
+                        location.href = "/";
+                    } else {
+                        tips(result.data, 'topCenter');
+                    }
+                },
+                //请求失败，包含具体的错误信息
+                error: function (e) {
+                    //_obj.reset(); //重置验证码
+                    tips('请求失败，请您将控制台信息发送邮件给loveing490@qq.com！', 'topCenter');
+                    //location.href = "/login";
+                }
+            });
 
+        }
     }
 }
+
 function resetPwd() {
     if((token ==null)||(token =='')){
         //如果为空说明没有进行人机验证操作
@@ -254,5 +299,87 @@ function judgeTokenIsEmpty(){
     }else{
         $("#vaptchaCode3").val(token);
 
+    }
+}
+function chooseBirthday() {
+    rd.show();
+
+}
+//发送验证码按钮点击事件
+function sendAuthCode(btn, time) {
+    //正则表达式
+    var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]*)*)$/;
+
+    //组装jason字符串
+    var emails = $('#email').val();
+    var data = $("#regist").serializeJson();
+    console.log(JSON.stringify(data));
+    if (reg.test(emails)) {
+        //向输入框填写的内容发送激活码
+        $.ajax({
+            //请求方式
+            type: ajaxInfo.postType,
+            //请求的媒体类型
+            contentType: ajaxInfo.jsonRequestContentType,
+            //请求地址
+            url: ajaxInfo.regEmialUrl,
+            //是否异步执行命令
+            async: ajaxInfo.allowAsyc,
+            //不进行缓存
+            cache: ajaxInfo.limitCache,
+            //数据，json字符串
+            data: JSON.stringify(data),
+            dataType: ajaxInfo.jsonDataType,
+            //请求成功
+            success: function (result) {
+                var intervalId ;
+                console.log(result);
+                if (result.code == 1) {
+                    tips(result.data, 'middleCenter');
+                    intervalId = sendAuthCodeChangeBtnValue(btn, time);
+                    //location.href="/";
+                } else {
+                    tips(result.data, 'middleCenter');
+                    //clearTimeout(intervalId);
+                    //btn.disabled = false;
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                sendAuthCodeChangeBtnValue(btn, time);
+                //_obj.reset(); //重置验证码
+                /*
+                 */
+                tips('请求失败，请您检查！', 'topCenter');
+                //location.href="/login";
+            }
+        });
+    } else {
+        tips('您填写的邮箱格式不正确！','middleCenter')
+    }
+
+}
+
+function sendAuthCodeChangeBtnValue(obj, time) {
+    obj.disabled = true;
+    var intervalId = setTimeout(function () {
+        var x = setInterval(function () {
+            time = time - 1000; //reduce each second
+            obj.innerHTML = time / 1000;
+            if (time == 0) {
+                clearInterval(x);
+                obj.innerHTML = "重新发送";
+                obj.disabled = false;
+            }
+        }, 1000);
+    }, time - 10000);
+    return intervalId;
+}
+
+function checkInputValueLength(value,errorObj){
+    if(value.length ==0){
+        $('.'+errorObj).addClass('is-visible');
+    }else{
+        $('.'+errorObj).removeClass('is-visible');
     }
 }

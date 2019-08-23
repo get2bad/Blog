@@ -18,7 +18,6 @@ import java.io.Serializable;
 @Configuration
 public class CustomSessionManager extends DefaultWebSessionManager {
 
-    /*
     private final String AUTHORIZATION = "token";
 
     public CustomSessionManager(){
@@ -42,5 +41,5 @@ public class CustomSessionManager extends DefaultWebSessionManager {
             return super.getSessionId(request, response);
         }
     }
-    */
+
 }

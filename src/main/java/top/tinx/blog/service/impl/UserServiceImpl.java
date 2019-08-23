@@ -51,4 +51,24 @@ public class UserServiceImpl implements UserService {
     public void updateSignInIP(String ip, String user_id) {
         userMapper.updateLoginIP(ip,user_id);
     }
+
+    @Override
+    public int getRepeatEmial(String email) {
+        return userMapper.getRepeatEmial(email);
+    }
+
+    @Override
+    public void insertUser(User user) {
+        userMapper.insertNewUser(user);
+    }
+
+    @Override
+    public int getUserNameCount(String userName) {
+        return userMapper.getUserNameCount(userName);
+    }
+
+    @Override
+    public int getEmailCount(String email) {
+        return userMapper.getEmailCount(email);
+    }
 }

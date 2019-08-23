@@ -35,6 +35,7 @@ var ajaxInfos = {
     jsonDataType:'json',
 }
 
+
 //日期插件基本配置
 var rd = new Rolldate({
     el: '#birthday',

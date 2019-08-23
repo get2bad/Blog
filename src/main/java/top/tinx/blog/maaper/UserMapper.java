@@ -1,9 +1,7 @@
 package top.tinx.blog.maaper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.fasterxml.jackson.databind.JavaType;
+import org.apache.ibatis.annotations.*;
 import top.tinx.blog.bean.User;
 
 /**
@@ -25,4 +23,34 @@ public interface UserMapper {
 
     @Update("update tb_user set lastSignInIP = #{IP} where user_id = #{user_id};")
     void updateLoginIP(@Param("IP")String ip,@Param("user_id")String userId);
+
+    @Select("SELECT COUNT(Email) as Email from tb_user where Email = #{email};")
+    @Results(
+            value = {
+                    @Result(property = "Email",column = "Email")
+            }
+    )
+    int getRepeatEmial(@Param("email")String email);
+
+    @Insert("insert into tb_user(userName,password,registDate,role_id,sex,phone,Email,score," +
+            "lastSignInIP,birthday,isDenySignIn,activationCode,isActived) " +
+            "VALUES(#{user.userName},#{user.password},#{user.registDate},5,#{user.sex},#{user.phone},#{user.Email},0,#{user.lastSignIP}," +
+            "#{user.birthday},0,#{user.activationCode},1);")
+    void insertNewUser(@Param("user") User user);
+
+    @Select("select count(userName) as userName from tb_user where userName = #{userName};")
+    @Results(
+            value = {
+                    @Result(property = "userName",column = "userName")
+            }
+    )
+    int getUserNameCount(@Param("userName")String userName);
+
+    @Select("select count(Email) as Email from tb_user where Email = #{Email};")
+    @Results(
+            value = {
+                    @Result(property = "Email",column = "Email")
+            }
+    )
+    int getEmailCount(@Param("Email")String Email);
 }

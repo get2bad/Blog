@@ -220,7 +220,7 @@ function regist() {
                     console.log(result);
                     if (result.code == 1) {
                         tips(result.data, 'topCenter');
-                        //location.href = "/";
+                        location.href = "/";
                     } else {
                         tips(result.data, 'topCenter');
                     }
@@ -228,7 +228,7 @@ function regist() {
                 //请求失败，包含具体的错误信息
                 error: function (e) {
                     //_obj.reset(); //重置验证码
-                    tips('请求失败，请您检查！', 'topCenter');
+                    tips('请求失败，请您将控制台信息发送邮件给loveing490@qq.com！', 'topCenter');
                     //location.href = "/login";
                 }
             });
@@ -244,7 +244,6 @@ function resetPwd() {
     } else {
         //不为空说明进行了人机操作，进行表单提交
         $("#vaptchaCode3").attr('value', token);
-
     }
 }
 
@@ -256,11 +255,11 @@ function chooseBirthday() {
 function sendAuthCode(btn, time) {
     //正则表达式
     var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]*)*)$/;
-    ;
 
     //组装jason字符串
     var emails = $('#email').val();
-    var data = $('#regist-form').serializeJson();
+    var data = $("#regist").serializeJson();
+    console.log(JSON.stringify(data));
     if (reg.test(emails)) {
         //向输入框填写的内容发送激活码
         $.ajax({
@@ -279,13 +278,16 @@ function sendAuthCode(btn, time) {
             dataType: ajaxInfo.jsonDataType,
             //请求成功
             success: function (result) {
-                sendAuthCodeChangeBtnValue(btn, time);
+                var intervalId ;
                 console.log(result);
                 if (result.code == 1) {
                     tips(result.data, 'middleCenter');
+                    intervalId = sendAuthCodeChangeBtnValue(btn, time);
                     //location.href="/";
                 } else {
                     tips(result.data, 'middleCenter');
+                    //clearTimeout(intervalId);
+                    //btn.disabled = false;
                 }
             },
             //请求失败，包含具体的错误信息
@@ -306,7 +308,7 @@ function sendAuthCode(btn, time) {
 
 function sendAuthCodeChangeBtnValue(obj, time) {
     obj.disabled = true;
-    setTimeout(function () {
+    var intervalId = setTimeout(function () {
         var x = setInterval(function () {
             time = time - 1000; //reduce each second
             obj.innerHTML = time / 1000;
@@ -317,6 +319,7 @@ function sendAuthCodeChangeBtnValue(obj, time) {
             }
         }, 1000);
     }, time - 10000);
+    return intervalId;
 }
 
 function checkInputValueLength(value,errorObj){

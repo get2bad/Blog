@@ -126,7 +126,7 @@
 
                             <p class="fieldset">
                                 <input name="phone" class="form-control full-width has-padding has-border"
-                                   id="signup-phone" type="text" placeholder="请输入您的手机号" onkeyup="checkInputValueLength(this.value,'regPhone')">
+                                   id="signup-phone" type="text" placeholder="请输入您的手机号" oninput="this.value=value.replace(/[^\d]/g,'')" onkeyup="checkInputValueLength(this.value,'regPhone')">
                                 <span class="cd-error-message regPhone">请您输入注册的手机号!</span>
                             </p>
 
@@ -149,7 +149,7 @@
 
                             <p class="fieldset">
                                 <input name="activationCode" class="form-control full-width has-padding has-border"
-                                       id="activeCode" type="text" placeholder="验证码" onkeyup="checkInputValueLength(this.value,'regAuthCode')">
+                                       id="activeCode" type="text" placeholder="验证码" oninput="this.value=value.replace(/[^\d]/g,'')" onkeyup="checkInputValueLength(this.value,'regAuthCode')">
                                 <span class="cd-error-message regAuthCode">请您输入验证码!</span>
                             </p>
 

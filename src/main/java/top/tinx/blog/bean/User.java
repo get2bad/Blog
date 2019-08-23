@@ -9,6 +9,7 @@ public class User {
     private String userName;
     private String password;
     private String vaptchaCode;
+    private String registDate;
     private String remember;
     private Role role;
     private int sex;
@@ -37,14 +38,12 @@ public class User {
     public User() {
     }
 
-    public User(int userId, String userName, String password, String vaptchaCode, String remember, Role role,
-                int sex, String phone, String QQ, String email, String address, int score, String lastSignIP,
-                Date birthday, String description, String userIconLocation, int isDenySignIn, String activationCode,
-                int isActived, List<Role> roleList) {
+    public User(int userId, String userName, String password, String vaptchaCode, String registDate, String remember, Role role, int sex, String phone, String QQ, String email, String address, int score, String lastSignIP, Date birthday, String description, String userIconLocation, int isDenySignIn, String activationCode, int isActived, List<Role> roleList) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.vaptchaCode = vaptchaCode;
+        this.registDate = registDate;
         this.remember = remember;
         this.role = role;
         this.sex = sex;
@@ -215,6 +214,22 @@ public class User {
         this.remember = rememberMe;
     }
 
+    public String getRegistDate() {
+        return registDate;
+    }
+
+    public void setRegistDate(String registDate) {
+        this.registDate = registDate;
+    }
+
+    public String getRemember() {
+        return remember;
+    }
+
+    public void setRemember(String remember) {
+        this.remember = remember;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -222,6 +237,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", vaptchaCode='" + vaptchaCode + '\'' +
+                ", registDate=" + registDate +
                 ", remember='" + remember + '\'' +
                 ", role=" + role +
                 ", sex=" + sex +
