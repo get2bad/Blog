@@ -38,11 +38,18 @@ public interface UserService {
     public User findUserByUserNameAndPassword(String userName,String password);
 
     /**
-     * 修改登陆的IP地址
+     * 根据用户ID修改登陆的IP地址
      * @param ip
      * @param user_id
      */
     public void updateSignInIP(String ip,String user_id);
+
+    /**
+     * 根据用户名修改登陆的IP地址
+     * @param ip
+     * @param userName
+     */
+    public void updateSignInIPByUserName(String ip,String userName);
 
     /**
      * 获取重复的email

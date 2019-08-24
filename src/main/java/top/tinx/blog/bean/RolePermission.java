@@ -1,11 +1,13 @@
 package top.tinx.blog.bean;
 
+import java.io.Serializable;
+
 /**
  * 创建人: Wills
  * 创建时间：2019/8/19 18:04
  * 描述:
  */
-public class RolePermission {
+public class RolePermission implements Serializable {
 
     private int id;
     private int roleId;

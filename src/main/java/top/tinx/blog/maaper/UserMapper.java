@@ -21,8 +21,21 @@ public interface UserMapper {
     @Select("select * from tb_user where userName=#{userName} and password = #{password}")
     User findUserByUsernameAndPassword(@Param("userName")String userName,@Param("password")String password);
 
+    /**
+     * 根据用户ID修改用户最后登陆的IP地址
+     * @param ip
+     * @param userId
+     */
     @Update("update tb_user set lastSignInIP = #{IP} where user_id = #{user_id};")
     void updateLoginIP(@Param("IP")String ip,@Param("user_id")String userId);
+
+    /**
+     * 根据用户ID修改用户最后登陆的IP地址
+     * @param ip
+     * @param userName
+     */
+    @Update("update tb_user set lastSignInIP = #{IP} where userName = #{userName};")
+    void updateLoginIPByUserName(@Param("IP")String ip,@Param("userName")String userName);
 
     @Select("SELECT COUNT(Email) as Email from tb_user where Email = #{email};")
     @Results(
@@ -53,4 +66,6 @@ public interface UserMapper {
             }
     )
     int getEmailCount(@Param("Email")String Email);
+
+
 }

@@ -53,6 +53,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateSignInIPByUserName(String ip, String userName) {
+        userMapper.updateLoginIPByUserName(ip,userName);
+    }
+
+    @Override
     public int getRepeatEmial(String email) {
         return userMapper.getRepeatEmial(email);
     }

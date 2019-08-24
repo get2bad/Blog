@@ -1,11 +1,13 @@
 package top.tinx.blog.bean;
 
+import java.io.Serializable;
+
 /**
  * 创建人: Wills
  * 创建时间：2019/8/22 13:30
  * 描述:
  */
-public class UserEmailCode {
+public class UserEmailCode implements Serializable {
     private String email;
 
     public String getEmail() {

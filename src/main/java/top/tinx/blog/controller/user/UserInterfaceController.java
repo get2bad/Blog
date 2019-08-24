@@ -2,7 +2,10 @@ package top.tinx.blog.controller.user;
 
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -10,13 +13,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import top.tinx.blog.bean.JsonData;
-import top.tinx.blog.bean.Login;
-import top.tinx.blog.bean.User;
-import top.tinx.blog.bean.UserEmailCode;
+import top.tinx.blog.bean.*;
 import top.tinx.blog.service.TempUserService;
 import top.tinx.blog.service.UserService;
 import top.tinx.blog.utils.IPAddressUtil;
+import top.tinx.blog.utils.JedisUtil;
 import top.tinx.blog.utils.Md5EncryptionUtil;
 import top.tinx.blog.utils.RandomNumber;
 
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -59,25 +61,33 @@ public class UserInterfaceController {
         return JsonData.buildSuccess(user);
     }
 
+    /**
+     * 登陆controller
+     * @param req
+     * @param resp
+     * @param login
+     * @return
+     */
     @PostMapping("login")
     @ResponseBody
     public JsonData login(HttpServletRequest req, HttpServletResponse resp, @RequestBody Login login){
-        String addr = IPAddressUtil.getIpAddr(req);
-        System.out.println("IP地址为："+addr);
-        System.out.println(login);
-        if(login.getPassword() ==null || StringUtils.isEmpty(login.getPassword())){
-            return JsonData.buildSuccess("用户名密码错误",-1);
-        }
-        //将password加密
-        login.setPassword(Md5EncryptionUtil.encrypt(login.getPassword(), "", 2));
-        User user = userService.findUserByUserNameAndPassword(login.getUserName(),login.getPassword());
-        System.out.println(user);
-        if(user!=null){
-            //修改登陆IP地址
-            userService.updateSignInIP(addr,user.getUserId()+"");
-            return JsonData.buildSuccess("登陆成功！欢迎回来~！",1);
-        }else{
-            return JsonData.buildSuccess("用户名密码错误",-1);
+
+        Subject subject = SecurityUtils.getSubject();
+        Map<String,Object> info = new HashMap<String,Object>();
+        try {
+            //尝试进行shiro登陆
+            UsernamePasswordToken token = new UsernamePasswordToken(login.getUserName(),login.getPassword());
+            subject.login(token);
+            //修改用户登陆IP
+            String addr = IPAddressUtil.getIpAddr(req);
+            userService.updateSignInIPByUserName(addr, ((User)subject.getPrincipal()).getUserName());
+            info.put("msg","登陆成功！欢迎"+((User)subject.getPrincipal()).getUserName()+"回来~！");
+            info.put("userId", ((User)subject.getPrincipal()).getUserId());
+            info.put("sessionId", (String) subject.getSession().getId());
+            return JsonData.buildSuccess(info,1);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return JsonData.buildSuccess("用户名或密码错误！code:-1",-1);
         }
     }
 
@@ -156,5 +166,23 @@ public class UserInterfaceController {
             return JsonData.buildSuccess("向数据库添加用户失败，请您联系loveing490@qq.com，感谢！code:-3",-3);
         }
         return JsonData.buildSuccess("注册成功，您现在可以使用新账户登陆了！",1);
+    }
+
+    @PostMapping("getUserInfo")
+    @ResponseBody
+    public JsonData getUserInfo(HttpServletRequest req, HttpServletResponse resp,@RequestBody ActiveUser token) {
+        System.out.println(token);
+        //从redis中查询是否含有这个sessionID,如果有，说明用户的session处于活动状态
+        boolean isActive = JedisUtil.judgeUserIsActive(token.getToken());
+        Map<String,Object> userInfo = new HashMap<>();
+        if(isActive){
+            User user = userService.findUserByUserId(Integer.parseInt(token.getUserId()));
+            System.out.println(user);
+            userInfo.put("msg","欢迎"+user.getUserName()+"归来~");
+            userInfo.put("userInfo",user);
+            return JsonData.buildSuccess(userInfo,1);
+        }else{
+            return JsonData.buildSuccess("您没有登陆哦，请您登陆即可体验完整功能！",-1);
+        }
     }
 }

@@ -56,6 +56,7 @@ $(function(){
             $ulWapper.css('width',li_Width).parent().css('overflow-x','scroll');
         }
     }
+    getUserInfo();
 });
 
 //gets current time and changes html to reflect it
@@ -213,7 +214,12 @@ function loginAccount(){
             success : function(result) {
                 console.log(result);
                 if(result.code ==1){
-                    tips(result.data,'topCenter');
+                    //tips(result.data['msg'],'topCenter');
+                    //设置cookie的属性（用于保存sessionID） ×存活时间为半个小时的时间 ,{expires:0.021}×
+                    // 暂时不使用本方法，sessionID在redis过期后，查不到就要求重新登陆
+                    $.cookie("UserRedisSessionID",result.data['sessionId']);
+                    $.cookie("UserID",result.data['userId']);
+                    //然后跳转到首页
                     location.href="/";
                 }else{
                     tips(result.data,'topCenter');

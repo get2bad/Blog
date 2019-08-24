@@ -1,5 +1,6 @@
 package top.tinx.blog.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * 创建时间：2019/8/19 17:05
  * 描述:
  */
-public class Role {
+public class Role implements Serializable {
 
     private int roleId;
     private String authName;

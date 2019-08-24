@@ -25,6 +25,7 @@ var ajaxInfos = {
     loginUrl : 'http://'+locations+'/user/login',
     regEmialUrl:'http://'+locations+'/user/regEmial',
     regUrl:'http://'+locations+'/user/reg',
+    getUserInfoUrl:'http://'+locations+'/user/getUserInfo',
     postType: 'POST',
     getType: 'GET',
     jsonRequestContentType: 'application/json;charset=UTF-8',

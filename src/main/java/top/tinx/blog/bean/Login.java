@@ -1,11 +1,13 @@
 package top.tinx.blog.bean;
 
+import java.io.Serializable;
+
 /**
  * 创建人: Wills
  * 创建时间：2019/8/21 15:09
  * 描述:
  */
-public class Login{
+public class Login implements Serializable {
     private String userName;
     private String password;
     private String vaptchaCode;

@@ -2,12 +2,13 @@ package top.tinx.blog.bean;
 
 import org.springframework.context.annotation.Bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  */
-public class Artical {
+public class Artical implements Serializable {
     private int articalId;
     private int categoryId;
     private int status;
