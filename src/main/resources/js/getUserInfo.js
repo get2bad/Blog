@@ -9,6 +9,7 @@
 * 如果不存在，则说明session已经失效，要求用户重新登陆
 * */
 function getUserInfo(){
+    var ajaxInfo = Object.create(ajaxInfos);
     var sessionID = $.cookie('UserRedisSessionID');
     var userId = $.cookie('UserID');
     console.log(sessionID);
@@ -30,12 +31,22 @@ function getUserInfo(){
         dataType: ajaxInfo.jsonDataType,
         //请求成功
         success: function (result) {
-            console.log(result);
+            console.log(result.data['userInfo']);
             if (result.code == 1) {
+                //隐藏登陆按钮
+                $("#loginBtn").css('display','none');
+                $("#userIcon").css('display','inline-block');
+                $("#userOptions").css('display','inline-block');
+                $('#setUserName').text(result.data['userInfo'].userName);
+                //设置欢迎标语
                 tips(result.data['msg'], 'middleCenter');
                 //设置相关信息
-                console.log(result.data['userInfo']);
             } else {
+                //隐藏头像按钮
+                $("#userIcon").css('display','none');
+                $("#userOptions").css('display','none');
+                $("#loginBtn").css('display','inline-block');
+                //设置提示标语
                 tips(result.data, 'middleCenter');
             }
         },

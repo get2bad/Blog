@@ -144,7 +144,7 @@ public class UserInterfaceController {
             return JsonData.buildSuccess("您的验证码填写错误!code:-2",-2);
         }
         //验证表中是否存在这个用户名/邮箱
-        if((userService.getEmailCount(user.getEmail()) >=0) ||(userService.getUserNameCount(user.getUserName()) >=1)){
+        if((userService.getEmailCount(user.getEmail()) >=1) ||(userService.getUserNameCount(user.getUserName()) >=1)){
             return JsonData.buildSuccess("用户名/邮箱重复!code:-4",-4);
         }
         //验证成功就开始向数据库插入信息
@@ -158,14 +158,26 @@ public class UserInterfaceController {
             user.setLastSignIP(ipAddr);
             //设置用户注册时候的注册码
             user.setActivationCode(activationCode);
+            String oldPwd = user.getPassword();
             //用户密码加密
             user.setPassword(Md5EncryptionUtil.encrypt(user.getPassword(),"",2));
             userService.insertUser(user);
+            //插入用户后查出这个用户的ID以及sessionID将其放入cookie中
+            User info = userService.findAllUserInfoByUserName(user.getUserName());
+            //先尝试登陆
+            UsernamePasswordToken token = new UsernamePasswordToken(info.getUserName(),oldPwd);
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(token);
+            //登陆完成后拿到sessionID和userID返回前端，更新cookie存储的sessionID和userID
+            Map<String,Object> userInfo = new HashMap<String,Object>();
+            userInfo.put("msg","注册并登陆成功！您可以体验完整的博客体验了~！");
+            userInfo.put("sessionId",subject.getSession().getId());
+            userInfo.put("userId",info.getUserId());
+            return JsonData.buildSuccess(userInfo,1);
         }catch (Exception ex){
             ex.printStackTrace();
             return JsonData.buildSuccess("向数据库添加用户失败，请您联系loveing490@qq.com，感谢！code:-3",-3);
         }
-        return JsonData.buildSuccess("注册成功，您现在可以使用新账户登陆了！",1);
     }
 
     @PostMapping("getUserInfo")
