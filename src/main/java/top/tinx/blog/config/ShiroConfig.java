@@ -73,7 +73,7 @@ public class ShiroConfig {
         //map.put("/video/update","perms[video_update]");
 
         //坑2 因为拦截是顺序执行，所以要将/**拦截放到最下面
-        map.put("/**","anon");
+        map.put("/*","anon");
         shiroFilter.setFilterChainDefinitionMap(map);
 
         return shiroFilter;

@@ -77,6 +77,7 @@ public class UserInterfaceController {
         try {
             //尝试进行shiro登陆
             UsernamePasswordToken token = new UsernamePasswordToken(login.getUserName(),login.getPassword());
+            //System.out.println("========================="+login);
             subject.login(token);
             //修改用户登陆IP
             String addr = IPAddressUtil.getIpAddr(req);

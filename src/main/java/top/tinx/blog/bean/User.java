@@ -12,7 +12,6 @@ public class User implements Serializable {
     private String vaptchaCode;
     private String registDate;
     private String remember;
-    private Role role;
     private int sex;
     private String phone;
     private String QQ;
@@ -39,14 +38,13 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int userId, String userName, String password, String vaptchaCode, String registDate, String remember, Role role, int sex, String phone, String QQ, String email, String address, int score, String lastSignIP, Date birthday, String description, String userIconLocation, int isDenySignIn, String activationCode, int isActived, List<Role> roleList) {
+    public User(int userId, String userName, String password, String vaptchaCode, String registDate, String remember, int sex, String phone, String QQ, String email, String address, int score, String lastSignIP, Date birthday, String description, String userIconLocation, int isDenySignIn, String activationCode, int isActived, List<Role> roleList) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.vaptchaCode = vaptchaCode;
         this.registDate = registDate;
         this.remember = remember;
-        this.role = role;
         this.sex = sex;
         this.phone = phone;
         this.QQ = QQ;
@@ -67,6 +65,8 @@ public class User implements Serializable {
         return userId;
     }
 
+    public int getId(){return userId;};
+
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -85,14 +85,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public int getSex() {
@@ -240,7 +232,6 @@ public class User implements Serializable {
                 ", vaptchaCode='" + vaptchaCode + '\'' +
                 ", registDate=" + registDate +
                 ", remember='" + remember + '\'' +
-                ", role=" + role +
                 ", sex=" + sex +
                 ", phone='" + phone + '\'' +
                 ", QQ='" + QQ + '\'' +

@@ -9,7 +9,7 @@ var vaptchaBaseInfo = {
     var virtualKey = '40c29540d31e489b97b5c88a9c91b7fe';
     var realKey = '03679a2265e743b5a4867d0079ac6364';
     */
-    vid: '5d5d04a9fc650ec7fc7154a1',
+    vid: '5d5a268dfc650e2da0799d17',
     key: 'd979ba5d304240fea37ea0c9ec6f7c91',
     type:'click',//embed invisible
     lang:'zh-CN',//en zh-TW
@@ -19,7 +19,8 @@ var vaptchaBaseInfo = {
     commentScene:'03',
     forgetScane:'04'
 }
-var locations = '192.168.0.102:8080'; //localhost:8080
+var locations = 'localhost'; //localhost:8080
+var locations = 'localhost'; //localhost:8080
 //ajax基本配置
 var ajaxInfos = {
     loginUrl : 'http://'+locations+'/user/login',

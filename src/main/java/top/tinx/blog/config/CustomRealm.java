@@ -38,6 +38,7 @@ public class CustomRealm extends AuthorizingRealm {
         //获取登陆时的用户名
         User user;
         User newUser = (User) principalCollection.getPrimaryPrincipal();
+        System.out.println("授权信息验证"+newUser);
         if(!StringUtils.isEmpty(newUser.getUserName())){
             user = userService.findAllUserInfoByUserName(newUser.getUserName());
             if((user ==null) ||(StringUtils.isEmpty(user.getPassword()))){
