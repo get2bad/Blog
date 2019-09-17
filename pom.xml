@@ -12,7 +12,7 @@
     <artifactId>wills-blog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>wills-blog</name>
-    <description>this is www.tinx.top blog code</description>
+    <description>this is www.tinx.top blog code，author Wills</description>
 
     <properties>
         <java.version>1.8</java.version>
