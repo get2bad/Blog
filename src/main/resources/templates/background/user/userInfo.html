@@ -5,10 +5,12 @@
     <title>Will的博客</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="../../css/bootstrap.css" rel="stylesheet">
-    <link href="../../css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../../css/iconfont.css" rel="stylesheet" type="text/css"/>
     <link href="../../../css/dropify.min.css" rel="stylesheet" type="text/css"/>
-    <link href="../../css/userInfo.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/animations.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/noticejs.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/userInfo.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div class="container-fluid">
@@ -20,11 +22,11 @@
             <div class="row">
                 <div class="col-md-4">
                     <div><span>用户名:</span><span>
-                        <input type="text" name="userName" disabled="disabled" class="form-control" value="978090490"/></span>
+                        <input type="text" id="userNameText" name="userName" disabled="disabled" class="form-control" value=""/></span>
                     </div>
                     <div><span>用户级别:</span>
                         <span>
-                            <select name="userLevel" class="form-control">
+                            <select id="userLevel" name="userLevel" class="form-control">
                                 <option selected="selected">管理员</option>
                                 <option>网站编辑</option>
                                 <option>作者</option>
@@ -33,17 +35,16 @@
                             </select>
                         </span>
                     </div>
-                    <div><span>别名:</span><span><input type="text" name="otherName" class="form-control"/></span></div>
-                    <div><span>邮箱:</span><span><input type="text" name="userEmail" class="form-control"/></span></div>
-                    <div><span>主页:</span><span><input type="text" name="userWebsite" class="form-control"/></span></div>
-                    <div><span>个人签名:</span><span>
-                <textarea class="form-control" rows="5"></textarea>
-            </span></div>
-
+                    <div><span>邮箱:</span><span><input type="text" id="userEmail" name="userEmail" class="form-control"/></span></div>
+                    <div><span>个人签名:</span>
+                        <span>
+                        <textarea id="userDescription" class="form-control" rows="5" style="resize:none"></textarea>
+                        </span>
+                    </div>
                 </div>
                 <div class="userPic col-md-3" >
                     <span>头像:</span>
-                    <input type="file" data-default-file="../../articalPic/little_animal_18.png" id="input-file-now" class="dropify"/>
+                    <input type="file" id="input-file-now" data-default-file="../../articalPic/little_animal_18.png"  class="dropify"/>
                 </div>
             </div>
             <div style="margin-top: 8px">
@@ -55,20 +56,25 @@
 </div>
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="../../js/jquery-2.1.1.js"></script>
-<script type="text/javascript" src="../../../js/dropify.min.js"></script>
-<script type="text/javascript">
-    $('.dropify').dropify({
-        messages: {
-            'default': '点击这里上传您的头像',
-            'replace': '点击或拖拽文件到这里来替换文件',
-            'remove':  '移除文件',
-            'error':   '对不起，你上传的文件大于3M'
-        }
-    });
-</script>
+<script src="../../../js/jquery-2.1.1.js"></script>
+<script src="../../../js/jquery.cookie.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="../../js/bootstrap.min.js"></script>
-<script src="../../js/iconfont.js"></script>
+<script src="../../../js/bootstrap.min.js"></script>
+<script src="../../../js/dropify.min.js"></script>
+<script type="text/javascript">
+$('.dropify').dropify({
+messages: {
+'default': '点击这里上传您的头像',
+'replace': '点击或拖拽文件到这里来替换文件',
+'remove':  '移除文件',
+'error':   '对不起，你上传的文件大于3M'
+}
+});
+</script>
+<script src="../../../js/iconfont.js"></script>
+<script src="../../../js/notice.js"></script>
+<script src="../../../js/rolldate.js"></script>
+<script src="../../../js/baseInfo.js"></script>
+<script src="../../../js/password.js"></script>
 </body>
 </html>

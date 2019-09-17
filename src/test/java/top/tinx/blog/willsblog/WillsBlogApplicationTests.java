@@ -46,7 +46,11 @@ public class WillsBlogApplicationTests {
 
     @Test
     public void test1(){
-
+        //去除字符串所有的标点符号测试
+        String str = "~,.!，，D_NAME。！；‘’”“《》**dfs  #$%^&()-+1431221中国123漢字かどうかのjavaを決定";
+        str = str.replaceAll("[\\pP‘’“”~]", "");
+        str = str.replace(" ","");
+        System.out.println(str);
     }
 
 }

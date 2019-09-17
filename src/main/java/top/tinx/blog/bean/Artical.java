@@ -19,28 +19,13 @@ public class Artical implements Serializable {
     private String articalTitle;
     private String articalIntroduce;
     private String picIntroduceUpload;
+    private String picIntroduceUrl;
     private String articalContent;
     private int isDenyComment;
     private int isLock;
     private int isSubmitTop;
 
     public Artical() {
-    }
-
-    public Artical(int articalId, int categoryId, int status, Date postTime, int viewCount, int userId, String articalTitle, String articalIntroduce, String picIntroduceUpload, String articalContent, int isDenyComment, int isLock, int isSubmitTop) {
-        this.articalId = articalId;
-        this.categoryId = categoryId;
-        this.status = status;
-        this.postTime = postTime;
-        this.viewCount = viewCount;
-        this.userId = userId;
-        this.articalTitle = articalTitle;
-        this.articalIntroduce = articalIntroduce;
-        this.picIntroduceUpload = picIntroduceUpload;
-        this.articalContent = articalContent;
-        this.isDenyComment = isDenyComment;
-        this.isLock = isLock;
-        this.isSubmitTop = isSubmitTop;
     }
 
     public String getArticalContent() {
@@ -155,6 +140,14 @@ public class Artical implements Serializable {
         this.userName = userName;
     }
 
+    public String getPicIntroduceUrl() {
+        return picIntroduceUrl;
+    }
+
+    public void setPicIntroduceUrl(String picIntroduceUrl) {
+        this.picIntroduceUrl = picIntroduceUrl;
+    }
+
     @Override
     public String toString() {
         return "Artical{" +
@@ -164,9 +157,11 @@ public class Artical implements Serializable {
                 ", postTime=" + postTime +
                 ", viewCount=" + viewCount +
                 ", userId=" + userId +
+                ", userName='" + userName + '\'' +
                 ", articalTitle='" + articalTitle + '\'' +
                 ", articalIntroduce='" + articalIntroduce + '\'' +
                 ", picIntroduceUpload='" + picIntroduceUpload + '\'' +
+                ", picIntroduceUrl='" + picIntroduceUrl + '\'' +
                 ", articalContent='" + articalContent + '\'' +
                 ", isDenyComment=" + isDenyComment +
                 ", isLock=" + isLock +

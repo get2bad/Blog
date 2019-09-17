@@ -16,6 +16,7 @@ import top.tinx.blog.service.ArticalService;
 import top.tinx.blog.service.FileService;
 import top.tinx.blog.service.UserService;
 import top.tinx.blog.utils.FileUtils;
+import top.tinx.blog.utils.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -57,11 +58,14 @@ public class ArticalController {
     public String newArtical(@RequestParam("picIntroduceUploads")MultipartFile picIntroduceUploads, Artical artical,
                              HttpServletRequest request){
         System.out.println(picIntroduceUploads.getOriginalFilename());
-        preFileLocation += "articalHeader/";
+        String preFileLocationn = preFileLocation;
+        preFileLocationn += "articalHeader/";
         if(!picIntroduceUploads.isEmpty()){
             try {
                 byte[] bytes = picIntroduceUploads.getBytes();
                 String title = artical.getArticalTitle();
+                //处理title中的相关标点符号
+                title = StringUtils.replaceOtherBadThing(title);
                 String realLocation = uploadLocation + "/articalHeader/"+ title + "/";
                 //判断文件夹是否存在，不存在就创建
                 File file = new File(realLocation);
@@ -73,8 +77,9 @@ public class ArticalController {
                 Files.write(path,bytes);
                 //将artical写入数据库中
                 artical.setPicIntroduceUpload(realLocation+originalFileName);
+                artical.setPicIntroduceUrl(preFileLocationn+title+"/"+originalFileName);
                 //将上传文件的基本信息上传到文件汇总表中
-                fileService.insertFile(new top.tinx.blog.bean.File(realLocation+originalFileName, FileUtils.getFileType(picIntroduceUploads),"文章介绍图片"));
+                fileService.insertFile(new top.tinx.blog.bean.File(preFileLocationn+title+"/"+originalFileName, FileUtils.getFileType(picIntroduceUploads),"文章介绍图片"));
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 artical.setPostTime(df.parse(df.format(new Date())));
                 articalService.insertArtical(artical);
@@ -91,7 +96,8 @@ public class ArticalController {
     public FileUpload uploadArticalPic(@RequestParam("articalContentPic")MultipartFile articalContentPic,HttpServletRequest request){
         System.out.println(articalContentPic.getOriginalFilename());
         List<String> data = new ArrayList<String>();
-        preFileLocation += "articalContent/";
+        String preFileLocationn = preFileLocation;
+        preFileLocationn += "articalContent/";
         if(!articalContentPic.isEmpty()){
             try {
                 byte[] bytes = articalContentPic.getBytes();
@@ -108,10 +114,10 @@ public class ArticalController {
                 String originalFileName = articalContentPic.getOriginalFilename();
                 Path path = Paths.get(realLocation+originalFileName);
                 Files.write(path,bytes);
-                data.add(preFileLocation+nowTime+"/"+originalFileName);
+                data.add(preFileLocationn+nowTime+"/"+originalFileName);
                 //将上传文件的基本信息上传到文件汇总表中
-                fileService.insertFile(new top.tinx.blog.bean.File(realLocation+originalFileName, FileUtils.getFileType(articalContentPic),"文章内部图片"));
-                System.out.println(preFileLocation+nowTime+"/"+originalFileName);
+                fileService.insertFile(new top.tinx.blog.bean.File(preFileLocationn+nowTime+"/"+originalFileName, FileUtils.getFileType(articalContentPic),"文章内部图片"));
+                System.out.println(preFileLocationn+nowTime+"/"+originalFileName);
             }catch (Exception ex){
                 ex.printStackTrace();
                 return FileUpload.buildError();

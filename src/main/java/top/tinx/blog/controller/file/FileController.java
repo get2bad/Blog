@@ -23,6 +23,7 @@ public class FileController {
     public JsonData getAllFiles(){
         try{
             List<File> allFiles = fileService.getAllFiles();
+            allFiles.stream().forEach(file -> System.out.println("==========文件路径是:"+file.getFilePath()));
             return JsonData.buildSuccess(allFiles,1);
         }catch (Exception ex){
             ex.printStackTrace();

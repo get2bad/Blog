@@ -212,4 +212,16 @@ public class UserInterfaceController {
         }
 
     }
+
+    @PostMapping("/getUserById")
+    @ResponseBody
+    public JsonData getUserById(@RequestBody HashMap<String, String> map){
+        try{
+            User user = userService.findUserByUserId(Integer.parseInt(map.get("id")));
+            return JsonData.buildSuccess(user,1);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return JsonData.buildError("服务器内部错误，已经通知网站管理员！",-1);
+        }
+    }
 }

@@ -33,6 +33,8 @@ var ajaxInfos = {
     faildArticalUrl:'http://'+locations+'/artical/faild',
     backJudgeArtical:'http://'+locations+'/artical/backJudgeArtical',
     getAllUserInfo:'http://'+locations+'/user/getAllUserInfo',
+    getAllFiles:'http://'+locations+'/file/getAllFiles',
+    getUserInfoById:'http://'+locations+'/user/getUserById',
     postType: 'POST',
     getType: 'GET',
     jsonRequestContentType: 'application/json;charset=UTF-8',
