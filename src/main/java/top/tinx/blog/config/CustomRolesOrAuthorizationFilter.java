@@ -18,20 +18,42 @@ import java.util.Set;
  */
 @Configuration
 public class CustomRolesOrAuthorizationFilter extends AuthorizationFilter {
-
+    @Override
     public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws IOException {
         Subject subject = this.getSubject(request, response);
-        String[] rolesArray = (String[])((String[])mappedValue);
+        String[] rolesArray = (String[]) ((String[]) mappedValue);
         if (rolesArray != null && rolesArray.length != 0) {
             Set<String> roles = CollectionUtils.asSet(rolesArray);
-            for (String role : roles){
-                if(subject.hasRole(role)){
+            for (String role : roles) {
+                if (subject.hasRole(role)) {
                     return true;
+                } else {
+                    return false;
                 }
             }
             return false;
         } else {
-            return true;
+            return false;
         }
     }
+    /*
+    @Override
+    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
+            throws Exception {
+        Subject subject = getSubject(request, response);
+        String[] rolesArray = (String[]) mappedValue;
+        //没有角色限制，有权限访问
+        if (rolesArray == null || rolesArray.length == 0) {
+            return true;
+        }
+        for (int i = 0; i < rolesArray.length; i++) {
+            //若当前用户是rolesArray中的任何一个，则有权限访问
+            if (subject.hasRole(rolesArray[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+     */
 }
+

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JavaType;
 import org.apache.ibatis.annotations.*;
 import top.tinx.blog.bean.User;
 
+import java.util.List;
+
 /**
  * 创建人: Wills
  * 创建时间：2019/8/19 17:15
@@ -27,7 +29,7 @@ public interface UserMapper {
      * @param userId
      */
     @Update("update tb_user set lastSignInIP = #{IP} where user_id = #{user_id};")
-    void updateLoginIP(@Param("IP")String ip,@Param("user_id")String userId);
+    void updateLoginIP(@Param("IP")String ip,@Param("user_id")int userId);
 
     /**
      * 根据用户ID修改用户最后登陆的IP地址
@@ -66,6 +68,9 @@ public interface UserMapper {
             }
     )
     int getEmailCount(@Param("Email")String Email);
+
+    @Select("select * from tb_user")
+    List<User> getAllUserInfo();
 
 
 }

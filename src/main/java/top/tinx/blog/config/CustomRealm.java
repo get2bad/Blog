@@ -1,5 +1,7 @@
 package top.tinx.blog.config;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -13,6 +15,7 @@ import org.springframework.util.StringUtils;
 import top.tinx.blog.bean.Permission;
 import top.tinx.blog.bean.Role;
 import top.tinx.blog.bean.User;
+import top.tinx.blog.service.PermissionService;
 import top.tinx.blog.service.UserService;
 
 import java.util.ArrayList;
@@ -27,6 +30,8 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PermissionService permissionService;
     /**
      * 在权限验证的时候触发
      * @param principalCollection
@@ -35,12 +40,19 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("==============正在进行授权信息验证==============");
+
+        //错误发生在此处  ~[classes/:na]
+        User newUser = new User();  //(User)
+        try {
+            BeanUtils.copyProperties(newUser,principalCollection.getPrimaryPrincipal());
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
         //获取登陆时的用户名
-        User user;
-        User newUser = (User) principalCollection.getPrimaryPrincipal();
         System.out.println("授权信息验证"+newUser);
-        if(!StringUtils.isEmpty(newUser.getUserName())){
-            user = userService.findAllUserInfoByUserName(newUser.getUserName());
+        User user;
+        if(!StringUtils.isEmpty(newUser.getUserName())){ //
+            user = userService.findAllUserInfoByUserName(newUser.getUserName());  //
             if((user ==null) ||(StringUtils.isEmpty(user.getPassword()))){
                 return null;
             }
@@ -53,7 +65,7 @@ public class CustomRealm extends AuthorizingRealm {
         List<Role> roleList1 = user.getRoleList();
         for(Role r : roleList1){
             roleList.add(r.getAuthName());
-            List<Permission> permissionList1 = r.getPermissionList();
+            List<Permission> permissionList1 = permissionService.findPermissionListByRoleId(r.getRoleId());
             for (Permission p : permissionList1){
                 permissionList.add(p.getName());
             }
@@ -77,6 +89,7 @@ public class CustomRealm extends AuthorizingRealm {
         //获取登陆时的用户名
         User user;
         String userName = (String) token.getPrincipal();
+        System.out.println("当前登录用户名：+++"+userName);
         if(StringUtils.isEmpty(userName)){
             return null;
         }
@@ -84,7 +97,6 @@ public class CustomRealm extends AuthorizingRealm {
         if(user ==null){
             return null;
         }
-        System.out.println("==============================================");
         return new SimpleAuthenticationInfo(user,user.getPassword(),this.getClass().getName());
     }
 }

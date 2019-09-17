@@ -11,6 +11,7 @@ import java.util.List;
  * 创建时间：2019/8/19 17:20
  * 描述:
  */
+@Mapper
 public interface RoleMapper {
 
     @Select("select r.role_id as role_id,r.authName as authName,r.authDescription as authDescription\n" +
@@ -26,5 +27,5 @@ public interface RoleMapper {
                     many = @Many(select = "top.tinx.blog.maaper.PermissionMapper.findPermissionListByRoleId",fetchType = FetchType.DEFAULT))
             }
     )
-    List<Role>findRoleListByUserId(@Param("userId")int userId);
+    List<Role> findRoleListByUserId(@Param("userId")int userId);
 }

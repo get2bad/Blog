@@ -20,13 +20,19 @@ var vaptchaBaseInfo = {
     forgetScane:'04'
 }
 var locations = 'localhost'; //localhost:8080
-var locations = 'localhost'; //localhost:8080
 //ajax基本配置
 var ajaxInfos = {
     loginUrl : 'http://'+locations+'/user/login',
     regEmialUrl:'http://'+locations+'/user/regEmial',
     regUrl:'http://'+locations+'/user/reg',
     getUserInfoUrl:'http://'+locations+'/user/getUserInfo',
+    getArticalUrl:'http://'+locations+'/artical/getAllJudgeArtical',
+    getAllPassUrl:'http://'+locations+'/artical/getAllPass',
+    viewArticalUrl:'http://'+locations+'/artical/view',
+    passArticalUrl:'http://'+locations+'/artical/pass',
+    faildArticalUrl:'http://'+locations+'/artical/faild',
+    backJudgeArtical:'http://'+locations+'/artical/backJudgeArtical',
+    getAllUserInfo:'http://'+locations+'/user/getAllUserInfo',
     postType: 'POST',
     getType: 'GET',
     jsonRequestContentType: 'application/json;charset=UTF-8',

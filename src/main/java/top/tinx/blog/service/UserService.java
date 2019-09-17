@@ -3,6 +3,8 @@ package top.tinx.blog.service;
 import top.tinx.blog.bean.Login;
 import top.tinx.blog.bean.User;
 
+import java.util.List;
+
 /**
  * 创建人: Wills
  * 创建时间：2019/8/19 17:38
@@ -42,7 +44,7 @@ public interface UserService {
      * @param ip
      * @param user_id
      */
-    public void updateSignInIP(String ip,String user_id);
+    public void updateSignInIP(String ip,int user_id);
 
     /**
      * 根据用户名修改登陆的IP地址
@@ -77,4 +79,9 @@ public interface UserService {
      * @return
      */
     public int getEmailCount(String email);
+
+    /**
+     * 获取所有用户信息
+     */
+    public List<User> getAllUserInfo();
 }

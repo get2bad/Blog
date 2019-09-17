@@ -15,6 +15,7 @@ public class Artical implements Serializable {
     private Date postTime;
     private int viewCount;
     private int userId;
+    private String userName;
     private String articalTitle;
     private String articalIntroduce;
     private String picIntroduceUpload;
@@ -144,6 +145,14 @@ public class Artical implements Serializable {
 
     public void setIsLock(int isLock) {
         this.isLock = isLock;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override

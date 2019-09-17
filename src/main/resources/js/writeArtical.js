@@ -4,9 +4,17 @@ $(function(){
     //富文本编辑器
     var E = window.wangEditor;
     editor = new E('#editor');
-    // 或者 var editor = new E( document.getElementById('editor') )
+    // 关闭粘贴内容中的样式
+    editor.customConfig.pasteFilterStyle = false
+    // 忽略粘贴内容中的图片
+    editor.customConfig.pasteIgnoreImg = true
+    // 图片上传配置
+    editor.customConfig.uploadFileName = 'articalContentPic'; //设置文件上传的参数名称
+    editor.customConfig.uploadImgServer = '/artical/upload';  // 上传图片到服务器
+    editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;  //限制上传图片的大小 限制3mb
+    // 限制一次最多上传 10张图片
+    editor.customConfig.uploadImgMaxLength = 10;
     // 自定义菜单配置
-    editor.customConfig.uploadImgServer = '/upload';
     editor.customConfig.menus = [
         'head',  // 标题
         'bold',  // 粗体
@@ -29,12 +37,6 @@ $(function(){
         'undo',  // 撤销
         'redo'  // 重复
     ];
-    // 下面两个配置，使用其中一个即可显示“上传图片”的tab。但是两者不要同时使用！！！
-    // editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
-    editor.customConfig.uploadImgServer = '/upload';  // 上传图片到服务器
-    editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;  //限制上传图片的大小 限制3mb
-    // 限制一次最多上传 10张图片
-    editor.customConfig.uploadImgMaxLength = 10;
     editor.create();
 
     /*防止xxs攻击配置

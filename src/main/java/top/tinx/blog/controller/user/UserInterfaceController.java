@@ -29,6 +29,7 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -197,5 +198,18 @@ public class UserInterfaceController {
         }else{
             return JsonData.buildSuccess("您没有登陆哦，请您登陆即可体验完整功能！",-1);
         }
+    }
+
+    @PostMapping("/getAllUserInfo")
+    @ResponseBody
+    public JsonData getAllUserInfo(){
+        try{
+            List<User> list = userService.getAllUserInfo();
+            return JsonData.buildSuccess(list,1);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return JsonData.buildError("服务器内部错误，已经通知网站管理员！",-1);
+        }
+
     }
 }

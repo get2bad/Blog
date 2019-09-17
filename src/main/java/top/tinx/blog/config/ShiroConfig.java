@@ -49,15 +49,20 @@ public class ShiroConfig {
         roleMap.put("roleOrFilter",new CustomRolesOrAuthorizationFilter());
         //设置Filter
         shiroFilter.setFilters(roleMap);
+
+        //权限拦截相关
         Map<String,String> map = new LinkedHashMap<String,String>();
 
         //静态资源防止拦截
         map.put("/articalPic/**","anon");
+        map.put("/upload/**","anon");
         map.put("/css/**","anon");
         map.put("/js/**","anon");
         map.put("/fonts/**","anon");
         map.put("/pic/**","anon");
         map.put("/templates/**","anon");
+        map.put("/articalHeader/**","anon");
+        map.put("/articalContent/**","anon");
 
         //退出过滤器
         map.put("/logout","logout");
@@ -68,7 +73,9 @@ public class ShiroConfig {
         //登录用户可以访问的
         //map.put("/user/**","authc");
         //管理员角色才可以访问
-        map.put("/background/**","roles[admin,root]");
+        map.put("/background/**","roleOrFilter[root,admin]");
+        //map.put("/background/**","perms[background]");
+        //map.put("/background","anon");
         //有编辑权限才可以访问的
         //map.put("/video/update","perms[video_update]");
 

@@ -44,7 +44,9 @@ public class BaseController {
     }
 
     @GetMapping("/manageArtical")
-    public String manageArtical(){ return "background/artical/manageArtical";}
+    public String manageArtical(){
+        return "background/artical/manageArtical";
+    }
 
     @GetMapping("/backBase")
     public String backBase(){ return "background/info";}

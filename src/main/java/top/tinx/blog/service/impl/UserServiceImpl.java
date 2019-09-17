@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateSignInIP(String ip, String user_id) {
+    public void updateSignInIP(String ip, int user_id) {
         userMapper.updateLoginIP(ip,user_id);
     }
 
@@ -75,5 +75,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int getEmailCount(String email) {
         return userMapper.getEmailCount(email);
+    }
+
+    @Override
+    public List<User> getAllUserInfo() {
+        return userMapper.getAllUserInfo();
     }
 }

@@ -38,7 +38,7 @@ public class UserController {
         User user = userService.findUserByUserNameAndPassword(login.getUserName(),login.getPassword());
         System.out.println(user);
         //修改登陆IP地址
-        userService.updateSignInIP(addr,user.getUserId()+"");
+        userService.updateSignInIP(addr,user.getUserId());
         if(user!=null){
             return "foreground/index";
         }else{
