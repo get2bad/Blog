@@ -9,7 +9,9 @@
     <link rel="stylesheet" th:href="@{/css/animations.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/content.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/comment.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/iconfont.css}" type="text/css"/>
+    <link href="../../../css/noticejs.css" rel="stylesheet" type="text/css"/>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../css/loginAndRegist.css">
 </head>
@@ -33,7 +35,7 @@
                     <div class="articalContent">
                         <div class="contentTitle text-center">
                             <h1 th:text="${artical.articalTitle}"></h1>
-                            <div class="infoTips">
+                            <div class="infoTips" style="margin-top: 15px">
                                 <i class="iconfont icon-bokeyuan" th:text="${artical.categoryName}"></i>
                                 <i class="iconfont icon-reloadtime  hidden-xs" th:text="${artical.postTime}"></i>
                                 <i class="iconfont icon-yanjing" th:text="${artical.viewCount}"></i>
@@ -77,6 +79,21 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-9 commentContentDiv">
+                <div class="commentTitle" style="margin-top: 10px">评论</div>
+                <div class="commentCommit">
+                    <form role="form" action="/artical/comment" method="post">
+                        <div class="input-group">
+                            <input name="articalId" type="text" style="display: none" th:value="${artical.articalId}">
+                            <textarea name="comment" id="comment" class="form-control" rows="6" cols="120%" placeholder="在这里您可以畅所欲言，说出您想说的话"></textarea>
+                            <button type="button" class="btn btn-default subComment" th:onclick="submitComment([[${artical.articalId}]]);">提交</button>
+                        </div><!-- /input-group -->
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
     </div>
 </section>
 <!--/内容页面-->
@@ -88,37 +105,22 @@
 <!--/页脚-->
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="../../js/jquery-2.1.1.js"></script>
-<script src="../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
+<script src="../../../js/jquery-2.1.1.js"></script>
+<script src="../../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="../../js/bootstrap.min.js"></script>
-<script src="../../js/moment.js"></script>
+<script src="../../../js/bootstrap.min.js"></script>
+<script src="../../../js/jquery.cookie.js"></script>
+<script src="https://cdn.vaptcha.com/v2.js"></script>
+<script src="../../../js/notice.js"></script>
+<!--日期选择插件引用-->
+<script src="../../../js/rolldate.js"></script>
 <!--引用自己的js文件-->
 <!--<script src="../../js/main.js"></script>-->
-<script type="text/javascript">
-    //激活动态效果
-    $('.category').bootstrapDropdownOnHover({
-        mouseOutDelay: 50,
-        //在宽度为多少像素时自动隐藏效果
-        responsiveThreshold: 888,
-        hideBackdrop: true
-    });
-    function sleep(d){
-        for(var t = Date.now();Date.now() - t <= d;);
-    }
-    $(function () {
-        $('.content-left').css('display','block');
-        $('.content-left').fadeOut(0);
-        $('.content-left').fadeIn(1000);
-        //sleep(5000);
-        $('.content-right').css('display','block');
-        $('.content-right').fadeOut(0);
-        $('.content-right').fadeIn(3000);
-    });
-</script>
-<script src="../../js/loginAndRegist.js"></script>
-<script src="../../js/modernizr.js"></script>
-<script src="../../js/iconfont.js"></script>
+<script src="../../../js/baseInfo.js"></script>
+<script src="../../../js/content.js"></script>
+<script src="../../../js/loginAndRegist.js"></script>
+<script src="../../../js/modernizr.js"></script>
+<script src="../../../js/iconfont.js"></script>
 <!--<script src="../../js/batsCursor.js"></script>-->
 </body>
 </html>

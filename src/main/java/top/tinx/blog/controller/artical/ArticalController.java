@@ -8,14 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import top.tinx.blog.bean.Artical;
-import top.tinx.blog.bean.FileUpload;
-import top.tinx.blog.bean.JsonData;
-import top.tinx.blog.bean.User;
-import top.tinx.blog.service.ArticalService;
-import top.tinx.blog.service.CategoryService;
-import top.tinx.blog.service.FileService;
-import top.tinx.blog.service.UserService;
+import top.tinx.blog.bean.*;
+import top.tinx.blog.service.*;
 import top.tinx.blog.utils.FileUtils;
 import top.tinx.blog.utils.StringUtils;
 
@@ -56,6 +50,9 @@ public class ArticalController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private CommentService commentService;
 
     @PostMapping("/newArtical")
     //@ResponseBody
@@ -206,5 +203,48 @@ public class ArticalController {
         artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
         request.setAttribute("artical",artical);
         return "foreground/content/content";
+    }
+
+    @PostMapping("/artical/submitComment")
+    @ResponseBody
+    public JsonData comment(@RequestBody HashMap<String, String> map ,HttpServletRequest request){
+        try{
+            String articalId = map.get("articalId");
+            String comment = map.get("comment");
+            Artical artical = articalService.findArticalById(Integer.parseInt(articalId));
+            artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
+            request.setAttribute("artical",artical);
+            String usrId = map.get("UserId");
+            Comment comment1 = new Comment();
+            if(!org.springframework.util.StringUtils.isEmpty(usrId)){
+                comment1.setUserId(Integer.parseInt(usrId));
+            }else{
+                comment1.setUserId(0);
+            }
+            comment1.setArticalId(Integer.parseInt(articalId));
+            comment1.setCommentContent(comment);
+            comment1.setCommentStatus(0);
+            comment1.setCommentPostTime(StringUtils.getNowTime());
+            commentService.insertComment(comment1);
+            return JsonData.buildSuccess("提交评论成功,等待审核中·····",1);
+        }catch (Exception ex){
+            return JsonData.buildError("服务器内部出现错误！",-1);
+        }
+
+    }
+
+    @PostMapping("/artical/getAllComment")
+    @ResponseBody
+    public JsonData getAllComment(){
+        try{
+            List<Comment> allComment = commentService.getAllComment();
+            for (Comment comment : allComment) {
+                comment.setUserName(userService.findUserByUserId(comment.getUserId()).getUserName());
+                comment.setArticalName(articalService.findArticalById(comment.getArticalId()).getArticalTitle());
+            }
+            return JsonData.buildSuccess(allComment,1);
+        }catch (Exception ex){
+            return JsonData.buildError("服务器内部出现错误！",-1);
+        }
     }
 }

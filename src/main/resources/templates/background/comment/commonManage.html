@@ -5,8 +5,10 @@
     <title>Will的博客</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../../css/bootstrap.css" rel="stylesheet">
     <link href="../../../css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/animations.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/noticejs.css" rel="stylesheet" type="text/css"/>
     <link href="../../../css/dropify.min.css" rel="stylesheet" type="text/css"/>
     <link href="../../../css/pageManage.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -16,29 +18,23 @@
         <h3><span class="iconfont icon-bulb" style="font-size: 24px;margin-right: 4px"></span>评论管理</h3>
     </div>
     <div class="pageManage">
-        <table class="table table-striped table-hover">
+        <table id="commentPanel" class="table table-striped table-hover">
             <tr>
-                <td>评论ID</td>
-                <td>文章ID</td>
+                <td>索引</td>
+                <td>文章</td>
                 <td>评论用户名</td>
                 <td>内容</td>
                 <td>评论日期</td>
+                <td>审核状态</td>
                 <td>操作</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>3</td>
-                <td>Wills</td>
-                <td>博主加油，你是最棒的！</td>
-                <td>2019-8-6 18:00</td>
-                <td>
-                    <a href="#" class="iconfont icon-frown" style="margin-right: 8px" title="删除"></a>
-                    <a href="#" class="iconfont icon-check-circle" title="审核通过"></a>
-                </td>
             </tr>
         </table>
     </div>
 </div>
 <script src="../../../js/jquery-2.1.1.js"></script>
+<script src="../../../js/notice.js"></script>
+<script src="../../../js/rolldate.js"></script>
+<script src="../../../js/baseInfo.js"></script>
+<script src="../../../js/commentManage.js"></script>
 </body>
 </html>

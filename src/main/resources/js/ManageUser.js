@@ -28,12 +28,12 @@ $(function(){
                         "                <td>"+(index+1)+"</td>\n" +
                         "                <td>"+data.userName+"</td>\n" +
                         "                <td>whwh2008</td>\n" +
-                        "                <td class=\"visible-md visible-lg\">"+data.birthday.substring(0,19)+"</td>\n" +
+                        "                <td class=\"visible-md visible-lg\">"+data.birthday+"</td>\n" +
                         "                <td>"+(data.sex ===1?'男':'女')+"</td>\n" +
                         "                <td>"+data.email+"</td>\n" +
                         "                <td>"+data.phone+"</td>\n" +
                         "                <td class=\"visible-md visible-lg\">"+data.description+"</td>\n" +
-                        "                <td>"+data.registDate.substring(0,19)+"</td>\n" +
+                        "                <td>"+data.registDate+"</td>\n" +
                         "                <td>暂未实现</td>\n" +
                         "                <td class=\"visible-md visible-lg\">暂未实现</td>\n" +
                         "                <td>\n" +

@@ -36,6 +36,8 @@ var ajaxInfos = {
     getAllFiles:'http://'+locations+'/file/getAllFiles',
     getUserInfoById:'http://'+locations+'/user/getUserById',
     changeUserPwd:'http://'+locations+'/user/changeUserPwd',
+    submitComment:'http://'+locations+'/artical/submitComment',
+    getAllComment:'http://'+locations+'/artical/getAllComment',
     postType: 'POST',
     getType: 'GET',
     jsonRequestContentType: 'application/json;charset=UTF-8',
