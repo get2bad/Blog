@@ -13,6 +13,6 @@ public interface FileMapper {
     @Select("select * from tb_file")
     public List<File> getAllFiles();
 
-    @Insert("insert into tb_file(file_path,file_type,file_description) values(#{file.filePath},#{file.fileType},#{file.fileDescription})")
+    @Insert("insert into tb_file(file_path,file_path_location,file_type,file_description) values(#{file.filePath},#{file.filePathLocation},#{file.fileType},#{file.fileDescription})")
     public void insertFile(@Param("file") File file);
 }

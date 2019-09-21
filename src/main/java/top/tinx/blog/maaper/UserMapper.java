@@ -72,5 +72,6 @@ public interface UserMapper {
     @Select("select * from tb_user")
     List<User> getAllUserInfo();
 
-
+    @Update("update tb_user set password=#{newPwd} where user_id = #{userId}")
+    void changeUserPwdById(@Param("userId")String userId,@Param("newPwd")String newPwd);
 }

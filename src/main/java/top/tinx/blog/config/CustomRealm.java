@@ -49,7 +49,6 @@ public class CustomRealm extends AuthorizingRealm {
             ex.printStackTrace();
         }
         //获取登陆时的用户名
-        System.out.println("授权信息验证"+newUser);
         User user;
         if(!StringUtils.isEmpty(newUser.getUserName())){ //
             user = userService.findAllUserInfoByUserName(newUser.getUserName());  //
@@ -89,7 +88,6 @@ public class CustomRealm extends AuthorizingRealm {
         //获取登陆时的用户名
         User user;
         String userName = (String) token.getPrincipal();
-        System.out.println("当前登录用户名：+++"+userName);
         if(StringUtils.isEmpty(userName)){
             return null;
         }

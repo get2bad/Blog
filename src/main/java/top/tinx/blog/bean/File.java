@@ -6,11 +6,13 @@ public class File implements Serializable {
 
     private int fileId;
     private String filePath;
+    private String filePathLocation;
     private String fileType;
     private String fileDescription;
 
-    public File(String filePath, String fileType, String fileDescription) {
+    public File(String filePath, String filePathLocation, String fileType, String fileDescription) {
         this.filePath = filePath;
+        this.filePathLocation = filePathLocation;
         this.fileType = fileType;
         this.fileDescription = fileDescription;
     }
@@ -47,11 +49,20 @@ public class File implements Serializable {
         this.fileDescription = fileDescription;
     }
 
+    public String getFilePathLocation() {
+        return filePathLocation;
+    }
+
+    public void setFilePathLocation(String filePathLocation) {
+        this.filePathLocation = filePathLocation;
+    }
+
     @Override
     public String toString() {
         return "File{" +
                 "fileId=" + fileId +
                 ", filePath='" + filePath + '\'' +
+                ", filePathLocation='" + filePathLocation + '\'' +
                 ", fileType='" + fileType + '\'' +
                 ", fileDescription='" + fileDescription + '\'' +
                 '}';

@@ -13,6 +13,7 @@ import top.tinx.blog.bean.FileUpload;
 import top.tinx.blog.bean.JsonData;
 import top.tinx.blog.bean.User;
 import top.tinx.blog.service.ArticalService;
+import top.tinx.blog.service.CategoryService;
 import top.tinx.blog.service.FileService;
 import top.tinx.blog.service.UserService;
 import top.tinx.blog.utils.FileUtils;
@@ -53,6 +54,9 @@ public class ArticalController {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @PostMapping("/newArtical")
     //@ResponseBody
     public String newArtical(@RequestParam("picIntroduceUploads")MultipartFile picIntroduceUploads, Artical artical,
@@ -77,11 +81,11 @@ public class ArticalController {
                 Files.write(path,bytes);
                 //将artical写入数据库中
                 artical.setPicIntroduceUpload(realLocation+originalFileName);
-                artical.setPicIntroduceUrl(preFileLocationn+title+"/"+originalFileName);
+                artical.setPicIntroduceUploadUrl(preFileLocationn+title+"/"+originalFileName);
                 //将上传文件的基本信息上传到文件汇总表中
-                fileService.insertFile(new top.tinx.blog.bean.File(preFileLocationn+title+"/"+originalFileName, FileUtils.getFileType(picIntroduceUploads),"文章介绍图片"));
+                fileService.insertFile(new top.tinx.blog.bean.File(preFileLocationn+title+"/"+originalFileName, realLocation+originalFileName,FileUtils.getFileType(picIntroduceUploads),"文章介绍图片"));
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                artical.setPostTime(df.parse(df.format(new Date())));
+                artical.setPostTime(df.format(new Date()));
                 articalService.insertArtical(artical);
                 System.out.println(artical);
             }catch (Exception ex){
@@ -116,7 +120,7 @@ public class ArticalController {
                 Files.write(path,bytes);
                 data.add(preFileLocationn+nowTime+"/"+originalFileName);
                 //将上传文件的基本信息上传到文件汇总表中
-                fileService.insertFile(new top.tinx.blog.bean.File(preFileLocationn+nowTime+"/"+originalFileName, FileUtils.getFileType(articalContentPic),"文章内部图片"));
+                fileService.insertFile(new top.tinx.blog.bean.File(preFileLocationn+nowTime+"/"+originalFileName, realLocation+originalFileName,FileUtils.getFileType(articalContentPic),"文章内部图片"));
                 System.out.println(preFileLocationn+nowTime+"/"+originalFileName);
             }catch (Exception ex){
                 ex.printStackTrace();
@@ -174,6 +178,8 @@ public class ArticalController {
             List<Artical> list = articalService.getAllPassArtical();
             for (Artical artical : list){
                 artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
+                artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
+                System.out.println("-------========----------\r\n"+artical.getPicIntroduceUploadUrl()+"\r\n");
             }
             return JsonData.buildSuccess(list,1);
         }catch (Exception ex){
@@ -192,5 +198,13 @@ public class ArticalController {
             ex.printStackTrace();
             return JsonData.buildError("对不起，内部出现了一些小错误，等待解决",-1);
         }
+    }
+
+    @GetMapping("/content/{id}.html")
+    public String getContent(@PathVariable String id,HttpServletRequest request){
+        Artical artical = articalService.findArticalById(Integer.parseInt(id));
+        artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
+        request.setAttribute("artical",artical);
+        return "foreground/content/content";
     }
 }

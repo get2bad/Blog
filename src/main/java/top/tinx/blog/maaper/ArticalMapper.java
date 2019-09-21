@@ -9,7 +9,7 @@ import java.util.List;
 public interface ArticalMapper {
 
     @Insert("INSERT INTO blog.tb_artical " +
-            "(artical_id, " +
+            "( " +
             "category_id, " +
             "STATUS, " +
             "postTime, " +
@@ -18,13 +18,14 @@ public interface ArticalMapper {
             "articalTitle, " +
             "articalIntroduce, " +
             "picIntroduceUpload, " +
+            "picIntroduceUploadUrl, " +
             "articalContent, " +
             "isDenyComment, " +
             "isLock, " +
             "isSubmitTop" +
             ")" +
             "VALUES" +
-            "(#{artical.articalId}, " +
+            "(" +
             "#{artical.categoryId}, " +
             "#{artical.status}, " +
             "#{artical.postTime}, " +
@@ -33,6 +34,7 @@ public interface ArticalMapper {
             "#{artical.articalTitle}, " +
             "#{artical.articalIntroduce}, " +
             "#{artical.picIntroduceUpload}, " +
+            "#{artical.picIntroduceUploadUrl}, " +
             "#{artical.articalContent}, " +
             "#{artical.isDenyComment}, " +
             "#{artical.isLock}, " +
@@ -59,4 +61,7 @@ public interface ArticalMapper {
             "\tWHERE\n" +
             "\tartical_id = #{id} ;")
     public void passArtical(@Param("id") String id);
+
+    @Select("select * from tb_artical where artical_id = #{id}")
+    public Artical findArticalById(@Param("id") int id);
 }

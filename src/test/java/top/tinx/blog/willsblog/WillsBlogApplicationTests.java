@@ -16,11 +16,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
+import top.tinx.blog.bean.Artical;
+import top.tinx.blog.maaper.ArticalMapper;
 import top.tinx.blog.maaper.UserMapper;
+import top.tinx.blog.service.ArticalService;
+import top.tinx.blog.service.impl.ArticalServiceImpl;
 import top.tinx.blog.service.impl.UserServiceImpl;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class WillsBlogApplicationTests {
 
     @Test
@@ -51,6 +59,13 @@ public class WillsBlogApplicationTests {
         str = str.replaceAll("[\\pP‘’“”~]", "");
         str = str.replace(" ","");
         System.out.println(str);
+    }
+
+    @Test
+    public void test2() throws ParseException {
+        //获取当前时间
+        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println((sim.parse(sim.format(new Date()))).toString());
     }
 
 }

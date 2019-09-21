@@ -84,4 +84,9 @@ public interface UserService {
      * 获取所有用户信息
      */
     public List<User> getAllUserInfo();
+
+    /**
+     * 修改用户的密码
+     */
+    public void changeUserPwdById(String userId,String newPwd);
 }

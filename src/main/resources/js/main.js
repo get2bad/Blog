@@ -53,6 +53,7 @@ $(function(){
         }
     }
     getUserInfo();
+    getHotArtical();
 });
 
 //获取现在的时间
@@ -127,4 +128,63 @@ function tips(alertText,position){
             close: 'animated bounceOut'
         }
     }).show();
+}
+var ajaxInfo;
+//获取热门文章
+function getHotArtical() {
+    ajaxInfo = Object.create(ajaxInfos);
+    //页面初始化，进行ajax请求
+    $.ajax({
+        //请求方式
+        type : ajaxInfo.postType,
+        //请求的媒体类型
+        contentType: ajaxInfo.jsonRequestContentType,
+        //请求地址
+        url : ajaxInfo.getAllPassUrl,
+        //是否异步执行命令
+        async: ajaxInfo.allowAsyc,
+        //不进行缓存
+        cache: ajaxInfo.limitCache,
+        //数据，json字符串
+        //data : jsonString,
+        dataType: ajaxInfo.jsonDataType,
+        //请求成功
+        success : function(result) {
+            if(result.code ==1){
+                $.each(result.data,function(index,data){
+                    //tips(data.picIntroduceUrl,"middleCenter");
+                    $("#articalPanel").append("<div class=\"col-md-12\">\n" +
+                        "                                    <!--第1篇文章-->\n" +
+                        "                                    <div class=\"artical\">\n" +
+                        "                                        <a href=\"/content/"+data.articalId+".html\" target=\"_blank\">\n" +
+                        "                                            <div class=\"artical-left pull-left hidden-xs\">\n" +
+                        "                                                <img src=\""+data.picIntroduceUploadUrl+"\" style='width: 64px;height: 64px;'/>\n" +
+                        "                                            </div>\n" +
+                        "                                            <div class=\"artical-right pull-left\">\n" +
+                        "                                                <h4 class=\"pull-left\">"+data.articalTitle+"</h4>\n" +
+                        "                                                <p class=\"pull-left\">\n" +
+                        "                                                    "+data.articalIntroduce+"\n" +
+                        "                                                </p>\n" +
+                        "                                                <div class=\"clearfix\"></div>\n" +
+                        "                                                <div class=\"infoTips hidden-xs\">\n" +
+                        "                                                    <i class=\"iconfont icon-bokeyuan\">"+data.categoryName+"</i>\n" +
+                        "                                                    <i class=\"iconfont icon-reloadtime\">"+data.postTime.substring(0,19)+"</i>\n" +
+                        "                                                    <i class=\"iconfont icon-yanjing\">"+data.viewCount+"</i>\n" +
+                        "                                                    <i class=\"iconfont icon-ziyuan\">评论数目</i>\n" +
+                        "                                                </div>\n" +
+                        "                                            </div>\n" +
+                        "                                        </a>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>");
+
+                });
+            }else{
+                tips(result.msg,'topCenter');
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            tips('请求失败，请您检查！','topCenter');
+        }
+    });
 }

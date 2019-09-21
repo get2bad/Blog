@@ -16,4 +16,6 @@ public interface ArticalService {
     public void backJudgeArtical(String id);
 
     public void passArtical(String id);
+
+    public Artical findArticalById(int id);
 }

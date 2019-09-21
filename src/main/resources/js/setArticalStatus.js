@@ -30,7 +30,7 @@ $(function () {
                         "    <td>"+data.articalIntroduce+"</td>" +
                         "    <td>"+data.userName+"</td>" +
                         //"    <td><code>"+data.articalContent+"</code></td>" +
-                        "    <td>"+data.postTime.substring(0,19)+"</td>" +
+                        "    <td>"+data.postTime+"</td>" +
                         "    <td>" +
                         "        <a onclick='viewArtical("+data.articalId+")' href='#' class='iconfont icon-yanjing' title='查看'></a>" +
                         "        <a onclick='passArtical("+data.articalId+")' href='#' class='iconfont icon-check-circle' title='审核通过'></a>" +

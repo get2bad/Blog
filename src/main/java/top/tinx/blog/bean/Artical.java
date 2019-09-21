@@ -11,15 +11,16 @@ import java.util.Date;
 public class Artical implements Serializable {
     private int articalId;
     private int categoryId;
+    private String categoryName;
     private int status;
-    private Date postTime;
+    private String postTime;
     private int viewCount;
     private int userId;
     private String userName;
     private String articalTitle;
     private String articalIntroduce;
     private String picIntroduceUpload;
-    private String picIntroduceUrl;
+    private String picIntroduceUploadUrl;
     private String articalContent;
     private int isDenyComment;
     private int isLock;
@@ -100,11 +101,11 @@ public class Artical implements Serializable {
         this.status = status;
     }
 
-    public Date getPostTime() {
+    public String getPostTime() {
         return postTime;
     }
 
-    public void setPostTime(Date postTime) {
+    public void setPostTime(String postTime) {
         this.postTime = postTime;
     }
 
@@ -140,12 +141,20 @@ public class Artical implements Serializable {
         this.userName = userName;
     }
 
-    public String getPicIntroduceUrl() {
-        return picIntroduceUrl;
+    public String getPicIntroduceUploadUrl() {
+        return picIntroduceUploadUrl;
     }
 
-    public void setPicIntroduceUrl(String picIntroduceUrl) {
-        this.picIntroduceUrl = picIntroduceUrl;
+    public void setPicIntroduceUploadUrl(String picIntroduceUploadUrl) {
+        this.picIntroduceUploadUrl = picIntroduceUploadUrl;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     @Override
@@ -153,6 +162,7 @@ public class Artical implements Serializable {
         return "Artical{" +
                 "articalId=" + articalId +
                 ", categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
                 ", status=" + status +
                 ", postTime=" + postTime +
                 ", viewCount=" + viewCount +
@@ -161,7 +171,7 @@ public class Artical implements Serializable {
                 ", articalTitle='" + articalTitle + '\'' +
                 ", articalIntroduce='" + articalIntroduce + '\'' +
                 ", picIntroduceUpload='" + picIntroduceUpload + '\'' +
-                ", picIntroduceUrl='" + picIntroduceUrl + '\'' +
+                ", picIntroduceUploadUrl='" + picIntroduceUploadUrl + '\'' +
                 ", articalContent='" + articalContent + '\'' +
                 ", isDenyComment=" + isDenyComment +
                 ", isLock=" + isLock +

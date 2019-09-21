@@ -20,8 +20,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
+    @SuppressWarnings("all")
     private UserMapper userMapper;
     @Autowired
+    @SuppressWarnings("all")
     private RoleMapper roleMapper;
 
     @Override
@@ -80,5 +82,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUserInfo() {
         return userMapper.getAllUserInfo();
+    }
+
+    @Override
+    public void changeUserPwdById(String userId, String newPwd) {
+        userMapper.changeUserPwdById(userId,newPwd);
     }
 }

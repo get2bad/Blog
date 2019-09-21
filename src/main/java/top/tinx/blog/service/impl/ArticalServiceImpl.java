@@ -38,4 +38,9 @@ public class ArticalServiceImpl implements ArticalService {
     public void passArtical(String id) {
         articalMapper.passArtical(id);
     }
+
+    @Override
+    public Artical findArticalById(int id) {
+        return articalMapper.findArticalById(id);
+    }
 }

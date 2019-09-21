@@ -224,4 +224,25 @@ public class UserInterfaceController {
             return JsonData.buildError("服务器内部错误，已经通知网站管理员！",-1);
         }
     }
+
+    @PostMapping("/changeUserPwd")
+    @ResponseBody
+    public JsonData changeUserPwd(@RequestBody HashMap<String, String> map){
+        try{
+            User user = userService.findUserByUserId(Integer.parseInt(map.get("userId")));
+            //确认密码是否输入正确
+            String oldPwd = Md5EncryptionUtil.encrypt(map.get("oldPwd"),"",2);
+            if (oldPwd.equals(user.getPassword())){
+                userService.changeUserPwdById(user.getUserId()+"",Md5EncryptionUtil.encrypt(map.get("newPwd"),"",2));
+                //执行修改密码逻辑
+                return JsonData.buildSuccess("恭喜您，密码修改成功！下次登录时请您使用新密码",1);
+            }else{
+                //密码验证错误，返回结果
+                return JsonData.buildError("您输入的原密码不正确，请您重新尝试！",-2);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return JsonData.buildError("您要修改密码的用户不存在！！",-1);
+        }
+    }
 }
