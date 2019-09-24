@@ -13,5 +13,11 @@ public interface CommentService {
 
     public void insertComment(Comment comment);
 
+    public void setCommentStatus(String id,String status);
 
+    public void deleteCommentById(String id);
+
+    public int getCommentCountByArticalId(String id);
+
+    public void setViewCountNum(String id);
 }

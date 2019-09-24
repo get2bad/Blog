@@ -58,7 +58,6 @@ public class ArticalController {
     //@ResponseBody
     public String newArtical(@RequestParam("picIntroduceUploads")MultipartFile picIntroduceUploads, Artical artical,
                              HttpServletRequest request){
-        System.out.println(picIntroduceUploads.getOriginalFilename());
         String preFileLocationn = preFileLocation;
         preFileLocationn += "articalHeader/";
         if(!picIntroduceUploads.isEmpty()){
@@ -84,7 +83,6 @@ public class ArticalController {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 artical.setPostTime(df.format(new Date()));
                 articalService.insertArtical(artical);
-                System.out.println(artical);
             }catch (Exception ex){
                 ex.printStackTrace();
             }
@@ -95,7 +93,6 @@ public class ArticalController {
     @PostMapping("/artical/upload")
     @ResponseBody
     public FileUpload uploadArticalPic(@RequestParam("articalContentPic")MultipartFile articalContentPic,HttpServletRequest request){
-        System.out.println(articalContentPic.getOriginalFilename());
         List<String> data = new ArrayList<String>();
         String preFileLocationn = preFileLocation;
         preFileLocationn += "articalContent/";
@@ -111,14 +108,13 @@ public class ArticalController {
                     file.mkdirs();
                 }
                 //(new File("")).getAbsolutePath()+"\\upload\\articalContent\\";
-                System.out.println(realLocation);
                 String originalFileName = articalContentPic.getOriginalFilename();
                 Path path = Paths.get(realLocation+originalFileName);
                 Files.write(path,bytes);
                 data.add(preFileLocationn+nowTime+"/"+originalFileName);
                 //将上传文件的基本信息上传到文件汇总表中
                 fileService.insertFile(new top.tinx.blog.bean.File(preFileLocationn+nowTime+"/"+originalFileName, realLocation+originalFileName,FileUtils.getFileType(articalContentPic),"文章内部图片"));
-                System.out.println(preFileLocationn+nowTime+"/"+originalFileName);
+                //System.out.println(preFileLocationn+nowTime+"/"+originalFileName);
             }catch (Exception ex){
                 ex.printStackTrace();
                 return FileUpload.buildError();
@@ -132,7 +128,6 @@ public class ArticalController {
     public JsonData getAllJudgeArtical(){
         List<Artical> list = articalService.getAllJudgeArtical();
         for (Artical artical: list){
-            System.out.println("userId为"+artical.getUserId());
             artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
         }
         if(!list.isEmpty()){
@@ -157,14 +152,12 @@ public class ArticalController {
     @PostMapping("/artical/view")
     @ResponseBody
     public JsonData viewArtical(@RequestBody HashMap<String, String> map ){
-        System.out.println("查看"+map.get("id"));
         return JsonData.buildSuccess("后台已经收到您的查看请求",1);
     }
 
     @PostMapping("/artical/faild")
     @ResponseBody
     public JsonData faildArtical(@RequestBody HashMap<String, String> map){
-        System.out.println("不通过"+map.get("id"));
         return JsonData.buildSuccess("此篇文章不通过操作成功！",1);
     }
 
@@ -176,7 +169,7 @@ public class ArticalController {
             for (Artical artical : list){
                 artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
                 artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
-                System.out.println("-------========----------\r\n"+artical.getPicIntroduceUploadUrl()+"\r\n");
+                artical.setArticalCommentCount(commentService.getCommentCountByArticalId(artical.getArticalId()+""));
             }
             return JsonData.buildSuccess(list,1);
         }catch (Exception ex){
@@ -201,6 +194,7 @@ public class ArticalController {
     public String getContent(@PathVariable String id,HttpServletRequest request){
         Artical artical = articalService.findArticalById(Integer.parseInt(id));
         artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
+        commentService.setViewCountNum(artical.getArticalId()+"");
         request.setAttribute("artical",artical);
         return "foreground/content/content";
     }

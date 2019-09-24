@@ -27,4 +27,24 @@ public class CommentServiceImpl implements CommentService {
     public void insertComment(Comment comment) {
         commentMapper.insertComment(comment);
     }
+
+    @Override
+    public void setCommentStatus(String id, String status) {
+        commentMapper.setCommentStatus(id,status);
+    }
+
+    @Override
+    public void deleteCommentById(String id) {
+        commentMapper.deleteComment(id);
+    }
+
+    @Override
+    public int getCommentCountByArticalId(String id) {
+        return commentMapper.getCommentCountByArticalId(id);
+    }
+
+    @Override
+    public void setViewCountNum(String id) {
+        commentMapper.setViewCountNum(id);
+    }
 }

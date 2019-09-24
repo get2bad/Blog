@@ -1,5 +1,7 @@
 "use strict";
+var ajaxInfo;
 $(function () {
+    ajaxInfo = Object.create(ajaxInfos);
     //激活动态效果
     $('.category').bootstrapDropdownOnHover({
         mouseOutDelay: 50,
@@ -19,12 +21,56 @@ $(function () {
         $('.content-right').fadeOut(0);
         $('.content-right').fadeIn(3000);
     });
+    //tips($("#articalId").text());
+    getAllComment($("#articalId").text());
 });
+
+function getAllComment(id) {
+    var jsonString = '{"id":"'+id+'"}';
+    $.ajax({
+        //请求方式
+        type : ajaxInfo.postType,
+        //请求的媒体类型
+        contentType: ajaxInfo.jsonRequestContentType,
+        //请求地址
+        url : ajaxInfo.getAllCommentByArticalId,
+        //是否异步执行命令
+        async: ajaxInfo.allowAsyc,
+        //不进行缓存
+        cache: ajaxInfo.limitCache,
+        //数据，json字符串
+        data : jsonString,
+        dataType: ajaxInfo.jsonDataType,
+        //请求成功
+        success : function(result) {
+            if(result.code ==1){
+                //tips(result.data,'middleCenter');
+                $.each(result.data,function(index,data){
+                    $("#commentPanel").append("<div class=\"media commonContent\">\n" +
+                        "                            <div class=\"media-left pull-left\">\n" +
+                        "                                <img src=\"https://static.runoob.com/images/mix/img_avatar.png\" class=\"media-object\">\n" +
+                        "                            </div>\n" +
+                        "                            <div class=\"media-body\">\n" +
+                        "                                <h5 class=\"media-heading\">"+data.userName+"</h5>\n" +
+                        "                                <p>"+data.commentContent+"</p>\n" +
+                        "                                <small>"+data.commentPostTime+"</small>\n" +
+                        "                            </div>\n" +
+                        "                        </div>");
+                });
+            }else{
+                tips(result.msg,'topCenter');
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            tips('请求失败，请您检查！','topCenter');
+        }
+    });
+}
 
 function submitComment(id) {
     var comment = $("#comment").val();
     var jsonString = '{"articalId":'+id+',"comment":"'+comment+'","userId":'+$.cookie("UserID")+'}';
-    var ajaxInfo = Object.create(ajaxInfos);
     //页面初始化，进行ajax请求
     $.ajax({
         //请求方式

@@ -170,7 +170,7 @@ function getHotArtical() {
                         "                                                    <i class=\"iconfont icon-bokeyuan\">"+data.categoryName+"</i>\n" +
                         "                                                    <i class=\"iconfont icon-reloadtime\">"+data.postTime.substring(0,19)+"</i>\n" +
                         "                                                    <i class=\"iconfont icon-yanjing\">"+data.viewCount+"</i>\n" +
-                        "                                                    <i class=\"iconfont icon-ziyuan\">评论数目</i>\n" +
+                        "                                                    <i class=\"iconfont icon-ziyuan\">"+data.articalCommentCount+"</i>\n" +
                         "                                                </div>\n" +
                         "                                            </div>\n" +
                         "                                        </a>\n" +

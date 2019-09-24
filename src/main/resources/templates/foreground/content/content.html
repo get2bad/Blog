@@ -35,6 +35,7 @@
                     <div class="articalContent">
                         <div class="contentTitle text-center">
                             <h1 th:text="${artical.articalTitle}"></h1>
+                            <i id="articalId" th:text="${artical.articalId}" style="display: none"></i>
                             <div class="infoTips" style="margin-top: 15px">
                                 <i class="iconfont icon-bokeyuan" th:text="${artical.categoryName}"></i>
                                 <i class="iconfont icon-reloadtime  hidden-xs" th:text="${artical.postTime}"></i>
@@ -52,29 +53,10 @@
             <div class="col-md-3">
                 <!--右边评论区-->
                 <div class="content-right"  style="display: none">
-                    <div class="articalCommon">
+                    <div class="articalCommon" id="commentPanel">
                         <div class="commonTitle text-center"><h4>评论区</h4></div>
                         <!--评论区内容-->
-                        <div class="media commonContent">
-                            <div class="media-left pull-left">
-                                <img src="https://static.runoob.com/images/mix/img_avatar.png" class="media-object">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="media-heading">评论者</h5>
-                                <p>评论区内容</p>
-                                <small>2019-07-22 19:11:55</small>
-                            </div>
-                        </div>
-                        <div class="media commonContent">
-                            <div class="media-left pull-left">
-                                <img src="https://static.runoob.com/images/mix/img_avatar.png" class="media-object">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="media-heading">评论者</h5>
-                                <p>评论区内容</p>
-                                <small>2019-07-22 19:11:55</small>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

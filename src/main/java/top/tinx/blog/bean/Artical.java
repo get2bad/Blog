@@ -22,6 +22,7 @@ public class Artical implements Serializable {
     private String picIntroduceUpload;
     private String picIntroduceUploadUrl;
     private String articalContent;
+    private int articalCommentCount;
     private int isDenyComment;
     private int isLock;
     private int isSubmitTop;
@@ -157,6 +158,14 @@ public class Artical implements Serializable {
         this.categoryName = categoryName;
     }
 
+    public int getArticalCommentCount() {
+        return articalCommentCount;
+    }
+
+    public void setArticalCommentCount(int articalCommentCount) {
+        this.articalCommentCount = articalCommentCount;
+    }
+
     @Override
     public String toString() {
         return "Artical{" +
@@ -164,7 +173,7 @@ public class Artical implements Serializable {
                 ", categoryId=" + categoryId +
                 ", categoryName='" + categoryName + '\'' +
                 ", status=" + status +
-                ", postTime=" + postTime +
+                ", postTime='" + postTime + '\'' +
                 ", viewCount=" + viewCount +
                 ", userId=" + userId +
                 ", userName='" + userName + '\'' +
@@ -173,6 +182,7 @@ public class Artical implements Serializable {
                 ", picIntroduceUpload='" + picIntroduceUpload + '\'' +
                 ", picIntroduceUploadUrl='" + picIntroduceUploadUrl + '\'' +
                 ", articalContent='" + articalContent + '\'' +
+                ", articalCommentCount=" + articalCommentCount +
                 ", isDenyComment=" + isDenyComment +
                 ", isLock=" + isLock +
                 ", isSubmitTop=" + isSubmitTop +
