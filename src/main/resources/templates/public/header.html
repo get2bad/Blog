@@ -28,11 +28,12 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Wills</a>
+                        <a class="navbar-brand" href="#">Wills的博客</a>
                     </div>
                     <div class="collapse navbar-collapse" id="menu">
                         <ul class="nav navbar-nav animated category" data-animation="flipInX">
-                            <li class="active"><a href="#">最新文章<span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="/" target="_self">主页<span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">最新文章</a></li>
                             <li><a href="#">热门文章</a></li>
                             <li class="dropdown">
                                 <a href="#" data-toggle="dropdown">文章分类<span class="caret"></span></a>
@@ -48,7 +49,7 @@
                                     <li><a href="#">资料分享</a></li>
                                 </ul>
                             </li>
-                            <li class="visible-lg visible-md"><a href="/comment" target="_blank">留言板</a></li>
+                            <li class="visible-lg visible-md"><a href="/comment" target="_self">留言板</a></li>
                         </ul>
                         <form class="navbar-form navbar-left" method="get" action="/search" target="_blank">
                             <div class="form-group">
@@ -57,11 +58,12 @@
                             <button type="submit" class="btn btn-default">搜索</button>
                         </form>
                         <ul class="nav navbar-nav navbar-right animated category" data-animation="fadeIn">
-                            <nav th:if="${session.user} ==null" class="main-nav" id="loginBtn">
+                            <nav class="main-nav" id="loginBtn">
                                 <ul>
-                                    <li><a id="loginAddr" class="cd-signin" href="#0" onclick="setVaptchaContainer('vaptchaContainer1','02')">登陆</a></li>
+                                    <li><a id="loginAddr" class="cd-signin" href="/login">登陆</a></li>
                                 </ul>
                             </nav>
+                            <div id="userInfo">
                                 <li class="hidden-sm hidden-xs user-img" id="userIcon"><img src="../../pic/pic5.jpg" alt="用户头像" class="img-circle"></li>
                                 <li class="dropdown hidden-sm" id="userOptions">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -78,6 +80,7 @@
                                         <li><a href="/logout">安全退出</a></li>
                                     </ul>
                                 </li>
+                            </div>
                         </ul>
                         <div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
                             <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
@@ -129,7 +132,7 @@
 
                                         <p class="fieldset">
                                             <input class="full-width submit" type="button" value="登陆" id="login"
-                                                   onclick="loginAccount()">
+                                                   onclick="loginAccount(document.referrer)">
                                         </p>
                                         <p class="fieldset">
                                             <input class="full-width reset" type="reset" value="重置">

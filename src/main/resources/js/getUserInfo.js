@@ -8,7 +8,7 @@
 * 如果存在，则说明session处在有效期，向前端页面发送json（user的基本信息）
 * 如果不存在，则说明session已经失效，要求用户重新登陆
 * */
-function getUserInfo(){
+function getUserInfo(sign){
     var ajaxInfo = Object.create(ajaxInfos);
     var sessionID = $.cookie('UserRedisSessionID');
     var userId = $.cookie('UserID');
@@ -32,14 +32,17 @@ function getUserInfo(){
         //请求成功
         success: function (result) {
             console.log(result.data['userInfo']);
-            if (result.code == 1) {
+            if (result.code === 1) {
                 //隐藏登陆按钮
                 $("#loginBtn").css('display','none');
                 $("#userIcon").css('display','inline-block');
                 $("#userOptions").css('display','inline-block');
                 $('#setUserName').text(result.data['userInfo'].userName);
-                //设置欢迎标语
-                tips(result.data['msg'], 'middleCenter');
+
+                if(sign ===1){
+                    //设置欢迎标语
+                    tips(result.data['msg'], 'middleCenter');
+                }
                 //设置相关信息
             } else {
                 //隐藏头像按钮

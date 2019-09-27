@@ -21,8 +21,18 @@ $(function () {
         $('.content-right').fadeOut(0);
         $('.content-right').fadeIn(3000);
     });
-    //tips($("#articalId").text());
+    /*
+    if($.cookie('UserRedisSessionID')===null){
+        //tips($.cookie('UserRedisSessionID'),'middleCenter');
+        $("#userInfo").css('display','none');
+        $("#loginBtn").css('display','block');
+    }else{
+        $("#userInfo").css('display','block');
+        $("#loginBtn").css('display','none');
+    }*/
     getAllComment($("#articalId").text());
+
+    getUserInfo(2);
 });
 
 function getAllComment(id) {
@@ -102,6 +112,10 @@ function submitComment(id) {
             tips('请求失败，请您检查！','topCenter');
         }
     });
+}
+
+function getUserIsLogin() {
+    
 }
 
 //提示框

@@ -53,7 +53,7 @@ function setVaptchaContainer(vaptchaContainerId,sceneText){
     })
 }
 //登陆按钮单击事件
-function loginAccount(){
+function loginAccount(url){
     var ajaxInfo = Object.create(ajaxInfos);
     var userName = $('#signin-userName').val();
     var password = $('#signin-password').val();
@@ -96,10 +96,11 @@ function loginAccount(){
                     //tips(result.data['msg'],'topCenter');
                     //设置cookie的属性（用于保存sessionID） ×存活时间为半个小时的时间 ,{expires:0.021}×
                     // 暂时不使用本方法，sessionID在redis过期后，查不到就要求重新登陆
-                    $.cookie("UserRedisSessionID",result.data['sessionId'],{expires:1});
-                    $.cookie("UserID",result.data['userId'],{expires:1});
+                    $.cookie("UserRedisSessionID",result.data['sessionId'],{expires:0.021});
+                    $.cookie("UserID",result.data['userId'],{expires:0.021});
                     //然后跳转到首页
-                    location.href="/";
+                    //tips(url,'middleCenter');
+                    location.href=url;
                 }else{
                     tips(result.data,'topCenter');
                 }

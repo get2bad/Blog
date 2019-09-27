@@ -28,6 +28,7 @@ $(function(){
             $('.main-nav').unbind('click');
             //修改登陆地址
             $('#loginAddr').attr('href','/login');
+            $('#pageCounter').css('margin-left','15%');
         }else{
             //大于1200px将左边div缩小到70%
             $('.content-left').css('width','70%');
@@ -35,6 +36,7 @@ $(function(){
             $('.content-right').css('display','block');
             //修改登陆地址
             $('#loginAddr').attr('href','#0');
+            $('#pageCounter').css('margin-left','35%');
         }
         scrollNavTabs();
     }
@@ -52,7 +54,22 @@ $(function(){
             $ulWapper.css('width',li_Width).parent().css('overflow-x','scroll');
         }
     }
-    getUserInfo();
+    //
+    $('#city').text(returnCitySN.cname);
+    $('#ipAddress').text(returnCitySN.cip);
+    var visitTime = $.cookie('visitTime');
+
+    if(typeof(visitTime) ==="undefined"){
+        $.cookie('visitTime',1);
+        visitTime = 1;
+        $('#visitTime').text(visitTime);
+    }else{
+        visitTime = parseInt(visitTime);
+        visitTime +=1;
+        $.cookie('visitTime',visitTime);
+        $('#visitTime').text(visitTime);
+    }
+    getUserInfo(1);
     getHotArtical();
 });
 
