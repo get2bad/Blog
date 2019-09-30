@@ -58,15 +58,50 @@ $(function(){
 });
 
 function getValuee() {
+    //获取标题内容
+    var articalTitle = $('#articalTitle').val();
+
+    //获取文章简介
+    var articalIntroduce = $('#articalIntroduce').val();
+
+    //获取上传文件的路径
+    var uploadFile = $('#input-file-now').val();
+
     //获取富文本编辑器中的内容（包含html代码）
     var content = editor.txt.html();
-    var inputValue = $('#content_text');
-    inputValue.val(content);
-    var formValue = $('#articalContent').serializeArray();
-    formValue.push({name:'content',value:content});
-    var uploadFile = $('#input-file-now').val();
-    formValue.push({name:'picIntroduceUpload',value:uploadFile});
-    var jsonContent = JSON.stringify(formValue);
+
+    //获得categoryId
+    var categoryId = $('#articalType').val();
+
+    //获得文章的公开状态
+    var publicStatus = $('#articalAuth').val();
+
+    //是否禁止评论
+    var isCheckedComment = 0;
+    //是否置顶申请
+    var isCheckedTop = 0;
+    $('input[name="checkOPtions"]:checked').each(function () {
+        if(this.value==='denyComment'){
+            isCheckedComment = 1;
+        }
+        if(this.value==='submitTop'){
+            isCheckedTop = 1;
+        }
+    });
+
+    //放入当前userID
+    var userId = $.cookie('UserID');
+    var jsonContent = '{"articalTitle":'+articalTitle+',"articalIntroduce":'+articalIntroduce+',' +
+        '"articalContent":'+content+',"categoryId":'+categoryId+',"isLock":'+publicStatus+',"isDenyComment":'+isCheckedComment+',' +
+        '"isSubmitTop":'+isCheckedTop+',"userId":'+userId+'}';
     console.log(jsonContent);
+
+    //向表格中的隐藏input填充数据！
+    $('#isLockHidden').val(publicStatus);
+    $('#isDenyCommentHidden').val(isCheckedComment);
+    $('#isSubmitTopHidden').val(isCheckedTop);
+    $('#categoryIdHidden').val(categoryId);
+    $('#contentTextHidden').val(content);
+    $('#userIdHidden').val(userId);
     document.getElementById('articalContent').submit();
 }

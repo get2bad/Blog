@@ -25,8 +25,8 @@ public class ArticalServiceImpl implements ArticalService {
     }
 
     @Override
-    public List<Artical> getAllPassArtical() {
-        return articalMapper.getAllPassArtical();
+    public List<Artical> getAllPassArtical(int start,int end) {
+        return articalMapper.getAllPassArtical(start,end);
     }
 
     @Override
@@ -42,5 +42,10 @@ public class ArticalServiceImpl implements ArticalService {
     @Override
     public Artical findArticalById(int id) {
         return articalMapper.findArticalById(id);
+    }
+
+    @Override
+    public int getAllArticalCount() {
+        return articalMapper.getAllArticalCount();
     }
 }

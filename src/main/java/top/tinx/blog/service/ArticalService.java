@@ -11,11 +11,13 @@ public interface ArticalService {
 
     public List<Artical> getAllJudgeArtical();
 
-    public List<Artical> getAllPassArtical();
+    public List<Artical> getAllPassArtical(int start,int end);
 
     public void backJudgeArtical(String id);
 
     public void passArtical(String id);
 
     public Artical findArticalById(int id);
+
+    public int getAllArticalCount();
 }

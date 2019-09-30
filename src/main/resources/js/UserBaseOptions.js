@@ -41,7 +41,6 @@ function setVaptchaContainer(vaptchaContainerId,sceneText){
             // 验证成功， 进行登录操作
             //如果token为空说明没有通过验证，如果token不为空说明通过了验证
             token = vaptchaObj.getToken();
-            console.log(token);
             judgeTokenIsEmpty();
         })
         vaptchaObj.listen('close', function() {
@@ -133,7 +132,6 @@ function regist() {
             $("#vaptchaCode2").attr('value', token);
             //序列化表单成JSON格式
             var data = $("#regist").serializeJson();
-            console.log(JSON.stringify(data));
             //不为空说明进行了人机操作，进行表单AJAX提交
             $.ajax({
                 //请求方式
@@ -151,7 +149,6 @@ function regist() {
                 dataType: ajaxInfo.jsonDataType,
                 //请求成功
                 success: function (result) {
-                    console.log(result);
                     if (result.code == 1) {
                         tips(result.data['msg'], 'topCenter');
                         $.cookie("UserRedisSessionID",result.data['sessionId']);
@@ -217,7 +214,6 @@ function sendAuthCode(btn, time) {
             //请求成功
             success: function (result) {
                 var intervalId ;
-                console.log(result);
                 if (result.code == 1) {
                     tips(result.data, 'middleCenter');
                     intervalId = sendAuthCodeChangeBtnValue(btn, time);

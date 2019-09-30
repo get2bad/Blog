@@ -45,8 +45,8 @@ public interface ArticalMapper {
     @Select("select * from tb_artical where status = 0")
     public List<Artical> getAllJudgeArtical();
 
-    @Select("select * from tb_artical where status = 1")
-    public List<Artical> getAllPassArtical();
+    @Select("select * from tb_artical where status = 1 limit #{start},#{end}")
+    public List<Artical> getAllPassArtical(@Param("start")int start,@Param("end")int end);
 
     @Update("UPDATE blog.tb_artical \n" +
             "\tSET\n" +
@@ -64,4 +64,7 @@ public interface ArticalMapper {
 
     @Select("select * from tb_artical where artical_id = #{id}")
     public Artical findArticalById(@Param("id") int id);
+
+    @Select("select COUNT(*) from tb_artical")
+    public int getAllArticalCount();
 }

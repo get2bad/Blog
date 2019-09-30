@@ -26,6 +26,7 @@ public class Artical implements Serializable {
     private int isDenyComment;
     private int isLock;
     private int isSubmitTop;
+    private int isAll;
 
     public Artical() {
     }
@@ -166,6 +167,14 @@ public class Artical implements Serializable {
         this.articalCommentCount = articalCommentCount;
     }
 
+    public int getIsAll() {
+        return isAll;
+    }
+
+    public void setIsAll(int isAll) {
+        this.isAll = isAll;
+    }
+
     @Override
     public String toString() {
         return "Artical{" +
@@ -186,6 +195,7 @@ public class Artical implements Serializable {
                 ", isDenyComment=" + isDenyComment +
                 ", isLock=" + isLock +
                 ", isSubmitTop=" + isSubmitTop +
+                ", isAll=" + isAll +
                 '}';
     }
 }

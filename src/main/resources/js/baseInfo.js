@@ -20,6 +20,7 @@ var vaptchaBaseInfo = {
     forgetScane:'04'
 }
 var locations = 'localhost'; //localhost:8080
+//var locations = '192.168.2.124'; //localhost:8080
 //ajax基本配置
 var ajaxInfos = {
     loginUrl : 'http://'+locations+'/user/login',
@@ -42,6 +43,7 @@ var ajaxInfos = {
     passComment:'http://'+locations+'/comment/passComment',
     faildComment:'http://'+locations+'/comment/faildComment',
     deleteComment:'http://'+locations+'/comment/deleteComment',
+    getAllNote:'http://'+locations+'/note/getAllNote',
     postType: 'POST',
     getType: 'GET',
     jsonRequestContentType: 'application/json;charset=UTF-8',

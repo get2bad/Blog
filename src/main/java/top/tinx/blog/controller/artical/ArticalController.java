@@ -54,10 +54,11 @@ public class ArticalController {
     @Autowired
     private CommentService commentService;
 
+    boolean isAll = false;
+
     @PostMapping("/newArtical")
     //@ResponseBody
-    public String newArtical(@RequestParam("picIntroduceUploads")MultipartFile picIntroduceUploads, Artical artical,
-                             HttpServletRequest request){
+    public String newArtical(@RequestParam("picIntroduceUploads")MultipartFile picIntroduceUploads, Artical artical){
         String preFileLocationn = preFileLocation;
         preFileLocationn += "articalHeader/";
         if(!picIntroduceUploads.isEmpty()){
@@ -163,13 +164,27 @@ public class ArticalController {
 
     @RequestMapping(value = "/artical/getAllPass",method = RequestMethod.POST)
     @ResponseBody
-    public JsonData getAllPassArtical(){
+    public JsonData getAllPassArtical(@RequestBody HashMap<String, String> map){
         try{
-            List<Artical> list = articalService.getAllPassArtical();
+            List<Artical> list = null;
+            int start = Integer.parseInt(map.get("start"));
+            int allArticalCount = articalService.getAllArticalCount();
+            if(start+7>allArticalCount){
+                if(allArticalCount-start<0){
+                    return null;
+                }
+                list = articalService.getAllPassArtical(start,allArticalCount-start);
+                isAll = true;
+            }else{
+                list = articalService.getAllPassArtical(start,start+7);
+            }
             for (Artical artical : list){
                 artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
                 artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
                 artical.setArticalCommentCount(commentService.getCommentCountByArticalId(artical.getArticalId()+""));
+                if(isAll){
+                    artical.setIsAll(1);
+                }
             }
             return JsonData.buildSuccess(list,1);
         }catch (Exception ex){
