@@ -11,8 +11,8 @@ import java.util.List;
 @Mapper
 public interface NoteMapper {
 
-    @Select("select * from tb_note")
-    public List<Note> getAllNote();
+    @Select("select * from tb_note limit #{start},#{end}")
+    public List<Note> getAllNote(@Param("start") int start,@Param("end") int end);
 
     @Select("select * from tb_note where note_id = #{id}")
     public Note getAllNoteById(@Param("id")String id);
@@ -20,4 +20,7 @@ public interface NoteMapper {
     @Insert("insert into tb_note(user_id,note_postTime,note_content,note_postIP) values(#{note.userId},#{note.notePostTime}," +
             "#{note.noteContent},#{note.notePostIP})")
     public void insertNote(@Param("note")Note note);
+
+    @Select("select count(*) from tb_note")
+    public int getNoteCount();
 }

@@ -2,6 +2,10 @@
 var ajaxInfo;
 $(function () {
     ajaxInfo = Object.create(ajaxInfos);
+    getAllArtical();
+});
+function getAllArtical() {
+    var jsonString = '{"option":"all","start":"0"}';
     //页面初始化，进行ajax请求
     $.ajax({
         //请求方式
@@ -15,7 +19,7 @@ $(function () {
         //不进行缓存
         cache: ajaxInfo.limitCache,
         //数据，json字符串
-        //data : ,
+        data : jsonString,
         dataType: ajaxInfo.jsonDataType,
         //请求成功
         success : function(result) {
@@ -47,8 +51,7 @@ $(function () {
             tips('请求失败，请您检查！','topCenter');
         }
     });
-});
-
+}
 //提示框
 function tips(alertText, position) {
     new NoticeJs({

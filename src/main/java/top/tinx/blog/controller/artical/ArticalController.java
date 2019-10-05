@@ -1,7 +1,5 @@
 package top.tinx.blog.controller.artical;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -55,6 +53,7 @@ public class ArticalController {
     private CommentService commentService;
 
     boolean isAll = false;
+    int allArticalCount = 0;
 
     @PostMapping("/newArtical")
     //@ResponseBody
@@ -166,9 +165,20 @@ public class ArticalController {
     @ResponseBody
     public JsonData getAllPassArtical(@RequestBody HashMap<String, String> map){
         try{
+            String jsonString = map.get("option");
+
             List<Artical> list = null;
             int start = Integer.parseInt(map.get("start"));
-            int allArticalCount = articalService.getAllArticalCount();
+            allArticalCount = articalService.getAllArticalCount();
+            if(jsonString !=null &&jsonString.equals("all")){
+                List<Artical> all = articalService.getAllPassArtical(0, allArticalCount);
+                for (Artical artical : all) {
+                    artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
+                    artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
+                    artical.setArticalCommentCount(commentService.getCommentCountByArticalId(artical.getArticalId()+""));
+                }
+                return JsonData.buildSuccess(all,1);
+            }
             if(start+7>allArticalCount){
                 if(allArticalCount-start<0){
                     return null;
@@ -184,6 +194,8 @@ public class ArticalController {
                 artical.setArticalCommentCount(commentService.getCommentCountByArticalId(artical.getArticalId()+""));
                 if(isAll){
                     artical.setIsAll(1);
+                }else{
+                    artical.setIsAll(0);
                 }
             }
             return JsonData.buildSuccess(list,1);

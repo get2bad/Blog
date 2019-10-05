@@ -1,5 +1,6 @@
 'use strict';
 var ajaxInfo;
+var startComment = 0;
 $(function(){
     ajaxInfo = Object.create(ajaxInfos);
     getUserInfo(2);
@@ -11,11 +12,16 @@ $(function(){
     }
     $('.userIdInput').val(parseInt(userId));
     $('.postIPInput').val(returnCitySN.cip);
+    //先获取一次评论（前8条）
+    getAllComment(startComment);
 
-    getAllComment();
+    scrollBottomToGetMoreInfo();
+
+    getAllCategory();
 });
 
-function getAllComment(){
+function getAllComment(startComments){
+    var jsonString = '{"start":'+startComments+'}';
     //ajax获取
     $.ajax({
         //请求方式
@@ -29,7 +35,7 @@ function getAllComment(){
         //不进行缓存
         cache: ajaxInfo.limitCache,
         //数据，json字符串
-        //data : jsonString,
+        data : jsonString,
         dataType: ajaxInfo.jsonDataType,
         //请求成功
         success : function(result) {
@@ -48,13 +54,16 @@ function getAllComment(){
                         "                </div>");
 
                 });
+                if(result.data!= null &&result.data[0].isAll ===1){
+                    $('#pageTips').text("😅 留言区已经全部展示咯~");
+                }
             }else{
                 tips(result.msg,'topCenter');
             }
         },
         //请求失败，包含具体的错误信息
         error : function(e){
-            tips('请求失败，请您检查！','topCenter');
+            //tips('请求失败，请您检查！','topCenter');
         }
     });
 }
@@ -70,4 +79,43 @@ function tips(alertText,position){
             close: 'animated bounceOut'
         }
     }).show();
+}
+
+function scrollBottomToGetMoreInfo(){
+    window.onscroll = function () {
+        if (getScrollTop() + getClientHeight() == getScrollHeight()) {
+            //alert("到达底部");
+            //浏览器滑到底部执行ajax动态获取数据  动态获取前8条的数据
+            getAllComment(startComment+7);
+        }
+    }
+}
+
+//获取滚动条当前的位置
+function getScrollTop() {
+    var scrollTop = 0;
+    if (document.documentElement && document.documentElement.scrollTop) {
+        scrollTop = document.documentElement.scrollTop;
+    }
+    else if (document.body) {
+        scrollTop = document.body.scrollTop;
+    }
+    return scrollTop;
+}
+
+//获取当前可是范围的高度
+function getClientHeight() {
+    var clientHeight = 0;
+    if (document.body.clientHeight && document.documentElement.clientHeight) {
+        clientHeight = Math.min(document.body.clientHeight, document.documentElement.clientHeight);
+    }
+    else {
+        clientHeight = Math.max(document.body.clientHeight, document.documentElement.clientHeight);
+    }
+    return clientHeight;
+}
+
+//获取文档完整的高度
+function getScrollHeight() {
+    return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
 }

@@ -21,18 +21,13 @@ $(function () {
         $('.content-right').fadeOut(0);
         $('.content-right').fadeIn(3000);
     });
-    /*
-    if($.cookie('UserRedisSessionID')===null){
-        //tips($.cookie('UserRedisSessionID'),'middleCenter');
-        $("#userInfo").css('display','none');
-        $("#loginBtn").css('display','block');
-    }else{
-        $("#userInfo").css('display','block');
-        $("#loginBtn").css('display','none');
-    }*/
+
     getAllComment($("#articalId").text());
 
     getUserInfo(2);
+
+    getAllCategory();
+
 });
 
 function getAllComment(id) {

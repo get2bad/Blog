@@ -8,6 +8,11 @@ public class Category implements Serializable {
     private String categoryName;
     private String categoryUrl;
 
+    public Category(String categoryName, String categoryUrl) {
+        this.categoryName = categoryName;
+        this.categoryUrl = categoryUrl;
+    }
+
     public int getCategoryId() {
         return categoryId;
     }

@@ -28,57 +28,18 @@
                 <!--左边div-->
                 <div class="content-left pull-left">
                     <!--放一个小的导航条，方便用户浏览-->
-                    <div class="ul-wapper">
-                        <ul class="nav nav-tabs" id="nav-tabs">
-                            <li role="presentation" class="active"><a href="#specialArtical" aria-controls="home" role="tab" data-toggle="tab">特别推荐</a></li>
-                            <li role="presentation"><a href="#hotArtical" aria-controls="profile" role="tab" data-toggle="tab">热门文章</a></li>
-                            <li role="presentation"><a href="#newArtical" aria-controls="messages" role="tab" data-toggle="tab">最新文章</a></li>
-                            <li role="presentation"><a href="#allArtical" aria-controls="settings" role="tab" data-toggle="tab">所有文章</a></li>
-                        </ul>
-                    </div>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade in active" id="specialArtical">
                             <div class="row">
                                 <div id="articalPanel">
 
                                 </div>
-
-                                <div id="pageCounter" >
-                                    <div id="pageTips" class="pull-left" style="padding: 30px 0 30px 0">
-                                        😄&nbsp;往下滑动获得更多惊喜~
-                                    </div>
-                                    <!--
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination">
-                                            <li>
-                                                <a href="#" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li>
-                                                <a href="#" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                    -->
+                            </div>
+                            <div id="pageCounter">
+                                <div id="pageTips" class="text-center" style="padding: 30px 0 30px 0">
+                                    😄&nbsp;往下滑动获得更多惊喜~
                                 </div>
                             </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade " id="hotArtical">
-
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade " id="newArtical">
-
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade " id="allArtical">
-
                         </div>
                     </div>
                 </div>
@@ -162,11 +123,8 @@
                             <div><h4 class="text-left">文章分类</h4></div>
                         </div>
                         <div class="catagorys">
-                            <div class="row">
-                                <div class="col-md-6">Java</div>
-                                <div class="col-md-6">Php</div>
-                                <div class="col-md-6">Python</div>
-                                <div class="col-md-6">C++</div>
+                            <div id="categorys" class="row">
+
                             </div>
                         </div>
                     </div>
@@ -188,6 +146,7 @@
 <!--引入jquery.cookie插件-->
 <script src="../../js/jquery.cookie.js"></script>
 <script src="../../js/getUserInfo.js"></script>
+<script src="../../js/UserBaseOptions.js"></script>
 <script src="../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
 <script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->

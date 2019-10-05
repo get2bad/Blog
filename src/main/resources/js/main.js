@@ -30,7 +30,7 @@ $(function(){
             $('.main-nav').unbind('click');
             //修改登陆地址
             $('#loginAddr').attr('href','/login');
-            $('#pageCounter').css('margin-left','15%');
+            //$('#pageCounter').css('margin-left','15%');
         }else{
             //大于1200px将左边div缩小到70%
             $('.content-left').css('width','70%');
@@ -38,7 +38,7 @@ $(function(){
             $('.content-right').css('display','block');
             //修改登陆地址
             $('#loginAddr').attr('href','#0');
-            $('#pageCounter').css('margin-left','35%');
+            //$('#pageCounter').css('margin-left','35%');
         }
         scrollNavTabs();
     }
@@ -75,6 +75,8 @@ $(function(){
     getHotArtical(start);
 
     scrollBottomToGetMoreInfo();
+
+    getAllCategory();
 });
 
 //获取现在的时间
@@ -175,7 +177,7 @@ function getHotArtical(start) {
             if(result.code ==1){
                 $.each(result.data,function(index,data){
                     //tips(data.picIntroduceUrl,"middleCenter");
-                    $("#articalPanel").append("<div class=\"col-md-12\">\n" +
+                    $("#articalPanel").append("<div id='pageInfo' class=\"col-md-12\">\n" +
                         "                                    <!--第1篇文章-->\n" +
                         "                                    <div class=\"artical\">\n" +
                         "                                        <a href=\"/content/"+data.articalId+".html\" target=\"_blank\">\n" +
@@ -185,7 +187,7 @@ function getHotArtical(start) {
                         "                                            <div class=\"artical-right pull-left\">\n" +
                         "                                                <h4 class=\"pull-left\">"+data.articalTitle+"</h4>\n" +
                         "                                                <p class=\"pull-left\">\n" +
-                        "                                                    "+data.articalIntroduce+"\n" +
+                        "                                                    "+data.articalIntroduce.substring(0,90)+"...."+"\n" +
                         "                                                </p>\n" +
                         "                                                <div class=\"clearfix\"></div>\n" +
                         "                                                <div class=\"infoTips hidden-xs\">\n" +
@@ -202,6 +204,7 @@ function getHotArtical(start) {
                 if(result.data[0].isAll ===1){
                     $('#pageTips').text("😅 文章已经全部展示咯~");
                 }
+                
             }else{
                 tips(result.msg,'topCenter');
             }
@@ -251,5 +254,6 @@ function getClientHeight() {
 function getScrollHeight() {
     return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
 }
+
 
 

@@ -42,6 +42,7 @@ function setVaptchaContainer(vaptchaContainerId,sceneText){
             //如果token为空说明没有通过验证，如果token不为空说明通过了验证
             token = vaptchaObj.getToken();
             judgeTokenIsEmpty();
+            //secondResult(sceneText,token);
         })
         vaptchaObj.listen('close', function() {
             //验证弹窗关闭触发
@@ -275,4 +276,91 @@ function judgeTokenIsEmpty(){
 //激活选择日期控件
 function chooseBirthday() {
     rd.show();
+}
+
+//二次验证vaptcha的结果
+function secondResult(scene,tokens) {
+    var vaptcha = Object.create(vaptchaBaseInfo);
+    var jsonString = '{"id":'+vaptcha.vid+',"secretkey":'+vaptcha.key+',"scene":'+scene+',"token":'+tokens+',"ip":'+returnCitySN.cip+'}';
+    //向输入框填写的内容发送激活码
+    $.ajax({
+        //请求方式
+        type: ajaxInfo.postType,
+        //增加请求头
+        headers: {
+            'Access-Control-Allow-Origin':'*'
+        },
+        //请求的媒体类型
+        contentType: ajaxInfo.jsonRequestContentType,
+        //请求地址
+        url: ajaxInfo.secondResult,
+        //是否异步执行命令
+        async: ajaxInfo.allowAsyc,
+        //不进行缓存
+        cache: ajaxInfo.limitCache,
+        //数据，json字符串
+        data: jsonString,
+        dataType: ajaxInfo.jsonDataType,
+        //请求成功
+        success: function (result) {
+            if (result.code == 1) {
+                tips(result.data, 'middleCenter');
+            } else {
+                tips(result.data, 'middleCenter');
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error: function (e) {
+            tips('请求失败，请您检查！', 'topCenter');
+        }
+    });
+}
+
+function logout() {
+    //删除cookies信息，然后跳转到logout连接
+    $.cookie('UserID',null,{expires:-1});
+    //alert($.cookie('UserID'));
+    $.cookie('UserRedisSessionID', null,{expires:-1});
+    //alert($.cookie('UserRedisSessionID'));
+    location.href='/logout';
+}
+
+function getAllCategory() {
+    //页面初始化，进行ajax请求
+    $.ajax({
+        //请求方式
+        type : ajaxInfo.postType,
+        //请求的媒体类型
+        contentType: ajaxInfo.jsonRequestContentType,
+        //请求地址
+        url : ajaxInfo.getAllCategory,
+        //是否异步执行命令
+        async: ajaxInfo.allowAsyc,
+        //不进行缓存
+        cache: ajaxInfo.limitCache,
+        //数据，json字符串
+        //data : jsonString,
+        dataType: ajaxInfo.jsonDataType,
+        //请求成功
+        success : function(result) {
+            if(result.code ==1){
+                $.each(result.data,function(index,data){
+                    var categorys = $("#categorys");
+                    if(typeof(categorys) !=='undefined'){
+                        categorys.append("<div class=\" col-md-6 marginButton10px\"><a href=\""+data.categoryUrl+"\">"+data.categoryName+"</a></div>");
+                    }
+                    var headerGuide = $("#headerGuide");
+                    if(typeof(headerGuide) !=='undefined'){
+                        headerGuide.append('<li><a href="'+data.categoryUrl+'">'+data.categoryName+'</a></li>');
+                    }
+                });
+            }else{
+                tips(result.msg,'topCenter');
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            tips('请求失败，请您检查！','topCenter');
+        }
+    });
 }

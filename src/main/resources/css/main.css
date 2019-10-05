@@ -138,7 +138,10 @@ body{
     margin-bottom: 10px;
 }
 #content .artical{
-    margin-top: 20px;
+    /*暂时不动！*/
+}
+#pageInfo{
+    margin: 20px 0 20px 0;
 }
 #content .artical .artical-right{
     border-bottom:1px solid #c0c0c0;
@@ -279,5 +282,9 @@ div.am-pm div p {
 
 #vaptchaCode1,#vaptchaCode2,#vaptchaCode3{
     display: none;
+}
+#categorys .marginButton10px{
+    margin-bottom: 10px;
+    /*border-bottom: 1px solid #c0c0c0;*/
 }
 

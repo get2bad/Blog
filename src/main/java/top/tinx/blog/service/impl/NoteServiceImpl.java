@@ -16,8 +16,8 @@ public class NoteServiceImpl implements NoteService {
 
 
     @Override
-    public List<Note> getAllNote() {
-        return noteMapper.getAllNote();
+    public List<Note> getAllNote(int start,int end) {
+        return noteMapper.getAllNote(start,end);
     }
 
     @Override
@@ -28,5 +28,10 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public void insertNote(Note note) {
         noteMapper.insertNote(note);
+    }
+
+    @Override
+    public int getNoteCount() {
+        return noteMapper.getNoteCount();
     }
 }

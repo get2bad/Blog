@@ -37,16 +37,11 @@
                             <li><a href="#">热门文章</a></li>
                             <li class="dropdown">
                                 <a href="#" data-toggle="dropdown">文章分类<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">JAVA</a></li>
-                                    <li><a href="#">Python</a></li>
-                                    <li><a href="#">PHP</a></li>
-                                    <li><a href="#">C++</a></li>
-                                    <li><a href="#">Golang</a></li>
-                                    <li role="separator" class="divider"></li>
+                                <ul id="headerGuide" class="dropdown-menu">
                                     <li><a href="#">学习E站</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">资料分享</a></li>
+                                    <li role="separator" class="divider"></li>
                                 </ul>
                             </li>
                             <li class="visible-lg visible-md"><a href="/comment" target="_self">留言板</a></li>
@@ -76,7 +71,7 @@
                                         <li role="separator" class="divider"></li>
                                         <li><a href="/background">后台管理</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="/logout">安全退出</a></li>
+                                        <li><a href="#" onclick="logout()">安全退出</a></li>
                                     </ul>
                                 </li>
                         </ul>

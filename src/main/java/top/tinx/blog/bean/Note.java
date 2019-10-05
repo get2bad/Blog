@@ -10,6 +10,7 @@ public class Note implements Serializable {
     private String notePostTime;
     private String noteContent;
     private String notePostIP;
+    private int isAll;
 
     public Note(int userId, String notePostTime, String noteContent, String notePostIP) {
         this.userId = userId;
@@ -66,6 +67,14 @@ public class Note implements Serializable {
         this.userName = userName;
     }
 
+    public int getIsAll() {
+        return isAll;
+    }
+
+    public void setIsAll(int isAll) {
+        this.isAll = isAll;
+    }
+
     @Override
     public String toString() {
         return "Note{" +
@@ -75,6 +84,7 @@ public class Note implements Serializable {
                 ", notePostTime='" + notePostTime + '\'' +
                 ", noteContent='" + noteContent + '\'' +
                 ", notePostIP='" + notePostIP + '\'' +
+                ", isAll=" + isAll +
                 '}';
     }
 }

@@ -44,6 +44,8 @@ var ajaxInfos = {
     faildComment:'http://'+locations+'/comment/faildComment',
     deleteComment:'http://'+locations+'/comment/deleteComment',
     getAllNote:'http://'+locations+'/note/getAllNote',
+    getAllCategory:'http://'+locations+'/category/getAll',
+    secondResult:'http://api.vaptcha.com/v2/validate',
     postType: 'POST',
     getType: 'GET',
     jsonRequestContentType: 'application/json;charset=UTF-8',
