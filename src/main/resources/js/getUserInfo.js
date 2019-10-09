@@ -12,7 +12,7 @@ function getUserInfo(sign){
     var ajaxInfo = Object.create(ajaxInfos);
     var sessionID = $.cookie('UserRedisSessionID');
     var userId = $.cookie('UserID');
-    console.log(sessionID);
+    //console.log(sessionID);
     //手动组装json字符串，内容是cookie中存储的sessionID
     var token = '{"token":"'+sessionID+'","userId":"'+userId+'"}';
     $.ajax({
@@ -31,13 +31,18 @@ function getUserInfo(sign){
         dataType: ajaxInfo.jsonDataType,
         //请求成功
         success: function (result) {
-            console.log(result.data['userInfo']);
+            //console.log(result.data['userInfo']);
             if (result.code === 1) {
                 //隐藏登陆按钮
-                $("#loginBtn").css('display','none');
-                $("#userIcon").css('display','inline-block');
-                $("#userOptions").css('display','inline-block');
-                $('#setUserName').text(result.data['userInfo'].userName);
+                if(typeof($("#loginBtn")) !='undefined'){
+                    $("#loginBtn").css('display','none');
+                    $("#userIcon").css('display','inline-block');
+                    $("#userOptions").css('display','inline-block');
+                    $('#setUserName').text(result.data['userInfo'].userName);
+                }
+                if(typeof($("#userName")) !='undefined'){
+                    $("#userName").text(result.data['userInfo'].userName);
+                }
 
                 if(sign ===1){
                     //设置欢迎标语

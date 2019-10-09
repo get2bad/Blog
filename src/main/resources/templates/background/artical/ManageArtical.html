@@ -18,33 +18,42 @@
         <h3><span class="iconfont icon-detail" style="font-size: 25px;margin-right: 4px"></span>文章管理</h3>
     </div>
     <div id="searchArtical">
-        <form action="#" method="post">
+        <form action="/artical/findArticalByConditions" method="post">
             <span>搜索：分类</span>
             <span>
-                <select>
-                    <option>任意</option>
-                    <option>Java</option>
-                    <option>Php</option>
-                    <option>Python</option>
-                    <option>C++</option>
+                <select id="category">
+                    <option value="1">Java</option>
+                    <option value="3">Php</option>
+                    <option value="2">Python</option>
+                    <option value="5">C++</option>
+                    <option value="4">Go</option>
                 </select>
             </span>
             <span>类型:
-                <select>
-                    <option>任意</option>
-                    <option>公开</option>
-                    <option>审核</option>
-                    <option>草稿</option>
-                    <option>已删除</option>
+                <select id="articalAuth">
+                    <option value="1">任意</option>
+                    <option value="2">公开</option>
+                    <option value="3">私密</option>
+                    <option value="4">草稿</option>
+                    <!--<option value="5">已删除</option>-->
                 </select>
             </span>
+            <span>审核状态:
+                <select id="judgeStatus">
+                    <option value="1">已审核</option>
+                    <option value="0">未审核</option>
+                </select>
+            </span>
+            <!--
             <span>
                 <input type="checkbox" id="isTop" name="isTop">
                 <label for="isTop">是否置顶</label>
             </span>
+            -->
             <span>
-                <input type="text" placeholder="在此输入要搜索的文章标题"/>
-                <input type="submit" value="搜索" />
+                <input id="articalContent" type="text" placeholder="在此输入要搜索的文章标题"/>
+                <button type="button" onclick="searchArtical()">搜索</button>
+                <button type="button" onclick="getAllArtical()">搜索所有</button>
             </span>
         </form>
     </div>

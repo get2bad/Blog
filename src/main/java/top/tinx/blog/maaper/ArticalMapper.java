@@ -2,6 +2,7 @@ package top.tinx.blog.maaper;
 
 import org.apache.ibatis.annotations.*;
 import top.tinx.blog.bean.Artical;
+import top.tinx.blog.bean.ArticalPieInfo;
 
 import java.util.List;
 
@@ -67,4 +68,13 @@ public interface ArticalMapper {
 
     @Select("select COUNT(*) from tb_artical")
     public int getAllArticalCount();
+
+    @Select("select * from tb_artical where category_id=#{id} and status = #{s} and articalTitle like #{a}")
+    public List<Artical> getArticalByConditions(@Param("id")String id,@Param("s")String s,@Param("a")String a);
+
+    @Select("select sum(viewCount) from tb_artical")
+    public int getAllViewCount();
+
+    @Select("select count(category_id)as count,category_id from tb_artical GROUP BY category_id;")
+    public List<ArticalPieInfo> getAllInfos();
 }

@@ -12,7 +12,7 @@
     <link href="../../css/noticejs.css" rel="stylesheet" type="text/css"/>
     <link href="../../css/main.css" rel="stylesheet" type="text/css"/>
     <link href="../../css/iconfont.css" rel="stylesheet" type="text/css"/>
-
+    <base target="_self">
 </head>
 <body>
     <!--header-->
@@ -58,6 +58,7 @@
                                     <li><a id="loginAddr" class="cd-signin" href="#0" onclick="setVaptchaContainer('vaptchaContainer1','02')">登陆</a></li>
                                 </ul>
                             </nav>
+                            <!--TODO 想办法使用户做的每一步操作都更新cookie的存活时间，或者修改相关登陆验证逻辑！这是个很大的BUG-->
                                 <li class="hidden-sm hidden-xs user-img" id="userIcon"><img src="../../pic/pic5.jpg" alt="用户头像" class="img-circle"></li>
                                 <li class="dropdown hidden-sm" id="userOptions">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -65,11 +66,12 @@
                                         <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">用户资料</a></li>
-                                        <li><a href="#">安全设置</a></li>
-                                        <li><a href="#">文章管理</a></li>
+                                        <li><a href="#" target="_self">用户资料</a></li>
+                                        <li><a href="#" target="_self">安全设置</a></li>
+                                        <li><a href="#" target="_self">文章管理</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="/background">后台管理</a></li>
+                                        <!--TODO 想办法将拥有访问权限的用户才能使用后台管理-->
+                                        <li><a href="/background" target="_self">后台管理</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="#" onclick="logout()">安全退出</a></li>
                                     </ul>

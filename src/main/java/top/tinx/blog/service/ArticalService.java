@@ -20,4 +20,8 @@ public interface ArticalService {
     public Artical findArticalById(int id);
 
     public int getAllArticalCount();
+
+    List<Artical> getArticalByConditions(String id,String s,String a);
+
+    public int getAllViewCount();
 }

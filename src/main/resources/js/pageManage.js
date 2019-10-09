@@ -31,7 +31,7 @@ function getAllCategorys() {
                         '                    <td>'+data.categoryName+'</td>\n' +
                         '                    <td>'+data.categoryUrl+'</td>\n' +
                         '                    <td>\n' +
-                        '                        <a href="#" class="iconfont icon-xiangqing" style="margin-right: 8px" title="编辑"></a>\n' +
+                        '                        <a  data-toggle="modal" data-target="#addCategory" onclick="setPageInfo('+data.categoryId+',\''+data.categoryName+'\',\''+data.categoryUrl+'\')" class="iconfont icon-xiangqing" style="margin-right: 8px" title="编辑"></a>\n' +
                         '                        <a data-toggle="modal" data-target="#confirmDelete" onclick="setCategoryId('+data.categoryId+')"  class="iconfont icon-close-circle" title="删除"></a>\n' +
                         '                    </td>\n' +
                         '                </tr>');
@@ -50,4 +50,13 @@ function getAllCategorys() {
 
 function setCategoryId(id) {
     $("#categoryId").val(id);
+}
+
+
+function setPageInfo(categoryId,categoryName,categoryUrl) {
+    //基本信息填入
+    $('#categoryInfoId').val(categoryId);
+    $('#categoryName').val(categoryName);
+    $('#categoryUrl').val(categoryUrl);
+
 }

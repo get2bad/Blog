@@ -19,4 +19,7 @@ public interface CategoryMapper {
 
     @Insert("insert into tb_category(category_name,category_url) values(#{c.categoryName},#{c.categoryUrl})")
     void insertCategory(@Param("c") Category category);
+
+    @Update("update tb_category set category_name=#{c.categoryName},category_url=#{c.categoryUrl} where category_id=#{c.categoryId}")
+    void updateCategoryById(@Param("c") Category category);
 }

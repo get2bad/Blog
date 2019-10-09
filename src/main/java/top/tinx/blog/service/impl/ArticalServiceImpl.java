@@ -48,4 +48,16 @@ public class ArticalServiceImpl implements ArticalService {
     public int getAllArticalCount() {
         return articalMapper.getAllArticalCount();
     }
+
+    @Override
+    public List<Artical> getArticalByConditions(String id, String s, String a) {
+        return articalMapper.getArticalByConditions(id,s,a);
+    }
+
+    @Override
+    public int getAllViewCount() {
+        return articalMapper.getAllViewCount();
+    }
+
+
 }

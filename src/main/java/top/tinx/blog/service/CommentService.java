@@ -20,4 +20,6 @@ public interface CommentService {
     public int getCommentCountByArticalId(String id);
 
     public void setViewCountNum(String id);
+
+    public int getAllCommentCount();
 }

@@ -54,6 +54,11 @@ public class ShiroConfig {
         Map<String,String> map = new LinkedHashMap<String,String>();
 
         //静态资源防止拦截
+        map.put("/background/**","roleOrFilter[root,admin]");
+        map.put("/background#","roleOrFilter[root,admin]");
+        map.put("/","anon");
+        map.put("/content/**","anon");
+        map.put("/comment","anon");
         map.put("/articalPic/**","anon");
         map.put("/upload/**","anon");
         map.put("/css/**","anon");
@@ -73,14 +78,14 @@ public class ShiroConfig {
         //登录用户可以访问的
         //map.put("/user/**","authc");
         //管理员角色才可以访问
-        map.put("/background/**","roleOrFilter[root,admin]");
+
         //map.put("/background/**","perms[background]");
         //map.put("/background","anon");
         //有编辑权限才可以访问的
         //map.put("/video/update","perms[video_update]");
 
         //坑2 因为拦截是顺序执行，所以要将/**拦截放到最下面
-        map.put("/*","anon");
+        //map.put("/*","anon");
         shiroFilter.setFilterChainDefinitionMap(map);
 
         return shiroFilter;

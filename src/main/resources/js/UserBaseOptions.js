@@ -318,9 +318,11 @@ function secondResult(scene,tokens) {
 
 function logout() {
     //删除cookies信息，然后跳转到logout连接
-    $.cookie('UserID',null,{expires:-1});
+    //$.cookie('UserID',null,{expires:-1});
+    $.removeCookie('UserID',{path:'/'});
     //alert($.cookie('UserID'));
-    $.cookie('UserRedisSessionID', null,{expires:-1});
+    //$.cookie('UserRedisSessionID', null,{expires:-1});
+    $.removeCookie('UserRedisSessionID',{path:'/'});
     //alert($.cookie('UserRedisSessionID'));
     location.href='/logout';
 }

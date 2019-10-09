@@ -175,7 +175,7 @@ public class ArticalController {
                 for (Artical artical : all) {
                     artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
                     artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
-                    artical.setArticalCommentCount(commentService.getCommentCountByArticalId(artical.getArticalId()+""));
+                    artical.setArticalCommentCount(commentService.getCommentCountByArticalId(Integer.toString(artical.getArticalId())));
                 }
                 return JsonData.buildSuccess(all,1);
             }
@@ -191,7 +191,7 @@ public class ArticalController {
             for (Artical artical : list){
                 artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
                 artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
-                artical.setArticalCommentCount(commentService.getCommentCountByArticalId(artical.getArticalId()+""));
+                artical.setArticalCommentCount(commentService.getCommentCountByArticalId(Integer.toString(artical.getArticalId())));
                 if(isAll){
                     artical.setIsAll(1);
                 }else{
@@ -266,6 +266,31 @@ public class ArticalController {
             return JsonData.buildSuccess(allComment,1);
         }catch (Exception ex){
             return JsonData.buildError("服务器内部出现错误！",-1);
+        }
+    }
+
+    @PostMapping("/artical/findArticalByConditions")
+    @ResponseBody
+    public JsonData findArticalByConditions(@RequestBody HashMap<String, String> map){
+        String category = map.get("category");
+        String articalAuth = map.get("articalAuth");
+        String judgeStatus = map.get("judgeStatus");
+        String articalContent = map.get("articalContent");
+        /*
+        String sqlStr = "where 1=1 AND category_id = "+category+" AND status = "+judgeStatus;
+        if(articalContent !="null"){
+            sqlStr += " AND articalTitle like %"+articalContent+"%";
+        }*/
+        try{
+            List<Artical> list = articalService.getArticalByConditions(category,judgeStatus,articalContent);
+            for (Artical artical : list) {
+                artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
+                artical.setArticalCommentCount(commentService.getCommentCountByArticalId(Integer.toString(artical.getArticalId())));
+            }
+            return JsonData.buildSuccess(list,1);
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonData.buildError("服务器内部出现错误，已经通知管理员！",-1);
         }
     }
 }

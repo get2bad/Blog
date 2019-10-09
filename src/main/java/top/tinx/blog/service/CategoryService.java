@@ -13,4 +13,6 @@ public interface CategoryService {
     void deleteCategoryById(String id);
 
     void insert(Category category);
+
+    void updateById(Category category);
 }

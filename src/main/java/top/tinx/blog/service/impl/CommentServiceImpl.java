@@ -47,4 +47,9 @@ public class CommentServiceImpl implements CommentService {
     public void setViewCountNum(String id) {
         commentMapper.setViewCountNum(id);
     }
+
+    @Override
+    public int getAllCommentCount() {
+        return commentMapper.getAllCommentCount();
+    }
 }

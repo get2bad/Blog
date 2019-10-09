@@ -33,4 +33,9 @@ public class CategoryServiceImpl implements CategoryService {
     public void insert(Category category) {
         categoryMapper.insertCategory(category);
     }
+
+    @Override
+    public void updateById(Category category) {
+        categoryMapper.updateCategoryById(category);
+    }
 }

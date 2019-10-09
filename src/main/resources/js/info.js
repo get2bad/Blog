@@ -6,100 +6,116 @@ var date = [];
 var data = [Math.random() * 150];
 var now = new Date(base);
 
+var ajaxInfo;
 $(function(){
-    initGaugeCharts('cpuInfo','Cpu','gauge','cpu占用','');
-    initGaugeCharts('memoryInfo','内存','gauge','内存占用','');
-    initGaugeCharts('diskInfo','硬盘','gauge','硬盘占用','');
-    initGaugeCharts('picInfo','上传','gauge','文件占用','');
-    initCategoryCharts('networkInfo','category','网络吞吐量');
+    ajaxInfo = Object.create(ajaxInfos);
+
+    initGaugeCharts(1,'cpuInfo','CPU','gauge','cpu占用');
+    initGaugeCharts(2,'memoryInfo','内存','gauge','内存占用');
+    initGaugeCharts(3,'diskInfo','硬盘','gauge','硬盘占用');
+    //initGaugeCharts(4,'picInfo','上传','gauge','文件占用');
+    initCategoryCharts('articalPie');
+
+    var location = window.location+"";
+    var realLocation = location.split("/");
+    $('#locations').text(realLocation[0]+"//"+realLocation[2]);
+
+    //设置IP地址
+    $('#ipLocation').text(returnCitySN.cname);
+    $('#ipAddress').text(returnCitySN.cip);
+    //设置所有的基本信息
+    getAllInfos();
+    getUserInfo(2);
 });
-function initCategoryCharts(elementId,chartType,chartName) {
-        var Chart=echarts.init(document.getElementById(elementId));//初始化
-        //用户等待
-        Chart.showLoading(
-            {text: '获取数据中...'  }
-        );
-        //自定义变量
-        var times=[];
-        var legend=[];
-        var chartDatas = [];
-        //var nodeid = ${nodeid};
-        //getData(Chart,elementId); //先执行一次，以防等十秒后才出现图表
-        setInterval(function(){//定时器
-            getData(Chart, elementId);
-        }, 1*1000);//每隔10秒刷新一次
+function initCategoryCharts(elementId) {
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById(elementId));
+    //从后台获取相关数据
+    var v = getData();
+    console.log(v);
+    //重建数组
+    var nameArray = new Array();
+    var categoryValue = new Array();
+    $.each(v,function(index,data){
+        console.log(data);
+        nameArray.push(data.categoryName);
+        var category = new Object();
+        category.value = (data.count) *1;
+        category.name = data.categoryName;
+        categoryValue.push(category);
+    });
+    console.log(nameArray);
+    console.log(categoryValue);
+    var option = {
+        title : {
+            text: '所有文章分类占比',
+            subtext: '来自后台统计',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>分类名称:{b}共{c}篇(占总比{d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: nameArray
+        },
+        series : [
+            {
+                name: '网站文章组成',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:categoryValue,
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+    //结束
+    myChart.setOption(option);
 }
 //获取数据的方法
-function getData(Chart,elementId){
-    /*
-    //发送Ajax请求
+function getData(){
+    var value = [];
+    //页面初始化，进行ajax请求
     $.ajax({
-        url : "/echarts/getFsLinechart",
-        dataType:"json",
-        data:{nodeid:elementId},
-        type:'post',
-        success:function(json){//
-            console.log("获取图表数据");
-            console.log(json);
-            times = json.times;  //拿到后台的数据
-            legend = json.legend;
-            chartDatas = json.chartDatas;   //拿到后台的数据
-            var option = {
-                title: {
-                    text: '风速统计'
-                },
+        //请求方式
+        type : 'POST',
+        //请求的媒体类型
+        contentType: ajaxInfo.jsonRequestContentType,
+        //请求地址
+        url : ajaxInfo.getArticalPie,
+        //是否异步执行命令
+        async: ajaxInfo.limitAsyc,
+        //不进行缓存
+        cache: ajaxInfo.limitCache,
+        //数据，json字符串
+        //data : jsonString,
+        //dataType: ajaxInfo.jsonDataType,
+        //请求成功
+        success : function(result) {
+            if(result.code ==1){
+                value = result.data;
+            }else{
+                tips(result.msg,'topCenter');
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            tips('请求失败，请您检查！','topCenter');
+        }
+    });
 
-                tooltip: {
-                    trigger: 'axis'
-                },
-
-                legend: {
-                    data:legend
-                },
-
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
-                },
-
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data:times
-                },
-
-                yAxis: {
-                    type: 'value'
-                },
-                series : chartDatas
-            };*/
-            var option = {
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                },
-                yAxis: {
-                    type: 'value'
-                },
-                series: [{
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
-                    type: 'line',
-                    areaStyle: {}
-                }]
-            };
-            //结束
-            Chart.hideLoading();
-            Chart.setOption(option);
+    return value;
 }
-function initGaugeCharts(elementId,chartsTitle,chartsType,dataName,jsonRequestUrl){
+function initGaugeCharts(options,elementId,chartsTitle,chartsType,dataName){
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById(elementId));
 
@@ -120,13 +136,13 @@ function initGaugeCharts(elementId,chartsTitle,chartsType,dataName,jsonRequestUr
             }
         },
         tooltip: { //弹窗组件
-            formatter: "{a} <br/>{b} : {c}%"
+            formatter: "{a}:{c}%"
         },
         series: [{
             name: dataName,
             type: chartsType,
             detail: {formatter:'{value}%'},
-            data: [{value: 50, name: ''}]
+            data: [{value: 0, name: ''}]
         }]
 
     };
@@ -135,7 +151,112 @@ function initGaugeCharts(elementId,chartsTitle,chartsType,dataName,jsonRequestUr
     myChart.setOption(option);
 
     setInterval(function(){//把option.series[0].data[0].value的值使用random()方法获取一个随机数
-        option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+        var values = getGaugeInfo(options);
+        option.series[0].data[0].value = values;
         myChart.setOption(option, true);
-    }, 2000);
+    }, 1000);
+}
+
+function getGaugeInfo(options){
+    var num = 0.0;
+    var jsonUrl = '';
+    if(options === 1){
+        jsonUrl = ajaxInfo.getCpuInfo;
+    }else if(options ===2){
+        jsonUrl = ajaxInfo.getMemInfo;
+    }else if (options ===3){
+        jsonUrl = ajaxInfo.getDiskInfo;
+    }else{
+
+    }
+    //页面初始化，进行ajax请求
+    $.ajax({
+        //请求方式
+        type : 'POST',
+        //请求的媒体类型
+        contentType: ajaxInfo.jsonRequestContentType,
+        //请求地址
+        url : jsonUrl,
+        //是否异步执行命令
+        async: ajaxInfo.limitAsyc,
+        //不进行缓存
+        cache: ajaxInfo.limitCache,
+        //数据，json字符串
+        //data : jsonString,
+        //dataType: ajaxInfo.jsonDataType,
+        //请求成功
+        success : function(result) {
+            if(result.code ==1){
+                num = (result.data)*1;
+            }else{
+                tips(result.msg,'topCenter');
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            tips('请求失败，请您检查！','topCenter');
+        }
+    });
+
+    return num;
+}
+
+function getAllInfos(){
+    //页面初始化，进行ajax请求
+    $.ajax({
+        //请求方式
+        type : ajaxInfo.postType,
+        //请求的媒体类型
+        contentType: ajaxInfo.jsonRequestContentType,
+        //请求地址
+        url : ajaxInfo.getAllBaseInfos,
+        //是否异步执行命令
+        async: ajaxInfo.allowAsyc,
+        //不进行缓存
+        cache: ajaxInfo.allowCache,
+        //数据，json字符串
+        //data : jsonString,
+        dataType: ajaxInfo.jsonDataType,
+        //请求成功
+        success : function(result) {
+            if(result.code ==1){
+                //设置相应的信息
+                $('#articalCount').text(result.data.articalCount);
+                $('#viewCount').text(result.data.viewCount);
+                $('#commentCount').text(result.data.commentCount);
+                $('#userCount').text(result.data.userCount);
+                $('#noteCount').text(result.data.noteCount);
+                $('#categoryCount').text(result.data.categoryCount);
+                $('#fileCount').text(result.data.fileCount);
+                $('#jdkVersion').text(result.data.jdkVersion);
+                $('#articalCommentCount').text(result.data.commentCount);
+                $('#systemInfo').text(result.data.systemInfo);
+                $('#serverIpAddress').text(result.data.serverIpAddress);
+                $('#systemArch').text(result.data.systemArch);
+                $('#cpuType').text(result.data.cpuType);
+                $('#cpuSpeed').text(result.data.cpuSpeed);
+                $('#memory').text(result.data.memory);
+                $('#disk').text(result.data.disk);
+            }else{
+                tips(result.msg,'topCenter');
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            tips('请求失败，请您检查！','topCenter');
+        }
+    });
+}
+
+//提示框
+function tips(alertText,position){
+    new NoticeJs({
+        text: alertText,
+        //topLeft topCenter topRight middleLeft middleCenter middleRight bottomLeft bottomCenter bottomRight
+        position: position,
+        animation: {
+            open: 'animated bounceIn',
+            close: 'animated bounceOut'
+        }
+    }).show();
 }

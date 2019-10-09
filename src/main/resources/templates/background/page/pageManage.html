@@ -40,8 +40,9 @@
                 </div>
                 <form action="/category/addCategory" method="post">
                     <div class="modal-body">
-                        <div >栏目名称:<input type="text" name="categoryName" class="form-control" /></div>
-                        <div >栏目URL:<input type="text" name="categoryUrl" class="form-control" /></div>
+                        <div ><input type="hidden" name="categoryId" id="categoryInfoId" class="form-control" value="0"/></div>
+                        <div >栏目名称:<input type="text" name="categoryName" id="categoryName" class="form-control" /></div>
+                        <div >栏目URL:<input type="text" name="categoryUrl" id="categoryUrl" class="form-control" /></div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">保存</button>
@@ -73,6 +74,7 @@
         </div>
     </div>
 <script src="../../../js/jquery-2.1.1.js"></script>
+<script src="../../../js/rolldate.js"></script>
 <script src="../../../js/bootstrap.min.js"></script>
 <script src="../../../js/baseInfo.js"></script>
 <script src="../../../js/pageManage.js"></script>

@@ -39,7 +39,12 @@ public class CategoryController {
 
     @PostMapping("addCategory")
     public String addCategory(Category category){
-        categoryService.insert(category);
+        if(category.getCategoryId() ==0){
+            //如果是0说明是不存在的。如果不是0说明是存在的，执行更新操作
+            categoryService.insert(category);
+        }else{
+            categoryService.updateById(category);
+        }
         return "redirect:/pageManage";
     }
 }
