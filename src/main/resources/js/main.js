@@ -77,7 +77,16 @@ $(function(){
     scrollBottomToGetMoreInfo();
 
     getAllCategory();
+
+    $('.searchArtical').click(function () {
+        //var keyword = $('.searchArticalKeyword').val();
+        //search(keyword);
+    });
 });
+
+function search(keyword) {
+    //alert(keyword);
+}
 
 //获取现在的时间
 function time(){
@@ -254,6 +263,8 @@ function getClientHeight() {
 function getScrollHeight() {
     return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
 }
+
+
 
 
 

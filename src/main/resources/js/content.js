@@ -24,7 +24,7 @@ $(function () {
 
     getAllComment($("#articalId").text());
 
-    getUserInfo(2);
+    getUserInfo(0);
 
     getAllCategory();
 

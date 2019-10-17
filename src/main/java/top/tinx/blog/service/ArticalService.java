@@ -3,6 +3,8 @@ package top.tinx.blog.service;
 import org.springframework.stereotype.Service;
 import top.tinx.blog.bean.Artical;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.List;
 
 public interface ArticalService {
@@ -24,4 +26,21 @@ public interface ArticalService {
     List<Artical> getArticalByConditions(String id,String s,String a);
 
     public int getAllViewCount();
+
+    public boolean addArticalIntoES(Artical artical,String id) throws IOException;
+
+    public boolean deleteArticalByES(String id)throws IOException;
+
+    public boolean updateArticalByEs(Artical artical,String id)throws IOException;
+
+    public boolean deleteAllArticalByES()throws IOException;
+
+    public List<Artical> searchMatch(String key,String value) throws IOException;
+
+    public List<Artical> searchTerm(String key,String value) throws IOException;
+
+    public List<Artical> searchPrefix(String key,String value) throws IOException;
+
+    public String getArticalCache() throws IOException;
+
 }

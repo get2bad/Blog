@@ -13,14 +13,12 @@ import top.tinx.blog.utils.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * 创建人: Wills
@@ -291,6 +289,70 @@ public class ArticalController {
         }catch (Exception e){
             e.printStackTrace();
             return JsonData.buildError("服务器内部出现错误，已经通知管理员！",-1);
+        }
+    }
+
+    @PostMapping("/artical/importAll")
+    @ResponseBody
+    public JsonData importAllIntoES() throws IOException {
+        try{
+            List<Artical> list = articalService.getAllPassArtical(0, 1000);
+            for (Artical artical : list) {
+                articalService.addArticalIntoES(artical,artical.getArticalId()+"");
+            }
+            return JsonData.buildSuccess("success",1);
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonData.buildError("ES出现问题，请您重新尝试，确保ES服务已经打开",-1);
+        }
+
+    }
+
+    @PostMapping("/artical/deleteAll")
+    @ResponseBody
+    public JsonData deleteAll() throws IOException {
+        try{
+            articalService.deleteAllArticalByES();
+            return JsonData.buildSuccess("success",1);
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonData.buildError("ES出现问题，请您重新尝试，确保ES服务已经打开",-1);
+        }
+
+    }
+
+    @PostMapping("/artical/getArticalCache")
+    @ResponseBody
+    public JsonData getArticalCache() throws IOException {
+        try{
+            String cache = articalService.getArticalCache();
+            return JsonData.buildSuccess(cache,1);
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonData.buildError("ES中没有文章的数据哦，建议您导入全部后再试！",-1);
+        }
+
+    }
+
+    @GetMapping("/manageArticalCache")
+    public String manageArticalCache(){ return "background/artical/ManageArticalCache";}
+
+    @PostMapping("/artical/query")
+    public String match(String keyword,HttpServletRequest req) throws IOException {
+        try{
+            List<Artical> list = new ArrayList<Artical>();
+            list = articalService.searchMatch("articalTitle", keyword);
+            if(list.size() ==0){
+                list = articalService.searchTerm("articalTitle", keyword);
+                if(list.size() ==0){
+                    list = articalService.searchPrefix("articalTitle", keyword);
+                }
+            }
+            req.setAttribute("list",list);
+            return "foreground/search/search";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "/error/5xx";
         }
     }
 }

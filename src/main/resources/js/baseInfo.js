@@ -32,7 +32,10 @@ var ajaxInfos = {
     viewArticalUrl:'http://'+locations+'/artical/view',
     passArticalUrl:'http://'+locations+'/artical/pass',
     faildArticalUrl:'http://'+locations+'/artical/faild',
+    getArticalCache:'http://'+locations+'/artical/getArticalCache',
     backJudgeArtical:'http://'+locations+'/artical/backJudgeArtical',
+    importAll:'http://'+locations+'/artical/importAll',
+    deleteAll:'http://'+locations+'/artical/deleteAll',
     getAllUserInfo:'http://'+locations+'/user/getAllUserInfo',
     getAllFiles:'http://'+locations+'/file/getAllFiles',
     getUserInfoById:'http://'+locations+'/user/getUserById',
@@ -60,6 +63,7 @@ var ajaxInfos = {
     allowCache:true,
     limitCache:false,
     jsonDataType:'json',
+    jsonPDataType:'jsonp',
 }
 
 

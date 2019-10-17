@@ -7,11 +7,13 @@
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/animations.css}" type="text/css"/>
-    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
-    <link rel="stylesheet" th:href="@{/css/search.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/comment.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/iconfont.css}" type="text/css"/>
+    <link href="../../../css/noticejs.css" rel="stylesheet" type="text/css"/>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../../css/loginAndRegist.css">
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/search.css}" type="text/css"/>
 </head>
 <body>
 <!--header-->
@@ -26,35 +28,24 @@
             </div>
             <div class="searchResult">
                 <!--第一条搜索内容-->
-               <div class="media searchContent">
-                   <div class="media-left pull-left">
-                       <img src="https://static.runoob.com/images/mix/img_avatar.png" class="media-object" style="width:90px;height: 90px">
-                   </div>
-                   <div class="media-body">
-                       <h5 class="media-heading">文章题目</h5>
-                       <p>文章内容</p>
-                       <div class="infoTips hidden-xs">
-                           <i class="iconfont icon-bokeyuan">Java</i>
-                           <i class="iconfont icon-reloadtime">2019-07-21 12:01:46</i>
-                           <i class="iconfont icon-yanjing">28</i>
-                           <i class="iconfont icon-ziyuan">1</i>
-                       </div>
-                   </div>
-                    </div>
-                <!--第二条搜索内容-->
-                <div class="media searchContent">
+                <div th:each="l : ${list}" class="media searchContent">
+
                     <div class="media-left pull-left">
-                        <img src="https://static.runoob.com/images/mix/img_avatar.png" class="media-object" style="width:90px;height: 90px">
+                        <!--<img src="https://static.runoob.com/images/mix/img_avatar.png" class="media-object"style="width:90px;height: 90px">-->
+                        <img th:src="${l.picIntroduceUploadUrl}" class="media-object"style="width:90px;height: 90px">
                     </div>
                     <div class="media-body">
-                        <h5 class="media-heading">文章题目</h5>
-                        <p>文章内容</p>
-                        <div class="infoTips hidden-xs">
-                            <i class="iconfont icon-bokeyuan">Java</i>
-                            <i class="iconfont icon-reloadtime">2019-07-21 12:01:46</i>
-                            <i class="iconfont icon-yanjing">28</i>
-                            <i class="iconfont icon-ziyuan">1</i>
-                        </div>
+                        <a th:href="@{'/content/'+${l.articalId}}+'.html'" target="_blank"
+                           th:onclick="href([[${l.articalId}]])">
+                            <h5 class="media-heading" th:text="${l.articalTitle}"></h5>
+                            <p th:utext="${l.articalIntroduce}"></p>
+                            <div class="infoTips hidden-xs">
+                                <i class="iconfont icon-bokeyuan" th:text="${l.categoryName}"></i>
+                                <i class="iconfont icon-reloadtime" th:text="${l.postTime}"></i>
+                                <i class="iconfont icon-yanjing" th:text="${l.viewCount}"></i>
+                                <i class="iconfont icon-ziyuan" th:text="${l.articalCommentCount}"></i>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -74,14 +65,18 @@
 <script src="../../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="../../../js/bootstrap.min.js"></script>
-<script src="../../../js/UserBaseOptions.js"></script>
-<script src="../../../js/moment.js"></script>
-<script src="../../../js/loginAndRegist.js"></script>
-<script src="../../../js/modernizr.js"></script>
-<script src="../../../js/search.js"></script>
+<script src="../../../js/jquery.cookie.js"></script>
+<script src="../../../js/notice.js"></script>
+<!--日期选择插件引用-->
+<script src="../../../js/rolldate.js"></script>
 <!--引用自己的js文件-->
 <!--<script src="../../js/main.js"></script>-->
+<script src="../../../js/baseInfo.js"></script>
+<script src="../../../js/getUserInfo.js"></script>
+<script src="../../../js/UserBaseOptions.js"></script>
+<script src="../../../js/loginAndRegist.js"></script>
+<script src="../../../js/modernizr.js"></script>
 <script src="../../../js/iconfont.js"></script>
-<!--<script src="../../js/batsCursor.js"></script>-->
+<script src="../../../js/search.js"></script>
 </body>
 </html>

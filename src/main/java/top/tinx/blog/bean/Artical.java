@@ -1,6 +1,8 @@
 package top.tinx.blog.bean;
 
+import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,6 +11,7 @@ import java.util.Date;
  *
  */
 public class Artical implements Serializable {
+
     private int articalId;
     private int categoryId;
     private String categoryName;

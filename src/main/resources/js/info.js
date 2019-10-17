@@ -32,20 +32,16 @@ function initCategoryCharts(elementId) {
     var myChart = echarts.init(document.getElementById(elementId));
     //从后台获取相关数据
     var v = getData();
-    console.log(v);
     //重建数组
     var nameArray = new Array();
     var categoryValue = new Array();
     $.each(v,function(index,data){
-        console.log(data);
         nameArray.push(data.categoryName);
         var category = new Object();
         category.value = (data.count) *1;
         category.name = data.categoryName;
         categoryValue.push(category);
     });
-    console.log(nameArray);
-    console.log(categoryValue);
     var option = {
         title : {
             text: '所有文章分类占比',

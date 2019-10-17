@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Will的博客</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../../css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/dropify.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/noticejs.css" rel="stylesheet" type="text/css"/>
+    <link href="../../../css/writeArtical.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="artical">
+    <div class="container-fluid">
+        <div class="writeContent">
+            <div class="writeHeader">
+                <h3><span class="iconfont icon-bokeyuan writeIcon" style="margin-right: 4px"></span>文章缓存管理
+                    <span class="left8px"><div class="btn-group btn-group-xs" role="group" aria-label="">
+                    <button class="btn btn-primary importAll">导入全部</button>
+                    <button class="btn btn-danger left12Px deleteAllCache">删除全部</button>
+                </div></span>
+                </h3>
+            </div>
+            <div class="manageCache">
+               <div class="formElement">
+                   <div><label for="articalCache"><h4><strong>所有缓存内容</strong><button class="btn btn-primary left12Px refreshCache">刷新缓存</button></h4></label></div>
+                   <textarea id="articalCache" rows="40" style="width: 100%;overflow-y: scroll;" disabled></textarea>
+                </div>
+            </div>
+    </div>
+</div>
+    <script src="../../../js/jquery-2.1.1.js"></script>
+    <script src="../../../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../../js/wangEditor.min.js"></script>
+    <script type="text/javascript" src="../../../js/dropify.min.js"></script>
+    <script src="../../../js/notice.js"></script>
+<script type="text/javascript" src="../../../js/baseInfo.js" ></script>
+<script type="text/javascript" src="../../../js/mamageArticalCache.js" ></script>
+</body>
+</html>
