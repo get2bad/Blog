@@ -119,7 +119,7 @@ function deleteArtical(id) {
                 tips(result.data,'middleCenter');
                 setTimeout(function(){
                     location.href = "/manageArtical";
-                },3000);
+                },500);
             }else{
                 tips(result.msg,'topCenter');
             }

@@ -22,4 +22,6 @@ public interface CommentService {
     public void setViewCountNum(String id);
 
     public int getAllCommentCount();
+
+    public void deleteCommentByArticalId(String id);
 }

@@ -9,4 +9,6 @@ $(function() {
         hideBackdrop: true
     });
     getUserInfo(0);
+
+    getAllCategory();
 });

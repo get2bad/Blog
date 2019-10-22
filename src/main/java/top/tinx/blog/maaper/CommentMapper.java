@@ -26,6 +26,9 @@ public interface CommentMapper {
     @Delete("delete from tb_comment where comment_id = #{id}")
     public void deleteComment(@Param("id")String id);
 
+    @Delete("delete from tb_comment where artical_id = #{id}")
+    public void deleteCommentByArticalId(@Param("id")String id);
+
     @Select("select count(*) from tb_comment where artical_id = #{id};")
     public int getCommentCountByArticalId(@Param("id")String id);
 

@@ -46,7 +46,7 @@ public interface ArticalMapper {
     @Select("select * from tb_artical where status = 0")
     public List<Artical> getAllJudgeArtical();
 
-    @Select("select * from tb_artical where status = 1 limit #{start},#{end}")
+    @Select("select * from tb_artical where status = 1 order by artical_id desc limit #{start},#{end}")
     public List<Artical> getAllPassArtical(@Param("start")int start,@Param("end")int end);
 
     @Update("UPDATE blog.tb_artical \n" +
@@ -73,8 +73,11 @@ public interface ArticalMapper {
     public List<Artical> getArticalByConditions(@Param("id")String id,@Param("s")String s,@Param("a")String a);
 
     @Select("select sum(viewCount) from tb_artical")
-    public int getAllViewCount();
+    public Integer getAllViewCount();
 
     @Select("select count(category_id)as count,category_id from tb_artical GROUP BY category_id;")
     public List<ArticalPieInfo> getAllInfos();
+
+    @Delete("delete from tb_artical where artical_id = #{id}")
+    public void deleteArticalById(@Param("id") String id);
 }

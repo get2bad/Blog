@@ -43,4 +43,6 @@ public interface ArticalService {
 
     public String getArticalCache() throws IOException;
 
+    public void deleteArticalById(String id);
+
 }

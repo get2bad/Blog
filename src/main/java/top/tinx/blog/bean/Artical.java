@@ -12,13 +12,15 @@ import java.util.Date;
  */
 public class Artical implements Serializable {
 
+    private String searchCondition;
+
     private int articalId;
     private int categoryId;
     private String categoryName;
     private int status;
     private String postTime;
     private int viewCount;
-    private int userId;
+    private String userId;
     private String userName;
     private String articalTitle;
     private String articalIntroduce;
@@ -27,7 +29,7 @@ public class Artical implements Serializable {
     private String articalContent;
     private int articalCommentCount;
     private int isDenyComment;
-    private int isLock;
+    private String isLock;
     private int isSubmitTop;
     private int isAll;
 
@@ -122,19 +124,19 @@ public class Artical implements Serializable {
         this.viewCount = viewCount;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public int getIsLock() {
+    public String getIsLock() {
         return isLock;
     }
 
-    public void setIsLock(int isLock) {
+    public void setIsLock(String isLock) {
         this.isLock = isLock;
     }
 
@@ -176,6 +178,14 @@ public class Artical implements Serializable {
 
     public void setIsAll(int isAll) {
         this.isAll = isAll;
+    }
+
+    public String getSearchCondition() {
+        return searchCondition;
+    }
+
+    public void setSearchCondition(String searchCondition) {
+        this.searchCondition = searchCondition;
     }
 
     @Override

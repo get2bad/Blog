@@ -328,6 +328,7 @@ function logout() {
 }
 
 function getAllCategory() {
+    var ajaxInfo = Object.create(ajaxInfos)
     //页面初始化，进行ajax请求
     $.ajax({
         //请求方式

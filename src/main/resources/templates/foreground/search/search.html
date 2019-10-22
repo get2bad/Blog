@@ -24,7 +24,7 @@
     <div class="container">
         <div class="searchContent">
             <div class="searchTitle">
-                <h4>搜索“<span>Java</span>”,结果为:</h4>
+                <h4>搜索“<span th:text="*{list[0].searchCondition}">Java</span>”,结果为:</h4>
             </div>
             <div class="searchResult">
                 <!--第一条搜索内容-->

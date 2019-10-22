@@ -32,7 +32,7 @@ $(function () {
                         //"    <td><code>"+data.articalContent+"</code></td>" +
                         "    <td>"+data.postTime+"</td>" +
                         "    <td>" +
-                        "        <a onclick='viewArtical("+data.articalId+")' href='#' class='iconfont icon-yanjing' title='查看'></a>" +
+                        //"        <a onclick='viewArtical("+data.articalId+")' href='#' class='iconfont icon-yanjing' title='查看'></a>" +
                         "        <a onclick='passArtical("+data.articalId+")' href='#' class='iconfont icon-check-circle' title='审核通过'></a>" +
                         "        <a onclick='faildArtical("+data.articalId+")' href='#' class='iconfont icon-frown'  title='删除'></a>" + //style='margin-right: 8px'
                         "    </td>" +
@@ -117,7 +117,7 @@ function passArtical(id) {
                 tips(result.data,'middleCenter');
                 setTimeout(function(){
                     location.href = "/setArticalStatus";
-                },3000);
+                },500);
             }else{
                 tips(result.msg,'middleCenter');
             }
@@ -152,7 +152,7 @@ function faildArtical(id) {
                 tips(result.data,'middleCenter');
                 setTimeout(function(){
                     location.href = "/setArticalStatus";
-                },3000);
+                },500);
             }else{
                 tips(result.msg,'middleCenter');
             }

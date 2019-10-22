@@ -1,7 +1,7 @@
 'use strict';
 var ajaxInfo;
 var start = 0;
-
+var ifFullScroll = 0;
 $(function(){
     /*时钟效果*/
     window.setInterval(function () {
@@ -58,7 +58,7 @@ $(function(){
     }
     //
     $('#city').text(returnCitySN.cname);
-    $('#ipAddress').text(returnCitySN.cip);
+    //$('#ipAddress').text(returnCitySN.cip);
     var visitTime = $.cookie('visitTime');
 
     if(typeof(visitTime) ==="undefined"){
@@ -77,16 +77,7 @@ $(function(){
     scrollBottomToGetMoreInfo();
 
     getAllCategory();
-
-    $('.searchArtical').click(function () {
-        //var keyword = $('.searchArticalKeyword').val();
-        //search(keyword);
-    });
 });
-
-function search(keyword) {
-    //alert(keyword);
-}
 
 //获取现在的时间
 function time(){
@@ -184,6 +175,46 @@ function getHotArtical(start) {
         //请求成功
         success : function(result) {
             if(result.code ==1){
+                if(ifFullScroll ===0){
+                    $("#scrollItems").append('<div class="item active">\n' +
+                        '                        <img src="../../pic/pic'+getRandomNum()+'.jpg" alt="..." style="width: 100%;" />\n' +
+                        '                        <div class="carousel-caption">\n' +
+                        '                            <div class="jumbotron visible-lg visible-md">\n' +
+                        '                                <h2>'+result.data[0].articalTitle+'</h2>\n' +
+                        '                                <p>\n' +
+                        '                                    '+result.data[0].articalIntroduce+'\n' +
+                        '                                </p>\n' +
+                        '                            </div>\n' +
+                        '                            <div class="visible-xs visible-sm"><p>Java发展态势</p></div>\n' +
+                        '                        </div>\n' +
+                        '                    </div>\n' +
+                        '                    <div class="item">\n' +
+                        '                        <img src="../../pic/pic'+getRandomNum()+'.jpg" alt="..." style="width: 100%;" />\n' +
+                        '                        <div class="carousel-caption">\n' +
+                        '                            <div class="jumbotron visible-lg visible-md">\n' +
+                        '                                <h2>'+result.data[1].articalTitle+'</h2>\n' +
+                        '                                <p>\n' +
+                        '                                    '+result.data[1].articalIntroduce+'\n' +
+                        '                                </p>\n' +
+                        '                            </div>\n' +
+                        '                            <div class="visible-xs visible-sm"><p>PHP介绍</p></div>\n' +
+                        '                        </div>\n' +
+                        '                    </div>\n' +
+                        '                    <div class="item">\n' +
+                        '                        <img src="../../pic/pic'+getRandomNum()+'.jpg" alt="..." style="width: 100%;" />\n' +
+                        '                        <div class="carousel-caption">\n' +
+                        '                            <div class="jumbotron visible-lg visible-md">\n' +
+                        '                                <h2>'+result.data[2].articalTitle+'</h2>\n' +
+                        '                                <p>\n' +
+                        '                                    '+result.data[2].articalIntroduce+'\n' +
+                        '                                </p>\n' +
+                        '                            </div>\n' +
+                        '                            <div class="visible-xs visible-sm"><p>Python介绍</p></div>\n' +
+                        '                        </div>\n' +
+                        '                    </div>');
+
+                    ifFullScroll ++;
+                }
                 $.each(result.data,function(index,data){
                     //tips(data.picIntroduceUrl,"middleCenter");
                     $("#articalPanel").append("<div id='pageInfo' class=\"col-md-12\">\n" +
@@ -264,6 +295,9 @@ function getScrollHeight() {
     return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
 }
 
+function getRandomNum() {
+    return Math.floor((Math.random()*10)+1);
+}
 
 
 

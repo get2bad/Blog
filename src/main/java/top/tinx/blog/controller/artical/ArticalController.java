@@ -55,7 +55,7 @@ public class ArticalController {
 
     @PostMapping("/newArtical")
     //@ResponseBody
-    public String newArtical(@RequestParam("picIntroduceUploads")MultipartFile picIntroduceUploads, Artical artical){
+    public String newArtical(@RequestParam("picIntroduceUploads")MultipartFile picIntroduceUploads, Artical artical) throws IOException {
         String preFileLocationn = preFileLocation;
         preFileLocationn += "articalHeader/";
         if(!picIntroduceUploads.isEmpty()){
@@ -126,7 +126,7 @@ public class ArticalController {
     public JsonData getAllJudgeArtical(){
         List<Artical> list = articalService.getAllJudgeArtical();
         for (Artical artical: list){
-            artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
+            artical.setUserName(userService.findUserByUserId(Integer.parseInt(artical.getUserId())).getUserName());
         }
         if(!list.isEmpty()){
             return JsonData.buildSuccess(list,1);
@@ -140,6 +140,12 @@ public class ArticalController {
     public JsonData passArtical(@RequestBody HashMap<String, String> map){
         try{
             articalService.passArtical(map.get("id"));
+            //更新ES内的数据
+            articalService.deleteAllArticalByES();
+            List<Artical> list = articalService.getAllPassArtical(0, 1000);
+            for (Artical articals : list) {
+                articalService.addArticalIntoES(articals,articals.getArticalId()+"");
+            }
             return JsonData.buildSuccess("此篇文章通过操作成功！",1);
         }catch (Exception ex){
             ex.printStackTrace();
@@ -156,7 +162,13 @@ public class ArticalController {
     @PostMapping("/artical/faild")
     @ResponseBody
     public JsonData faildArtical(@RequestBody HashMap<String, String> map){
-        return JsonData.buildSuccess("此篇文章不通过操作成功！",1);
+        try{
+            articalService.deleteArticalById(map.get("id"));
+            return JsonData.buildSuccess("此篇文章删除成功！",1);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return JsonData.buildError("对不起，内部出现了一些小错误，等待解决", -1);
+        }
     }
 
     @RequestMapping(value = "/artical/getAllPass",method = RequestMethod.POST)
@@ -171,7 +183,7 @@ public class ArticalController {
             if(jsonString !=null &&jsonString.equals("all")){
                 List<Artical> all = articalService.getAllPassArtical(0, allArticalCount);
                 for (Artical artical : all) {
-                    artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
+                    artical.setUserName(userService.findUserByUserId(Integer.parseInt(artical.getUserId())).getUserName());
                     artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
                     artical.setArticalCommentCount(commentService.getCommentCountByArticalId(Integer.toString(artical.getArticalId())));
                 }
@@ -187,7 +199,7 @@ public class ArticalController {
                 list = articalService.getAllPassArtical(start,start+7);
             }
             for (Artical artical : list){
-                artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
+                artical.setUserName(userService.findUserByUserId(Integer.parseInt(artical.getUserId())).getUserName());
                 artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
                 artical.setArticalCommentCount(commentService.getCommentCountByArticalId(Integer.toString(artical.getArticalId())));
                 if(isAll){
@@ -282,7 +294,7 @@ public class ArticalController {
         try{
             List<Artical> list = articalService.getArticalByConditions(category,judgeStatus,articalContent);
             for (Artical artical : list) {
-                artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
+                artical.setUserName(userService.findUserByUserId(Integer.parseInt(artical.getUserId())).getUserName());
                 artical.setArticalCommentCount(commentService.getCommentCountByArticalId(Integer.toString(artical.getArticalId())));
             }
             return JsonData.buildSuccess(list,1);
@@ -348,6 +360,27 @@ public class ArticalController {
                     list = articalService.searchPrefix("articalTitle", keyword);
                 }
             }
+            list.get(0).setSearchCondition(keyword);
+            req.setAttribute("list",list);
+            return "foreground/search/search";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "/error/5xx";
+        }
+    }
+
+    @GetMapping("/search/{query}")
+    public String query(@PathVariable("query") String query,HttpServletRequest req) throws IOException {
+        try{
+            List<Artical> list = new ArrayList<Artical>();
+            list = articalService.searchMatch("articalTitle", query);
+            if(list.size() ==0){
+                list = articalService.searchTerm("articalTitle", query);
+                if(list.size() ==0){
+                    list = articalService.searchPrefix("articalTitle", query);
+                }
+            }
+            list.get(0).setSearchCondition(query);
             req.setAttribute("list",list);
             return "foreground/search/search";
         }catch (Exception e){

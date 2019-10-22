@@ -102,7 +102,12 @@ public class ArticalServiceImpl implements ArticalService {
 
     @Override
     public int getAllViewCount() {
-        return articalMapper.getAllViewCount();
+        Integer num =  articalMapper.getAllViewCount();
+        if(num == null){
+            return 0;
+        }else{
+            return num;
+        }
     }
 
     @Override
@@ -155,16 +160,16 @@ public class ArticalServiceImpl implements ArticalService {
         sb.query(QueryBuilders.matchQuery(key,value));
         sb.from(FROM);
         sb.size(SIZE);
+        HighlightBuilder hb = new HighlightBuilder();
+        hb.preTags("<b style='color:red;'>");
+        hb.postTags("</b>");
+        sb.highlighter(hb);
         req.source(sb);
         SearchResponse resp = client.search(req,RequestOptions.DEFAULT);
         System.out.println(JSONObject.toJSON(resp));
         SearchHit[] hits = resp.getHits().getHits();
         List<Artical> all = new ArrayList<Artical>();
-        for (SearchHit hit : hits) {
-            Artical artical = JSONObject.parseObject(hit.getSourceAsString(), Artical.class);
-            getInfos(artical);
-            all.add(artical);
-        }
+        all = getAllArtical(hits);
         return all;
     }
 
@@ -175,20 +180,16 @@ public class ArticalServiceImpl implements ArticalService {
         sb.query(QueryBuilders.termsQuery(key,value));
         sb.from(FROM);
         sb.size(SIZE);
-        req.source(sb);
         HighlightBuilder hb = new HighlightBuilder();
         hb.preTags("<b style='color:red;'>");
         hb.postTags("</b>");
         sb.highlighter(hb);
+        req.source(sb);
         SearchResponse resp = client.search(req,RequestOptions.DEFAULT);
         System.out.println(JSONObject.toJSON(resp));
         SearchHit[] hits = resp.getHits().getHits();
         List<Artical> all = new ArrayList<Artical>();
-        for (SearchHit hit : hits) {
-            Artical artical = JSONObject.parseObject(hit.getSourceAsString(), Artical.class);
-            getInfos(artical);
-            all.add(artical);
-        }
+        all = getAllArtical(hits);
         return all;
     }
 
@@ -199,21 +200,32 @@ public class ArticalServiceImpl implements ArticalService {
         sb.query(QueryBuilders.prefixQuery(key,value));
         sb.from(FROM);
         sb.size(SIZE);
+        HighlightBuilder hb = new HighlightBuilder();
+        hb.preTags("<b style='color:red;'>");
+        hb.postTags("</b>");
+        sb.highlighter(hb);
         req.source(sb);
         SearchResponse resp = client.search(req,RequestOptions.DEFAULT);
         System.out.println(JSONObject.toJSON(resp));
         SearchHit[] hits = resp.getHits().getHits();
         List<Artical> all = new ArrayList<Artical>();
+        all = getAllArtical(hits);
+        return all;
+    }
+
+    public List<Artical> getAllArtical(SearchHit[] hits){
+        List<Artical> all = new ArrayList<Artical>();
         for (SearchHit hit : hits) {
             Artical artical = JSONObject.parseObject(hit.getSourceAsString(), Artical.class);
             getInfos(artical);
             all.add(artical);
+            System.out.println("ID为："+artical.getArticalId());
         }
         return all;
     }
 
     public Artical getInfos(Artical artical){
-        artical.setUserName(userService.findUserByUserId(artical.getUserId()).getUserName());
+        artical.setUserName(userService.findUserByUserId(Integer.parseInt(artical.getUserId())).getUserName());
         artical.setCategoryName(categoryService.getCategoryById(artical.getCategoryId()).getCategoryName());
         artical.setArticalCommentCount(commentService.getCommentCountByArticalId(artical.getArticalId()+""));
         return artical;
@@ -243,6 +255,12 @@ public class ArticalServiceImpl implements ArticalService {
             json+=JSONObject.toJSONString(get);
         }
         return json;
+    }
+
+    @Override
+    public void deleteArticalById(String id) {
+        articalMapper.deleteArticalById(id);
+        commentService.deleteCommentByArticalId(id);
     }
 
     public static <T> Map<String, Object> beanToMap(T bean) {

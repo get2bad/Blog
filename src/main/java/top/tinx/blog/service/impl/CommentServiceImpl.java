@@ -52,4 +52,9 @@ public class CommentServiceImpl implements CommentService {
     public int getAllCommentCount() {
         return commentMapper.getAllCommentCount();
     }
+
+    @Override
+    public void deleteCommentByArticalId(String id) {
+        commentMapper.deleteCommentByArticalId(id);
+    }
 }

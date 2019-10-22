@@ -54,8 +54,43 @@ $(function(){
             'error':   '对不起，你上传的文件大于3M'
         }
     });
-
+    getCategorys();
 });
+
+function getCategorys() {
+    var ajaxInfo = Object.create(ajaxInfos)
+    //页面初始化，进行ajax请求
+    $.ajax({
+        //请求方式
+        type : ajaxInfo.postType,
+        //请求的媒体类型
+        contentType: ajaxInfo.jsonRequestContentType,
+        //请求地址
+        url : ajaxInfo.getAllCategory,
+        //是否异步执行命令
+        async: ajaxInfo.allowAsyc,
+        //不进行缓存
+        cache: ajaxInfo.limitCache,
+        //数据，json字符串
+        //data : jsonString,
+        dataType: ajaxInfo.jsonDataType,
+        //请求成功
+        success : function(result) {
+            if(result.code ==1){
+                $.each(result.data,function(index,data){
+                    $('#articalType').append('<option value="'+data.categoryId+'">'+data.categoryName+'</option>');
+                });
+            }else{
+                tips(result.msg,'topCenter');
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            tips('请求失败，请您检查！','topCenter');
+        }
+    });
+}
+
 
 function getValuee() {
     //获取标题内容
@@ -91,6 +126,12 @@ function getValuee() {
 
     //放入当前userID
     var userId = $.cookie('UserID');
+    if(typeof(userId) ==="undefined"){
+        userId = 0;
+    }
+    if(typeof(isLock) ==="undefined"){
+        publicStatus = 0;
+    }
     var jsonContent = '{"articalTitle":'+articalTitle+',"articalIntroduce":'+articalIntroduce+',' +
         '"articalContent":'+content+',"categoryId":'+categoryId+',"isLock":'+publicStatus+',"isDenyComment":'+isCheckedComment+',' +
         '"isSubmitTop":'+isCheckedTop+',"userId":'+userId+'}';
