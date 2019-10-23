@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/animations.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/iconfont.css}" type="text/css"/>
-    <!--<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>-->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" th:href="@{/css/loginAndRegist.css}">
 </head>
 <body>
@@ -18,20 +18,26 @@
 <section id="errorMsg">
     <div class="container" style="background-color: white">
         <div class="text-center" style="padding-top: 45px">
+            <p>
+            <h3>对不起哦，出现了一点小问题~</h3>
+            </p>
+        </div>
+        <div class="text-left" style="padding-top: 45px">
             <div>
                 <p>
-                    <h1 th:text="${errorTitle}" th:if="${errorTitle !=null}"></h1>
-                </p>
-                <p>
-                    <h1 th:if="${errorTitle ==null}">对不起，出了点错误~！</h1>
+                    状态码：<br/>
+                <h3 th:text="${status}">500</h3>
+                发生时间：<br/>
+                <h3 th:text="${#dates.format(timestamp, 'yyyy-MM-dd mm:HH:ss')}"></h3>
+                Exception：<br/>
+                <h3 >Server Error</h3>
+                错误信息：<br/>
+                <h3 >服务器内部错误!已经通知管理员！</h3>
                 </p>
             </div>
             <div style="margin-top: 20px">
                 <p>
-                    <h3 th:if="${errorMsg !=null}" th:text="${errorMsg}"></h3>
-                </p>
-                <p>
-                    <h3 th:if="${errorTitle ==null}">该错误已经上报管理员，管理员会尽快处理，请您谅解，如果有特别着急的需求，
+                <h3 th:if="${errorTitle ==null}">该错误已经上报管理员，管理员会尽快处理，请您谅解，如果有特别着急的需求，
                     <a href="mailto:loveing490@qq.com" style="color: red;text-decoration: underline">请您联系本人邮箱</a></h3>
                 </p>
             </div>
@@ -46,15 +52,25 @@
 <!--/页脚-->
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="../../js/jquery-2.1.1.js"></script>
-<script src="../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
+<!--引入jquery.cookie插件-->
+<script src="../../js/jquery.cookie.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="../../js/bootstrap.min.js"></script>
-<!--引用自己的js文件
+<script src="../../js/jquery.bootstrap-dropdown-on-hover.js"></script>
+<!--引用自己的js文件-->
 <script src="../../js/moment.js"></script>
-<script src="../../js/main.js"></script>-->
+<script src="../../js/notice.js"></script>
+<!--日期选择插件引用-->
+<script src="../../js/rolldate.js"></script>
+<!--基本配置信息设置-->
+<script src="../../js/baseInfo.js"></script>
+<!--基本的登陆注册找回密码的js文件-->
+<script src="../../js/getUserInfo.js"></script>
+<script src="../../js/UserBaseOptions.js"></script>
 <script src="../../js/loginAndRegist.js"></script>
 <script src="../../js/modernizr.js"></script>
 <script src="../../js/iconfont.js"></script>
+<script src="../../js/main.js"></script>
 <!--<script src="../../js/batsCursor.js"></script>-->
 </body>
 </html>

@@ -56,6 +56,19 @@ public class ShiroConfig {
         //静态资源防止拦截
         map.put("/background/**","roleOrFilter[root,admin]");
         map.put("/background#","roleOrFilter[root,admin]");
+        map.put("/newArtical","roleOrFilter[root,admin]");
+        map.put("/artical/upload","roleOrFilter[root,admin]");
+        map.put("/artical/getAllJudgeArtical","roleOrFilter[root,admin]");
+        map.put("/artical/pass","roleOrFilter[root,admin]");
+        map.put("/artical/faild","roleOrFilter[root,admin]");
+        map.put("/artical/backJudgeArtical","roleOrFilter[root,admin]");
+        map.put("/artical/deleteAll","roleOrFilter[root,admin]");
+        map.put("/deleteCategoryById","roleOrFilter[root,admin]");
+        map.put("/addCategory","roleOrFilter[root,admin]");
+        map.put("/passComment","roleOrFilter[root,admin]");
+        map.put("/deleteComment","roleOrFilter[root,admin]");
+        map.put("/getAllCommentByArticalId","roleOrFilter[root,admin]");
+        map.put("/insertNote","roleOrFilter[root,admin]");
         map.put("/","anon");
         map.put("/content/**","anon");
         map.put("/comment","anon");

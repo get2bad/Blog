@@ -54,7 +54,7 @@
                         <ul class="nav navbar-nav navbar-right animated category" data-animation="fadeIn">
                             <nav th:if="${session.user} ==null" class="main-nav" id="loginBtn">
                                 <ul>
-                                    <li><a id="loginAddr" class="cd-signin" href="/login">登陆</a></li>
+                                    <li><a href="/login" id="loginAddr" class="cd-signin" >登陆</a></li>
                                 </ul>
                             </nav>
                             <div id="userInfo">
@@ -71,7 +71,7 @@
                                         <li role="separator" class="divider"></li>
                                         <li><a href="/background">后台管理</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#" onclick="logout()">安全退出</a></li>
+                                        <li><a href="/logout" onclick="logout()">安全退出</a></li>
                                     </ul>
                                 </li>
                             </div>

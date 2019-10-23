@@ -40,7 +40,7 @@ public class BaseController {
 
     @GetMapping("/manageArtical")
     public String manageArtical(){
-        return "background/artical/manageArtical";
+        return "background/artical/manageArticals";
     }
 
     @GetMapping("/backBase")
@@ -84,8 +84,14 @@ public class BaseController {
 
     @GetMapping("/not_permit")
     public String notPermission(HttpServletRequest request){
-        request.setAttribute("errorTitle","出错了....");
-        request.setAttribute("errorMsg","对不起，您的权限不够哦，请您重新尝试一下，或者登陆拥有该权限的账号再试!");
-        return "/error/4xx";
+        request.setAttribute("errorTitle","哦哦~您的权限貌似不够哦....");
+        request.setAttribute("errorMsg","您的权限不够哦，请您重新尝试一下，或者登陆拥有该权限的账号再试!");
+        return "/error/noPermission";
+    }
+
+    @GetMapping("/error")
+    public String error(){
+        int a = 1/0;
+        return "";
     }
 }

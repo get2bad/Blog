@@ -59,7 +59,6 @@ public class NoteController {
                 }else{
                     note.setIsAll(0);
                 }
-                System.out.println("-`-`-`-`-`-`-`"+note);
             }
         }
         return JsonData.buildSuccess(allNote,1);
